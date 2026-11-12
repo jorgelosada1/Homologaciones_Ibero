@@ -56,7 +56,8 @@ ALLOWED_PDF_EXTENSIONS = {"pdf"}
 ASSET_VERSION = str(int(max(os.path.getmtime(os.path.join(STATIC_DIR, f)) for f in ("css/app.css", "js/app.js", "js/imagen-homologacion.js"))))
 
 store = DataStore()
-activity = ActivityLog(os.path.join(DATA_DIR, "actividad.json"))
+# En Vercel (demo) el disco es de solo lectura salvo /tmp
+activity = ActivityLog(os.path.join("/tmp" if os.environ.get("VERCEL") else DATA_DIR, "actividad.json"))
 limiter = LoginLimiter()
 
 app.extensions["homologaciones_store"] = store

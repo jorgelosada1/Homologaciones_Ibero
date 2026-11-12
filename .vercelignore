@@ -1,0 +1,5 @@
+tests/
+Dockerfile
+docker-compose.yml
+.dockerignore
+requirements-dev.txt
