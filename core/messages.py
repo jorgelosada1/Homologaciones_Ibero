@@ -49,7 +49,15 @@ def mensaje_homologacion(resultado, cfg, nombre="", incluir_precios=False, aseso
             texto += "\n"
     texto += ("¿Te gustaría recibir más información sobre este programa?\n\n" if total == 1
               else "¿De cuál de estas opciones te gustaría recibir más información?\n\n")
-    texto += "💡 *El descuento SENA se mantiene durante toda la carrera.*"
+    con_sena = [p for g in grupos for p in g["programas"] if (p.get("precio") or {}).get("tipo_descuento") == "SENA"]
+    if con_sena and incluir_precios:
+        texto += "💡 *El descuento SENA se mantiene durante toda la carrera.*"
+    elif con_sena:
+        nombres = ", ".join(dict.fromkeys(p["programa_display"] for p in con_sena))
+        texto += (f"💡 *Los egresados SENA tienen precio especial* en {nombres}."
+                  if len(con_sena) < sum(len(g["programas"]) for g in grupos)
+                  else "💡 *Los egresados SENA tienen precio especial, que se mantiene durante toda la carrera.*")
+    texto = texto.rstrip()
     return texto
 
 
@@ -57,7 +65,7 @@ def mensaje_precios(programas, cfg):
     con_precio = [p for p in programas if p.get("precio")]
     if not con_precio:
         return "No se encontraron precios para estos programas."
-    texto = "🎓 *Precios Ibero · egresados SENA*\n\n"
+    texto = "🎓 *Precios Ibero*\n\n"
     for p in con_precio:
         pr = p["precio"]
         texto += f"📌 *{pr['programa']}*\n💰 Valor regular: {money(pr['valor'])}\n"
@@ -71,6 +79,9 @@ def mensaje_precios(programas, cfg):
         if p.get("inicio"):
             texto += f"📅 Cohorte: *{p['inicio']}*\n"
         texto += "\n"
-    texto += ("_El descuento SENA se mantiene durante toda la carrera. El pronto pago aplica solo para el primer periodo. "
-              "Valores sujetos a cambios institucionales._")
+    if any(p["precio"].get("tipo_descuento") == "SENA" for p in con_precio):
+        texto += "_El descuento SENA se mantiene durante toda la carrera. El pronto pago aplica solo para el primer periodo. "
+    else:
+        texto += "_"
+    texto += "Valores sujetos a cambios institucionales._"
     return texto

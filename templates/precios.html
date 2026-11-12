@@ -37,7 +37,7 @@
     </div>
 </div>
 
-<div class="alert info" style="margin-bottom:16px"><i class="fa-solid fa-circle-info"></i><span class="small">El <b>descuento SENA</b> y el <b>remarketing</b> se mantienen durante toda la carrera. El <b>pronto pago</b> aplica solo para el primer periodo. Valores sujetos a cambios institucionales.</span></div>
+<div class="alert info" style="margin-bottom:16px"><i class="fa-solid fa-circle-info"></i><span class="small">El <b>descuento SENA</b> aplica solo en las carreras de pregrado con homologación (no en posgrado). El descuento SENA y el <b>remarketing</b> se mantienen durante toda la carrera. El <b>pronto pago</b> aplica solo para el primer periodo. Valores sujetos a cambios institucionales.</span></div>
 
 <div class="tabs" id="nivelTabs">
     <button class="tab {{ 'active' if nivel != 'pos' }}" data-n="pre"><i class="fa-solid fa-user-graduate"></i> Pregrado <span class="badge">{{ programas|selectattr('nivel','equalto','pre')|list|length }}</span></button>
@@ -102,10 +102,10 @@
                     <h3>${highlight(p.programa, q)}</h3>
                     <div class="p-full">Valor regular por semestre: <b>${money(p.valor)}</b></div>
                     <div class="p-rows">
-                        ${p.valor_sena
+                        ${p.nivel === 'pos' ? '' : p.valor_sena
                             ? `<div class="p-row sena"><div class="lbl">Egresado SENA<small>${p.descuento_sena}% SENA${p.pronto_pago_sena ? ` · pronto pago ${money(p.pago_sena)}` : ''}</small></div><div class="val"><strong>${money(p.valor_sena)}</strong><span>por semestre</span></div></div>`
-                            : `<div class="p-row na"><div class="lbl">Egresado SENA<small>Sin precio SENA en la lista</small></div></div>`}
-                        <div class="p-row"><div class="lbl">No SENA<small>${p.subsidio}% subsidio + ${p.remarketing}% remarketing${p.pronto_pago ? ` + ${p.pronto_pago}% p. pago` : ''}</small></div><div class="val"><strong>${money(p.valor_final)}</strong><span>precio final</span></div></div>
+                            : `<div class="p-row na"><div class="lbl">Egresado SENA<small>No aplica descuento SENA</small></div></div>`}
+                        <div class="p-row"><div class="lbl">${p.nivel === 'pos' ? 'Precio final' : 'No SENA'}<small>${p.subsidio}% subsidio + ${p.remarketing}% remarketing${p.pronto_pago ? ` + ${p.pronto_pago}% p. pago` : ''}</small></div><div class="val"><strong>${money(p.valor_final)}</strong><span>precio final</span></div></div>
                     </div>
                     <div class="p-actions">
                         <button class="btn btn-primary btn-sm" data-oferta><i class="fa-solid fa-paper-plane"></i> Oferta</button>
@@ -113,11 +113,12 @@
                     </div>
                 </article>`).join('')}</div>`;
         } else {
-            $('out').innerHTML = `<div class="table-wrap"><table class="table"><thead><tr><th>Programa</th><th class="num">Valor regular</th><th class="num">% SENA</th><th class="num">Precio SENA</th><th class="num">Pronto pago SENA</th><th class="num">Precio final no SENA</th><th>Vigencia</th><th></th></tr></thead><tbody>${l.map((p) => `
+            const conSena = nivel !== 'pos';
+            $('out').innerHTML = `<div class="table-wrap"><table class="table"><thead><tr><th>Programa</th><th class="num">Valor regular</th>${conSena ? '<th class="num">% SENA</th><th class="num">Precio SENA</th><th class="num">Pronto pago SENA</th>' : ''}<th class="num">${conSena ? 'Precio final no SENA' : 'Precio final'}</th><th>Vigencia</th><th></th></tr></thead><tbody>${l.map((p) => `
                 <tr data-id="${p.id}"><td><b>${highlight(p.programa, q)}</b></td><td class="num">${money(p.valor)}</td>
-                <td class="num">${p.descuento_sena != null ? p.descuento_sena + '%' : '—'}</td>
-                <td class="num">${p.valor_sena ? `<span class="t-sena">${money(p.valor_sena)}</span>` : '<span class="muted">—</span>'}</td>
-                <td class="num">${p.pago_sena ? money(p.pago_sena) : '—'}</td>
+                ${conSena ? `<td class="num">${p.descuento_sena != null ? p.descuento_sena + '%' : '—'}</td>
+                <td class="num">${p.valor_sena ? `<span class="t-sena">${money(p.valor_sena)}</span>` : '<span class="muted">No aplica</span>'}</td>
+                <td class="num">${p.pago_sena ? money(p.pago_sena) : '—'}</td>` : ''}
                 <td class="num"><span class="t-pv">${money(p.valor_final)}</span></td>
                 <td class="small">${escapeHtml(corto(p.cohorte_sena_txt || p.cohorte_txt))}</td>
                 <td class="num"><button class="btn btn-ghost btn-sm" data-oferta title="Oferta"><i class="fa-solid fa-paper-plane"></i></button></td></tr>`).join('')}</tbody></table></div>`;
@@ -141,10 +142,11 @@
     }
     function pintarOferta() {
         const p = oferta.p;
+        $('ofTipo').hidden = p.nivel === 'pos';
         $('ofTipo').querySelector('[data-t=sena]').disabled = !p.valor_sena;
         if (!p.valor_sena && oferta.tipo === 'sena') oferta.tipo = 'reg';
         $('ofTipo').querySelectorAll('button').forEach((b) => b.classList.toggle('active', b.dataset.t === oferta.tipo));
-        $('ofNota').textContent = !p.valor_sena ? 'Este programa no tiene precio SENA en la lista.' : '';
+        $('ofNota').textContent = p.nivel !== 'pos' && !p.valor_sena ? 'Este programa no tiene descuento SENA.' : '';
         $('ofertaTxt').innerHTML = waFormat(textoOferta());
     }
     $('out').addEventListener('click', (e) => {

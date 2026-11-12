@@ -95,3 +95,23 @@ def test_mensajes_usan_cohorte_del_programa():
     assert out == "Cohorte: 5ta cohorte 2026"
     out = store.render("Cohorte: {cohorte}", "Administración en Salud – Virtual", "pre")
     assert out == "Cohorte: 1ra cohorte 2027"
+
+
+def test_sena_solo_pregrado_con_homologacion():
+    acta = set(store.actas()["programa"])
+    for p in store.precios():
+        if p["valor_sena"]:
+            assert p["nivel"] == "pre" and p["programa"] in acta, p["programa"]
+    assert all(p["valor_sena"] is None for p in store.precios() if p["nivel"] == "pos")
+    msgs = store.mensajes_sena()
+    assert msgs and all(m["nivel"] == "pre" for m in msgs)
+    assert not any("Esp." in m["titulo"] or "Maestría" in m["titulo"] or "Matemáticas" in m["titulo"] for m in msgs)
+
+
+def test_mensaje_sin_sena_no_promete_descuento():
+    res = buscar_homologacion(store, "Tecnología en Gestión Logística")
+    for g in res["grupos"]:
+        for p in g["programas"]:
+            p["precio"] = None
+    msg = mensaje_homologacion(res, store.config)
+    assert "SENA" not in msg.split("información")[-1]

@@ -168,7 +168,7 @@
         }
 
         // ---- Beneficios
-        const ben = conBeneficios ? ['100% virtual', 'Descuento SENA durante toda la carrera', 'Pronto pago en el primer periodo'] : [];
+        const ben = conBeneficios ? ['100% virtual', programas.some((p) => p.precio && p.precio.tipo_descuento === 'SENA') ? 'Precio SENA durante toda la carrera' : 'Homologación por créditos', 'Pronto pago en el primer periodo'] : [];
         const colW = (W - PAD * 2) / 3;
         ben.forEach((b, i) => {
             const bx = PAD + i * colW; check(ctx, bx + 20, benY + 26, 20, C.green, C.white);
