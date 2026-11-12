@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block head %}
+<style>
+    .ed-card { padding: 0; overflow: hidden; }
+    .ed-head { display: flex; align-items: center; gap: 10px; padding: 12px 16px; cursor: pointer; }
+    .ed-head strong { flex: 1; font-size: 14px; }
+    .ed-body { display: none; padding: 0 16px 16px; }
+    .ed-card.open .ed-body { display: block; }
+    .ed-card.open .ed-head i.fa-chevron-down { transform: rotate(180deg); }
+    .ed-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+    @media (max-width: 900px) { .ed-grid { grid-template-columns: minmax(0, 1fr); } }
+    .ed-grid textarea { min-height: 260px; font-family: ui-monospace, Menlo, monospace; font-size: 13px; }
+</style>
+{% endblock %}
+{% block content %}
+<div class="page-head"><div><h2><span class="head-icon purple"><i class="fa-solid fa-comments"></i></span> {{ titulo }}</h2><p>Edita el texto con formato WhatsApp (*negrilla*, _cursiva_). Variables disponibles: <code>{cohorte}</code> (vigencia del programa según la lista de precios; en la vista previa se muestra la cohorte por defecto), <code>{cohorte_actual}</code> ({{ cfg.cohorte_actual }}), <code>{anio}</code>.</p></div>
+    <div class="actions"><button class="btn btn-primary" data-open-modal="newModal"><i class="fa-solid fa-plus"></i> Nuevo mensaje</button></div></div>
+{% include "_admin_nav.html" %}
+<div class="input-icon mb-2"><i class="fa-solid fa-magnifying-glass"></i><input type="text" id="flt" placeholder="Filtrar mensajes…" data-page-search></div>
+<div class="stack" style="gap:10px" id="list">
+    {% for m in mensajes %}
+    <div class="card ed-card" data-name="{{ (m.titulo ~ ' ' ~ m.texto)|lower }}">
+        <div class="ed-head"><i class="fa-solid fa-grip-vertical muted"></i>{% if tipo == 'comerciales' %}<span class="badge {{ 'blue' if m.nivel == 'pos' else 'green' }}">{{ 'Posgrado' if m.nivel == 'pos' else 'Pregrado' }}</span>{% endif %}<strong>{{ m.titulo }}</strong>
+            <form method="POST" action="{{ accion }}" style="display:contents"><input type="hidden" name="action" value="move"><input type="hidden" name="index" value="{{ loop.index0 }}"><button class="icon-btn sm" name="dir" value="up" title="Subir" onclick="event.stopPropagation()" {% if loop.first %}disabled{% endif %}><i class="fa-solid fa-arrow-up"></i></button><button class="icon-btn sm" name="dir" value="down" title="Bajar" onclick="event.stopPropagation()" {% if loop.last %}disabled{% endif %}><i class="fa-solid fa-arrow-down"></i></button></form>
+            <i class="fa-solid fa-chevron-down muted" style="transition:transform .2s"></i></div>
+        <div class="ed-body">
+            <form method="POST" action="{{ accion }}" class="stack" style="gap:12px">
+                <input type="hidden" name="action" value="update"><input type="hidden" name="index" value="{{ loop.index0 }}">
+                <div class="row">
+                    <input type="text" name="titulo" value="{{ m.titulo }}" required style="flex:1;min-width:200px">
+                    {% if tipo == 'comerciales' %}<select name="nivel" style="width:auto"><option value="pre" {% if m.nivel=='pre' %}selected{% endif %}>Pregrado</option><option value="pos" {% if m.nivel=='pos' %}selected{% endif %}>Posgrado</option></select>{% endif %}
+                </div>
+                <div class="ed-grid">
+                    <textarea name="texto" data-preview>{{ m.texto }}</textarea>
+                    <div class="wa-preview"><div class="wa-bubble" data-time="vista previa"></div></div>
+                </div>
+                <div class="row"><button class="btn btn-primary btn-sm" type="submit"><i class="fa-solid fa-floppy-disk"></i> Guardar</button><span class="spacer"></span><button class="btn btn-danger-soft btn-sm" type="submit" form="del{{ loop.index0 }}"><i class="fa-regular fa-trash-can"></i> Eliminar</button></div>
+            </form>
+            <form method="POST" action="{{ accion }}" id="del{{ loop.index0 }}" data-confirm="¿Eliminar “{{ m.titulo }}”?" hidden><input type="hidden" name="action" value="delete"><input type="hidden" name="index" value="{{ loop.index0 }}"></form>
+        </div>
+    </div>
+    {% else %}
+    <div class="card"><div class="empty"><div class="empty-icon"><i class="fa-regular fa-comments"></i></div><h4>No hay mensajes</h4></div></div>
+    {% endfor %}
+</div>
+<div class="modal" id="newModal" aria-hidden="true"><div class="modal-box lg">
+    <form method="POST" action="{{ accion }}">
+        <div class="modal-head"><h3><i class="fa-solid fa-plus" style="color:var(--brand)"></i> Nuevo mensaje</h3><button type="button" class="icon-btn sm" data-close-modal><i class="fa-solid fa-xmark"></i></button></div>
+        <div class="modal-body stack" style="gap:12px">
+            <input type="hidden" name="action" value="add">
+            <div class="row"><input type="text" name="titulo" placeholder="Título (ej. Ingeniería Industrial – Virtual)" required style="flex:1">{% if tipo == 'comerciales' %}<select name="nivel" style="width:auto"><option value="pre">Pregrado</option><option value="pos">Posgrado</option></select>{% endif %}</div>
+            <div class="ed-grid"><textarea name="texto" data-preview placeholder="🎓 *Programa – 100% Virtual*&#10;…" required></textarea><div class="wa-preview"><div class="wa-bubble" data-time="vista previa"></div></div></div>
+        </div>
+        <div class="modal-foot"><button type="button" class="btn btn-secondary" data-close-modal>Cancelar</button><button class="btn btn-primary" type="submit"><i class="fa-solid fa-floppy-disk"></i> Crear</button></div>
+    </form>
+</div></div>
+{% endblock %}
+{% block scripts %}
+<script>
+document.querySelectorAll('.ed-head').forEach((h) => h.addEventListener('click', (e) => { if (e.target.closest('button,form')) return; h.parentElement.classList.toggle('open'); }));
+const VARS = { '{cohorte}': {{ cfg.cohorte_actual|tojson }}, '{inicio}': {{ cfg.cohorte_actual|tojson }}, '{cohorte_actual}': {{ cfg.cohorte_actual|tojson }}, '{anio}': '{{ cfg.anio }}' };
+const renderVars = (t) => Object.entries(VARS).reduce((acc, [k, v]) => acc.split(k).join(v), t);
+document.querySelectorAll('[data-preview]').forEach((ta) => { const b = ta.parentElement.querySelector('.wa-bubble'); const up = () => b.innerHTML = App.waFormat(renderVars(ta.value || ' ')); ta.addEventListener('input', up); up(); });
+document.getElementById('flt').addEventListener('input', (e) => { const q = App.normalize(e.target.value); document.querySelectorAll('#list [data-name]').forEach((el) => el.hidden = q && !App.normalize(el.dataset.name).includes(q)); });
+</script>
+{% endblock %}

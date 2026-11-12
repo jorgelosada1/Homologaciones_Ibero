@@ -1,0 +1,10 @@
+<div class="tabs">
+    {% for href, icon, label in [('/admin/dashboard','fa-gauge','Resumen'),('/admin/mensajes-comerciales','fa-comments','Mensajes comerciales'),('/admin/mensajes-sena','fa-graduation-cap','Mensajes SENA'),('/admin/precios','fa-tags','Precios'),('/admin/piezas','fa-images','Piezas'),('/admin/brochures','fa-file-pdf','Brochures'),('/admin/config','fa-sliders','Configuración')] %}
+    <a class="tab {% if request.path == href or (href != '/admin/dashboard' and request.path.startswith(href)) %}active{% endif %}" href="{{ href }}"><i class="fa-solid {{ icon }}"></i> {{ label }}</a>
+    {% endfor %}
+    <span class="spacer"></span>
+    <a class="tab" href="/admin/logout" style="color:var(--danger)"><i class="fa-solid fa-right-from-bracket"></i> Salir</a>
+</div>
+{% if request.args.get('ok') %}<div class="alert success mb-2"><i class="fa-solid fa-circle-check"></i><span>{{ request.args.get('ok') }}</span></div>{% endif %}
+{% if request.args.get('error') %}<div class="alert error mb-2"><i class="fa-solid fa-circle-exclamation"></i><span>{{ request.args.get('error') }}</span></div>{% endif %}
+{% if request.args.get('reemplazos') %}<div class="alert success mb-2"><i class="fa-solid fa-circle-check"></i><span>Se hicieron {{ request.args.get('reemplazos') }} reemplazos en los mensajes.</span></div>{% endif %}

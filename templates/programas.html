@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+{% block title %}Explorar programas{% endblock %}
+{% block head %}
+<style>
+    .explorer { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 20px; align-items: start; }
+    @media (max-width: 980px) { .explorer { grid-template-columns: minmax(0, 1fr); } }
+    .plist { position: sticky; top: calc(var(--topbar-h) + 16px); padding: 8px; }
+    .pitem { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; cursor: pointer; border: 1px solid transparent; transition: var(--t); width: 100%; background: none; text-align: left; color: var(--text); }
+    .pitem:hover { background: var(--surface-2); }
+    .pitem.active { background: var(--brand-soft); border-color: rgba(201,160,60,0.35); }
+    .pitem .pi { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: var(--surface-3); color: var(--text-2); flex-shrink: 0; }
+    .pitem.active .pi { background: var(--brand); color: #1a1406; }
+    .pitem .nm { font-weight: 600; font-size: 13.5px; line-height: 1.25; }
+    .pitem .mt { font-size: 12px; color: var(--text-3); }
+    .pitem .ct { margin-left: auto; font-family: var(--font-display); font-weight: 700; font-size: 16px; color: var(--text-2); }
+    .detail-head { padding: 22px; display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap; }
+    .detail-head h3 { font-size: 22px; font-weight: 700; }
+    .mini-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; padding: 0 22px 18px; }
+    @media (max-width: 720px) { .mini-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .mini { padding: 12px 14px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--border); }
+    .mini small { font-size: 11px; color: var(--text-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+    .mini strong { display: block; font-family: var(--font-display); font-size: 20px; margin-top: 2px; }
+    .trow td:first-child { width: 55%; }
+    .hbar { display: flex; align-items: center; gap: 8px; min-width: 140px; }
+    .hbar .progress { flex: 1; }
+</style>
+{% endblock %}
+{% block content %}
+<div class="page-head">
+    <div>
+        <h2><span class="head-icon blue"><i class="fa-solid fa-diagram-project"></i></span> Explorar por programa</h2>
+        <p>Búsqueda inversa: elige una carrera virtual y mira todos los títulos SENA que homologan en ella y cuántos créditos se reconocen.</p>
+    </div>
+</div>
+
+<div class="explorer">
+    <div class="card plist" id="plist">
+        {% for p in programas %}
+        <button class="pitem {% if loop.first %}active{% endif %}" data-i="{{ loop.index0 }}">
+            <span class="pi"><i class="fa-solid fa-building-columns"></i></span>
+            <span style="min-width:0"><span class="nm" style="display:block">{{ p.display }}</span><span class="mt">Hasta {{ p.max_porcentaje }}% de créditos</span></span>
+            <span class="ct">{{ p.total }}</span>
+        </button>
+        {% endfor %}
+    </div>
+    <div class="card" id="detail"></div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+(() => {
+    const { escapeHtml, money, normalize, highlight, copyText, debounce } = App;
+    const PROGS = {{ programas | tojson }};
+    let cur = 0, filtro = '', minSem = 0;
+
+    function render() {
+        const p = PROGS[cur];
+        const list = p.titulos.filter((t) => (!filtro || normalize(t.titulo).includes(normalize(filtro))) && t.porcentaje >= minSem);
+        const pr = p.precio;
+        const fin = pr ? (pr.valor_sena || pr.valor_final) : 0;
+        const semOpts = [20, 40, 60].filter((x) => p.titulos.some((t) => t.porcentaje >= x));
+        document.getElementById('detail').innerHTML = `
+            <div class="detail-head">
+                <span class="head-icon"><i class="fa-solid fa-building-columns"></i></span>
+                <div style="flex:1;min-width:200px"><p class="eyebrow">Programa virtual</p><h3>${escapeHtml(p.display)}</h3></div>
+                <div class="row">
+                    <button class="btn btn-secondary btn-sm" id="cpList"><i class="fa-regular fa-copy"></i> Copiar lista</button>
+                    ${p.pensum ? `<a class="btn btn-secondary btn-sm" href="/brochures?nivel=pregrado&ver=${encodeURIComponent(p.pensum)}"><i class="fa-solid fa-book-open"></i> Ver pensum</a>` : ''}
+                </div>
+            </div>
+            <div class="mini-kpis">
+                <div class="mini"><small>Títulos SENA</small><strong>${p.total}</strong></div>
+                <div class="mini"><small>Máx. homologado</small><strong>${p.max_porcentaje}%</strong></div>
+                <div class="mini"><small>Promedio</small><strong>${p.promedio}%</strong></div>
+                <div class="mini"><small>${pr && pr.valor_sena ? 'Precio SENA' : 'Semestre'}</small><strong>${pr ? money(fin) : '—'}</strong></div>
+            </div>
+            <div style="padding:0 22px 14px" class="row">
+                <div class="input-icon" style="flex:1;min-width:220px"><i class="fa-solid fa-filter"></i><input type="text" id="flt" placeholder="Filtrar títulos…" value="${escapeHtml(filtro)}" data-page-search></div>
+                <div class="seg" id="semSeg"><button data-min="0" class="${minSem === 0 ? 'active' : ''}">Todos</button>${semOpts.map((s) => `<button data-min="${s}" class="${minSem === s ? 'active' : ''}">≥ ${s}%</button>`).join('')}</div>
+            </div>
+            <div style="overflow:auto;border-top:1px solid var(--border)">
+                <table class="table"><thead><tr><th>Título SENA</th><th>Créditos homologados</th><th class="num">≈ Sem. por cursar</th><th></th></tr></thead>
+                <tbody>${list.map((t) => {
+                    return `<tr class="trow"><td>${highlight(t.titulo, filtro)}</td><td><div class="hbar"><div class="progress"><span style="width:${t.porcentaje}%"></span></div><b title="${t.creditos} de ${t.creditos_programa} créditos">${t.creditos}</b></div></td><td class="num">${t.faltantes}</td><td class="num"><a class="btn btn-ghost btn-sm" href="/?q=${encodeURIComponent(t.titulo)}" title="Generar mensaje"><i class="fa-solid fa-wand-magic-sparkles"></i></a></td></tr>`;
+                }).join('') || `<tr><td colspan="4"><div class="empty" style="padding:24px">Sin títulos con ese filtro</div></td></tr>`}</tbody></table>
+            </div>`;
+        const f = document.getElementById('flt');
+        f.addEventListener('input', debounce(() => { filtro = f.value; render(); const n = document.getElementById('flt'); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }, 200));
+        document.getElementById('semSeg').addEventListener('click', (e) => { const b = e.target.closest('[data-min]'); if (b) { minSem = +b.dataset.min; render(); } });
+        document.getElementById('cpList').onclick = () => {
+            const txt = `🎓 *${p.display.toUpperCase()}* – Títulos SENA que homologan:\n\n` + list.map((t) => `🔹 ${t.titulo} → ${t.creditos} de ${t.creditos_programa} créditos (${t.porcentaje}%), ≈${t.faltantes} semestres por cursar`).join('\n');
+            copyText(txt, 'Lista copiada');
+        };
+    }
+    document.getElementById('plist').addEventListener('click', (e) => {
+        const b = e.target.closest('.pitem'); if (!b) return;
+        document.querySelectorAll('.pitem').forEach((x) => x.classList.toggle('active', x === b));
+        cur = +b.dataset.i; filtro = ''; minSem = 0; render();
+        if (window.innerWidth < 980) document.getElementById('detail').scrollIntoView({ behavior: 'smooth' });
+    });
+    render();
+})();
+</script>
+{% endblock %}

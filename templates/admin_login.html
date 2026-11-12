@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}Administración{% endblock %}
+{% block content %}
+<div class="card fade-up" style="max-width:400px;margin:48px auto;padding:30px">
+    <span class="head-icon purple"><i class="fa-solid fa-shield-halved"></i></span>
+    <h2 style="font-size:22px;margin-top:14px">Panel de administración</h2>
+    <p class="muted" style="margin:4px 0 20px">Gestiona mensajes, precios, piezas, actas y configuración.</p>
+    {% if error %}<div class="alert error mb-2"><i class="fa-solid fa-circle-exclamation"></i>{{ error }}</div>{% endif %}
+    <form method="POST" class="stack" style="gap:14px">
+        <div class="input-icon"><i class="fa-solid fa-key"></i><input type="password" name="password" placeholder="Contraseña de administrador" required autofocus></div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit"><i class="fa-solid fa-unlock"></i> Entrar</button>
+    </form>
+</div>
+{% endblock %}

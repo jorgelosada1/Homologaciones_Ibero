@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+*.log
+.pytest_cache/
+.venv/
+venv/
+.env
+
+# Datos generados en tiempo de ejecución
+data/actividad.json
+data/backups/
+data/archivos/

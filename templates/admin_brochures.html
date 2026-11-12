@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}Brochures · Admin{% endblock %}
+{% block content %}
+<div class="page-head"><div><h2><span class="head-icon pink"><i class="fa-solid fa-file-pdf"></i></span> Pensum y brochures</h2><p>Sube los PDF de los programas. Los de pregrado y posgrado aparecen en <b>Brochures y pensum</b> y se enlazan solos con cada carrera por su nombre (ej. <code>INGENIERIA INDUSTRIAL.pdf</code>).</p></div></div>
+{% include "_admin_nav.html" %}
+{% if ok %}<div class="alert success mb-2"><i class="fa-solid fa-circle-check"></i> {{ ok }}</div>{% endif %}
+<form method="POST" enctype="multipart/form-data" class="card card-pad row mb-2">
+    <input type="hidden" name="action" value="upload">
+    <i class="fa-solid fa-file-arrow-up" style="font-size:22px;color:var(--pink)"></i>
+    <select name="destino" style="width:auto"><option value="pregrado">Pensum pregrado</option><option value="posgrado">Pensum posgrado</option><option value="otros">Otros documentos</option></select>
+    <input type="file" name="pdfs" accept="application/pdf" multiple required style="flex:1;height:auto;padding:8px">
+    <button class="btn btn-primary" type="submit"><i class="fa-solid fa-upload"></i> Subir PDF</button>
+</form>
+{% for g in grupos %}
+<h3 style="font-size:15px;margin:18px 0 8px">{{ g.label }} <span class="badge">{{ g.archivos|length }}</span></h3>
+<div class="table-wrap">
+    <table class="table"><thead><tr><th>Archivo</th><th>Tamaño</th><th>Actualizado</th><th class="num">Acciones</th></tr></thead><tbody>
+    {% for a in g.archivos %}
+    <tr><td><i class="fa-solid fa-file-pdf" style="color:var(--pink)"></i> {{ a.name }}</td><td>{{ a.size|human_size }}</td><td>{{ a.mtime }}</td>
+        <td class="num nowrap"><a class="btn btn-ghost btn-sm" href="{{ a.url }}" target="_blank"><i class="fa-regular fa-eye"></i></a>
+        <form method="POST" style="display:inline" data-confirm="¿Eliminar {{ a.name }}?"><input type="hidden" name="action" value="delete"><input type="hidden" name="destino" value="{{ g.key }}"><input type="hidden" name="filename" value="{{ a.name }}"><button class="btn btn-danger-soft btn-sm"><i class="fa-regular fa-trash-can"></i></button></form></td></tr>
+    {% else %}
+    <tr><td colspan="4"><div class="empty" style="padding:20px">Sin archivos todavía.</div></td></tr>
+    {% endfor %}
+    </tbody></table>
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends "layout.html" %}
+{% block title %}Brochures y pensum{% endblock %}
+{% block head %}
+<style>
+    .pen-toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 18px; }
+    .pen-group { margin-bottom: 26px; }
+    .pen-group h3 { font-size: 15px; font-weight: 650; display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: var(--text-2); }
+    .pen-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .pen-card { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+    .pen-top { display: flex; gap: 12px; align-items: flex-start; }
+    .pen-icon { width: 44px; height: 52px; border-radius: 8px 14px 8px 8px; flex-shrink: 0; display: grid; place-items: center; font-size: 18px;
+        background: linear-gradient(160deg, var(--brand), var(--brand-700)); color: #fff; box-shadow: 0 6px 14px -6px rgba(82,122,31,.6); }
+    .pen-card.posgrado .pen-icon { background: linear-gradient(160deg, #f6a33a, var(--orange)); box-shadow: 0 6px 14px -6px rgba(240,138,18,.6); }
+    .pen-card.maes .pen-icon { background: linear-gradient(160deg, #9c84ff, var(--purple)); box-shadow: 0 6px 14px -6px rgba(124,92,240,.6); }
+    .pen-card.otros .pen-icon { background: linear-gradient(160deg, #4f7fc4, var(--pink)); box-shadow: 0 6px 14px -6px rgba(46,90,156,.5); }
+    .pen-name { font-family: var(--font-display); font-size: 15.5px; font-weight: 650; line-height: 1.3; }
+    .pen-meta { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+    .pen-actions { display: flex; gap: 6px; margin-top: auto; }
+    .pen-actions .btn { flex: 1; }
+</style>
+{% endblock %}
+{% block content %}
+<div class="page-head">
+    <div>
+        <h2><span class="head-icon pink"><i class="fa-solid fa-file-pdf"></i></span> Brochures y pensum</h2>
+        <p>Plan de estudios de cada programa en PDF. Ábrelo aquí mismo, descárgalo o compártelo con el prospecto.</p>
+    </div>
+    {% if is_admin %}<div class="actions"><a class="btn btn-secondary" href="/admin/brochures"><i class="fa-solid fa-upload"></i> Gestionar</a></div>{% endif %}
+</div>
+
+<div class="tabs">
+    <a class="tab {{ 'active' if nivel == 'pregrado' }}" href="/brochures?nivel=pregrado"><i class="fa-solid fa-user-graduate"></i> Pregrado <span class="badge {{ 'green' if nivel == 'pregrado' }}">{{ conteo.pregrado }}</span></a>
+    <a class="tab {{ 'active' if nivel == 'posgrado' }}" href="/brochures?nivel=posgrado"><i class="fa-solid fa-award"></i> Posgrado <span class="badge {{ 'orange' if nivel == 'posgrado' }}">{{ conteo.posgrado }}</span></a>
+    {% if conteo.otros %}<a class="tab {{ 'active' if nivel == 'otros' }}" href="/brochures?nivel=otros"><i class="fa-regular fa-folder-open"></i> Otros <span class="badge {{ 'pink' if nivel == 'otros' }}">{{ conteo.otros }}</span></a>{% endif %}
+</div>
+
+{% if items %}
+<div class="pen-toolbar">
+    <div class="input-icon" style="flex:1;min-width:240px"><i class="fa-solid fa-magnifying-glass"></i><input type="text" id="q" placeholder="Buscar programa…" data-page-search><button type="button" class="input-clear"><i class="fa-solid fa-xmark"></i></button></div>
+</div>
+
+{% for cat, grupo in items|groupby('categoria') %}
+<section class="pen-group" data-group>
+    {% if nivel != 'otros' %}<h3>{{ cat }} <span class="badge">{{ grupo|length }}</span></h3>{% endif %}
+    <div class="pen-grid">
+        {% for it in grupo %}
+        <article class="card hoverable pen-card {{ nivel }} {{ 'maes' if cat == 'Maestrías' }}" data-name="{{ it.nombre }}">
+            <div class="pen-top">
+                <span class="pen-icon"><i class="fa-solid fa-file-lines"></i></span>
+                <div style="min-width:0"><div class="pen-name">{{ it.nombre }}</div><div class="pen-meta">PDF · {{ it.size|human_size }}</div></div>
+            </div>
+            <div class="pen-actions">
+                <button class="btn {{ 'btn-orange' if nivel == 'posgrado' else ('btn-pink' if nivel == 'otros' else 'btn-primary') }} btn-sm" data-ver="{{ it.url }}" data-title="{{ it.nombre }}" data-file="{{ it.archivo }}"><i class="fa-regular fa-eye"></i> Ver</button>
+                <a class="btn btn-secondary btn-sm" href="{{ it.url }}{{ '?descargar=1' if nivel != 'otros' }}" {% if nivel == 'otros' %}download{% endif %}><i class="fa-solid fa-download"></i> Descargar</a>
+                <button class="icon-btn sm" data-share="{{ it.url }}" data-file="{{ it.archivo }}" title="Compartir"><i class="fa-solid fa-share-nodes"></i></button>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endfor %}
+<div class="card" id="empty" hidden><div class="empty"><div class="empty-icon"><i class="fa-solid fa-magnifying-glass"></i></div><h4>Sin resultados</h4><p>No hay documentos que coincidan con la búsqueda.</p></div></div>
+{% else %}
+<div class="card"><div class="empty"><div class="empty-icon"><i class="fa-regular fa-file-pdf"></i></div><h4>Aún no hay documentos aquí</h4><p>Agrega los PDF en la carpeta <code>Pensum {{ 'Posgrados' if nivel == 'posgrado' else 'Pregrados' }}</code> del repositorio.</p></div></div>
+{% endif %}
+
+<div class="modal" id="pdfModal" aria-hidden="true">
+    <div class="modal-box xl" style="height:calc(100vh - 40px);display:flex;flex-direction:column">
+        <div class="modal-head"><h3 id="pdfTitle"></h3>
+            <a class="btn btn-secondary btn-sm" id="pdfDl"><i class="fa-solid fa-download"></i><span class="desktop-only">Descargar</span></a>
+            <a class="btn btn-ghost btn-sm" id="pdfTab" target="_blank" rel="noopener" title="Abrir en otra pestaña"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            <button class="icon-btn sm" data-close-modal aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button></div>
+        <iframe id="pdfFrame" title="Documento" style="flex:1;border:0;width:100%;background:var(--surface-2)"></iframe>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+(() => {
+    const { normalize, toast, openModal } = App;
+    const $ = (id) => document.getElementById(id);
+    const dl = (url) => url.includes('/static/') ? url : url + '?descargar=1';
+    function ver(url, title) {
+        $('pdfFrame').src = url; $('pdfTitle').textContent = title;
+        $('pdfDl').href = dl(url); $('pdfTab').href = url;
+        openModal('pdfModal');
+    }
+    async function share(url, file) {
+        try {
+            toast('Preparando archivo…', 'info');
+            const blob = await (await fetch(url)).blob();
+            const f = new File([blob], file, { type: 'application/pdf' });
+            if (navigator.canShare && navigator.canShare({ files: [f] })) { await navigator.share({ files: [f], title: file }); return; }
+        } catch (e) { if (e.name === 'AbortError') return; }
+        const a = document.createElement('a'); a.href = dl(url); a.download = file; a.click();
+        toast('Tu dispositivo no permite compartir directo: se descargó el PDF para que lo adjuntes.', 'info', 4000);
+    }
+    document.addEventListener('click', (e) => {
+        const v = e.target.closest('[data-ver]'); if (v) ver(v.dataset.ver, v.dataset.title);
+        const s = e.target.closest('[data-share]'); if (s) share(s.dataset.share, s.dataset.file);
+    });
+    $('pdfModal').addEventListener('transitionend', () => { if (!$('pdfModal').classList.contains('open')) $('pdfFrame').src = 'about:blank'; });
+    const q = $('q');
+    if (q) q.addEventListener('input', () => {
+        const t = normalize(q.value.trim()); let vis = 0;
+        document.querySelectorAll('[data-name]').forEach((c) => { const ok = !t || normalize(c.dataset.name).includes(t); c.hidden = !ok; if (ok) vis++; });
+        document.querySelectorAll('[data-group]').forEach((g) => { g.hidden = !g.querySelector('[data-name]:not([hidden])'); });
+        $('empty').hidden = vis > 0;
+    });
+    const ver0 = {{ ver | tojson }};
+    if (ver0) { const b = document.querySelector(`[data-ver][data-file="${CSS.escape(ver0)}"]`); if (b) ver(b.dataset.ver, b.dataset.title); }
+})();
+</script>
+{% endblock %}

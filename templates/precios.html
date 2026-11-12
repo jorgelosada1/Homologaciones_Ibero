@@ -1,0 +1,173 @@
+{% extends "layout.html" %}
+{% block title %}Precios Ibero{% endblock %}
+{% block head %}
+<style>
+    .p-toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 18px; }
+    .p-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 14px; }
+    .p-card { padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+    .p-card h3 { font-size: 15px; font-weight: 650; line-height: 1.3; min-height: 40px; }
+    .p-full { font-size: 12.5px; color: var(--text-2); }
+    .p-full b { color: var(--text); font-size: 14px; }
+    .p-rows { display: grid; gap: 8px; }
+    .p-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface-2); }
+    .p-row .lbl { font-size: 12px; font-weight: 650; color: var(--text-2); }
+    .p-row .lbl small { display: block; font-weight: 500; color: var(--text-3); }
+    .p-row .val { margin-left: auto; text-align: right; }
+    .p-row .val strong { display: block; font-family: var(--font-display); font-size: 19px; font-variant-numeric: tabular-nums; }
+    .p-row .val span { font-size: 11.5px; color: var(--text-3); }
+    .p-row.sena { background: var(--pink-soft); border-color: transparent; }
+    .p-row.sena .val strong { color: var(--pink); }
+    .p-row.na { opacity: .6; }
+    .p-meta { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--text-2); flex-wrap: wrap; }
+    .p-actions { display: flex; gap: 6px; margin-top: auto; }
+    .p-actions .btn { flex: 1; }
+    .t-sena { color: var(--pink); font-weight: 700; }
+    .t-pv { color: var(--brand-ink); font-weight: 700; }
+</style>
+{% endblock %}
+{% block content %}
+<div class="page-head">
+    <div>
+        <h2><span class="head-icon orange"><i class="fa-solid fa-tags"></i></span> Precios virtuales</h2>
+        <p>Valor por semestre de cada programa: precio SENA (con su pronto pago) y precio regular para quien no es egresado SENA. Genera la oferta en un clic.</p>
+    </div>
+    <div class="actions">
+        <button class="btn btn-secondary" id="exportCsv"><i class="fa-solid fa-file-excel" style="color:#1d7044"></i> Descargar en Excel</button>
+        <button class="btn btn-secondary" id="copyAll"><i class="fa-regular fa-copy"></i> Copiar lista</button>
+    </div>
+</div>
+
+<div class="alert info" style="margin-bottom:16px"><i class="fa-solid fa-circle-info"></i><span class="small">El <b>descuento SENA</b> y el <b>remarketing</b> se mantienen durante toda la carrera. El <b>pronto pago</b> aplica solo para el primer periodo. Valores sujetos a cambios institucionales.</span></div>
+
+<div class="tabs" id="nivelTabs">
+    <button class="tab {{ 'active' if nivel != 'pos' }}" data-n="pre"><i class="fa-solid fa-user-graduate"></i> Pregrado <span class="badge">{{ programas|selectattr('nivel','equalto','pre')|list|length }}</span></button>
+    <button class="tab {{ 'active' if nivel == 'pos' }}" data-n="pos"><i class="fa-solid fa-award"></i> Posgrado <span class="badge">{{ programas|selectattr('nivel','equalto','pos')|list|length }}</span></button>
+</div>
+
+<div class="p-toolbar">
+    <div class="input-icon" style="flex:1;min-width:220px"><i class="fa-solid fa-magnifying-glass"></i><input type="text" id="q" placeholder="Buscar programa…" data-page-search><button type="button" class="input-clear"><i class="fa-solid fa-xmark"></i></button></div>
+    <select id="sort" style="width:auto">
+        <option value="nombre">Ordenar: nombre</option>
+        <option value="asc">Precio SENA: menor a mayor</option>
+        <option value="desc">Precio SENA: mayor a menor</option>
+    </select>
+    <div class="seg" id="view"><button data-v="grid" class="active" aria-label="Tarjetas"><i class="fa-solid fa-grip"></i></button><button data-v="table" aria-label="Tabla"><i class="fa-solid fa-list"></i></button></div>
+</div>
+
+<div id="out"></div>
+
+<div class="modal" id="ofertaModal" aria-hidden="true">
+    <div class="modal-box">
+        <div class="modal-head"><h3><i class="fa-solid fa-paper-plane" style="color:var(--brand)"></i> Oferta para el prospecto</h3><button class="icon-btn sm" data-close-modal aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button></div>
+        <div style="padding:14px 20px 0" class="row">
+            <div class="seg" id="ofTipo"><button data-t="sena" class="active">Egresado SENA</button><button data-t="reg">No SENA</button></div>
+            <span class="small muted" id="ofNota"></span>
+        </div>
+        <div class="wa-preview" style="border-radius:0;margin-top:14px"><div class="wa-bubble" id="ofertaTxt" data-time="ahora ✓✓"></div></div>
+        <div class="modal-foot">
+            <div class="input-icon" style="flex:1;min-width:160px"><i class="fa-solid fa-phone"></i><input type="tel" id="phone" placeholder="Celular (opcional)"></div>
+            <button class="btn btn-pink" id="ofCopy"><i class="fa-regular fa-copy"></i> Copiar</button>
+            <button class="btn btn-wa" id="ofWa"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+(() => {
+    const { escapeHtml, money, normalize, highlight, waFormat, copyText, openWhatsApp, openModal, store, debounce } = App;
+    const DATA = {{ programas | tojson }};
+    const $ = (id) => document.getElementById(id);
+    let nivel = {{ ('pos' if nivel == 'pos' else 'pre') | tojson }}, view = store.get('precios-view', 'grid');
+    let oferta = { p: null, tipo: 'sena' };
+    const ref = (p) => p.valor_sena || p.valor_final;
+    const corto = (c) => (c || '').replace(/ cohorte /, ' coh. ');
+
+    function list() {
+        const q = normalize($('q').value.trim());
+        let l = DATA.filter((p) => p.nivel === nivel && (!q || normalize(p.programa).includes(q)));
+        const s = $('sort').value;
+        l.sort((a, b) => s === 'asc' ? ref(a) - ref(b) : s === 'desc' ? ref(b) - ref(a) : a.programa.localeCompare(b.programa));
+        return l;
+    }
+    function render() {
+        document.querySelectorAll('#view button').forEach((b) => b.classList.toggle('active', b.dataset.v === view));
+        document.querySelectorAll('#nivelTabs .tab').forEach((b) => b.classList.toggle('active', b.dataset.n === nivel));
+        const l = list(); const q = $('q').value.trim();
+        if (!l.length) { $('out').innerHTML = '<div class="card"><div class="empty"><div class="empty-icon"><i class="fa-solid fa-tags"></i></div><h4>Sin programas</h4></div></div>'; return; }
+        if (view === 'grid') {
+            $('out').innerHTML = `<div class="p-grid">${l.map((p) => `
+                <article class="card hoverable p-card" data-id="${p.id}">
+                    <div class="row" style="justify-content:space-between"><span class="badge">Virtual</span>${(p.cohorte_sena_txt || p.cohorte_txt) ? `<span class="badge green" title="Vigencia"><i class="fa-regular fa-calendar"></i> ${escapeHtml(p.cohorte_sena_txt || p.cohorte_txt)}</span>` : ''}</div>
+                    <h3>${highlight(p.programa, q)}</h3>
+                    <div class="p-full">Valor regular por semestre: <b>${money(p.valor)}</b></div>
+                    <div class="p-rows">
+                        ${p.valor_sena
+                            ? `<div class="p-row sena"><div class="lbl">Egresado SENA<small>${p.descuento_sena}% SENA${p.pronto_pago_sena ? ` · pronto pago ${money(p.pago_sena)}` : ''}</small></div><div class="val"><strong>${money(p.valor_sena)}</strong><span>por semestre</span></div></div>`
+                            : `<div class="p-row na"><div class="lbl">Egresado SENA<small>Sin precio SENA en la lista</small></div></div>`}
+                        <div class="p-row"><div class="lbl">No SENA<small>${p.subsidio}% subsidio + ${p.remarketing}% remarketing${p.pronto_pago ? ` + ${p.pronto_pago}% p. pago` : ''}</small></div><div class="val"><strong>${money(p.valor_final)}</strong><span>precio final</span></div></div>
+                    </div>
+                    <div class="p-actions">
+                        <button class="btn btn-primary btn-sm" data-oferta><i class="fa-solid fa-paper-plane"></i> Oferta</button>
+                        ${p.pensum ? `<a class="btn btn-secondary btn-sm" href="/brochures?nivel=${p.nivel === 'pos' ? 'posgrado' : 'pregrado'}&ver=${encodeURIComponent(p.pensum)}"><i class="fa-solid fa-book-open"></i> Pensum</a>` : ''}
+                    </div>
+                </article>`).join('')}</div>`;
+        } else {
+            $('out').innerHTML = `<div class="table-wrap"><table class="table"><thead><tr><th>Programa</th><th class="num">Valor regular</th><th class="num">% SENA</th><th class="num">Precio SENA</th><th class="num">Pronto pago SENA</th><th class="num">Precio final no SENA</th><th>Vigencia</th><th></th></tr></thead><tbody>${l.map((p) => `
+                <tr data-id="${p.id}"><td><b>${highlight(p.programa, q)}</b></td><td class="num">${money(p.valor)}</td>
+                <td class="num">${p.descuento_sena != null ? p.descuento_sena + '%' : '—'}</td>
+                <td class="num">${p.valor_sena ? `<span class="t-sena">${money(p.valor_sena)}</span>` : '<span class="muted">—</span>'}</td>
+                <td class="num">${p.pago_sena ? money(p.pago_sena) : '—'}</td>
+                <td class="num"><span class="t-pv">${money(p.valor_final)}</span></td>
+                <td class="small">${escapeHtml(corto(p.cohorte_sena_txt || p.cohorte_txt))}</td>
+                <td class="num"><button class="btn btn-ghost btn-sm" data-oferta title="Oferta"><i class="fa-solid fa-paper-plane"></i></button></td></tr>`).join('')}</tbody></table></div>`;
+        }
+    }
+
+    function textoOferta() {
+        const p = oferta.p; if (!p) return '';
+        const esSena = oferta.tipo === 'sena' && p.valor_sena;
+        let t = `🎓 *Oferta Ibero · Corporación Universitaria Iberoamericana*\n*${p.programa}* – 100% virtual\n\n💰 Valor regular del semestre: *${money(p.valor)}*\n`;
+        if (esSena) {
+            t += `🏷️ Como egresado SENA tienes un precio especial de *${money(p.valor_sena)}* por semestre, que se mantiene durante toda la carrera.\n`;
+            if (p.pago_sena && p.pago_sena < p.valor_sena) t += `⚡ Con pronto pago, tu primer periodo queda en *${money(p.pago_sena)}*.\n`;
+        } else {
+            t += `✅ *Precio final por semestre: ${money(p.valor_final)}*\n`;
+        }
+        const coh = esSena ? (p.cohorte_sena_txt || p.cohorte_txt) : p.cohorte_txt;
+        if (coh) t += `\n📅 *Cohorte:* ${coh}\n`;
+        t += `📌 Valores sujetos a cambios institucionales.`;
+        return t;
+    }
+    function pintarOferta() {
+        const p = oferta.p;
+        $('ofTipo').querySelector('[data-t=sena]').disabled = !p.valor_sena;
+        if (!p.valor_sena && oferta.tipo === 'sena') oferta.tipo = 'reg';
+        $('ofTipo').querySelectorAll('button').forEach((b) => b.classList.toggle('active', b.dataset.t === oferta.tipo));
+        $('ofNota').textContent = !p.valor_sena ? 'Este programa no tiene precio SENA en la lista.' : '';
+        $('ofertaTxt').innerHTML = waFormat(textoOferta());
+    }
+    $('out').addEventListener('click', (e) => {
+        if (!e.target.closest('[data-oferta]')) return;
+        oferta.p = DATA.find((x) => x.id === +e.target.closest('[data-id]').dataset.id);
+        oferta.tipo = oferta.p.valor_sena ? 'sena' : 'reg';
+        pintarOferta(); openModal('ofertaModal');
+    });
+    $('ofTipo').addEventListener('click', (e) => { const b = e.target.closest('[data-t]'); if (b && !b.disabled) { oferta.tipo = b.dataset.t; pintarOferta(); } });
+    $('ofCopy').onclick = () => copyText(textoOferta(), '¡Oferta copiada!', oferta.p.programa);
+    $('ofWa').onclick = () => openWhatsApp($('phone').value, textoOferta(), oferta.p.programa);
+    $('q').addEventListener('input', debounce(render, 120));
+    $('sort').addEventListener('change', render);
+    $('nivelTabs').addEventListener('click', (e) => { const b = e.target.closest('[data-n]'); if (!b) return; nivel = b.dataset.n; const u = new URL(location); u.searchParams.set('nivel', nivel); history.replaceState(null, '', u); render(); });
+    $('view').addEventListener('click', (e) => { const b = e.target.closest('[data-v]'); if (b) { view = b.dataset.v; store.set('precios-view', view); render(); } });
+    $('copyAll').onclick = () => copyText(`🎓 *Precios ${nivel === 'pos' ? 'posgrado' : 'pregrado'} virtual · Ibero*\n\n` + list().map((p) => `📌 *${p.programa}*: ${p.valor_sena ? `SENA ${money(p.valor_sena)} · ` : ''}regular ${money(p.valor_final)}`).join('\n'), 'Lista copiada');
+    $('exportCsv').onclick = () => {
+        const rows = [['Nivel', 'Programa', 'Valor regular', '% subsidio', 'Precio con subsidio', '% remarketing', '% pronto pago', 'Precio final no SENA', '% SENA', 'Precio SENA', '% pronto pago SENA', 'Pago total SENA', 'Vigencia'],
+            ...list().map((p) => [p.nivel === 'pos' ? 'Posgrado' : 'Pregrado', p.programa, p.valor, p.subsidio, p.valor_lista, p.remarketing, p.pronto_pago, p.valor_final, p.descuento_sena ?? '', p.valor_sena ?? '', p.pronto_pago_sena ?? '', p.pago_sena ?? '', p.cohorte_sena_txt || p.cohorte_txt])];
+        const csv = rows.map((r) => r.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(';')).join('\n');
+        const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8' })); a.download = `precios_${nivel === 'pos' ? 'posgrado' : 'pregrado'}_ibero.csv`; a.click();
+    };
+    render();
+})();
+</script>
+{% endblock %}

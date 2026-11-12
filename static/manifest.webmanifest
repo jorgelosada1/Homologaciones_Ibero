@@ -1,0 +1,14 @@
+{
+  "name": "Homologaciones SENA · Ibero",
+  "short_name": "Homologaciones",
+  "description": "Herramienta de asesores Ibero para homologaciones SENA, mensajes y precios.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#141b26",
+  "theme_color": "#1f2b3d",
+  "lang": "es-CO",
+  "icons": [
+    {"src": "/static/icons/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "/static/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}

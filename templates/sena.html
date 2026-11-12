@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<style>
+    .sena-page { max-width: 800px; margin: 0 auto; animation: fadeIn 0.5s ease; }
+    .sena-header { margin-bottom: 20px; }
+    .sena-header p { color: var(--text-muted); font-size: 14px; margin-top: -18px; }
+    .search-form { position: relative; margin-bottom: 24px; }
+    .search-form i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+    .search-form input { padding-left: 42px; height: 48px; border-radius: 12px; font-size: 14px; }
+    .search-form button { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); height: 38px; padding: 0 16px; border: none; border-radius: 8px; background: var(--accent); color: white; font-size: 13px; font-weight: 600; cursor: pointer; transition: var(--transition); }
+    .search-form button:hover { background: var(--accent-dark); }
+
+    .sena-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 22px; margin-bottom: 14px; transition: var(--transition); animation: slideUp 0.5s ease both; position: relative; overflow: hidden; box-shadow: var(--shadow-sm); }
+    .sena-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--accent); }
+    .sena-card:hover { box-shadow: var(--shadow-md); transform: translateX(3px); }
+    .sena-card h3 { font-size: 15px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .sena-card h3::before { content: '🎓'; }
+    .sena-body { white-space: pre-wrap; font-size: 14px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 14px; padding-left: 8px; }
+    .btn-copy-sena { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border: none; border-radius: 8px; background: var(--accent); color: white; font-size: 13px; font-weight: 600; cursor: pointer; transition: var(--transition); }
+    .btn-copy-sena:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .sena-card:nth-child(1) { animation-delay: 0.05s; }
+    .sena-card:nth-child(2) { animation-delay: 0.1s; }
+    .sena-card:nth-child(3) { animation-delay: 0.15s; }
+    .no-results { text-align: center; padding: 40px; color: var(--text-muted); }
+</style>
+
+<div class="sena-page">
+    <div class="sena-header">
+        <h2><i class="fa-solid fa-graduation-cap" style="color:var(--accent)"></i> Mensajes SENA</h2>
+        <p>Mensajes con beneficios de homologación para egresados SENA</p>
+    </div>
+    <form method="get" class="search-form">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" name="q" placeholder="Buscar programa SENA..." value="{{ q }}">
+        <button type="submit"><i class="fa-solid fa-search"></i> Buscar</button>
+    </form>
+    {% if mensajes %}
+    <div id="listaSena">
+        {% for m in mensajes %}
+        <div class="sena-card">
+            <h3>{{ m.titulo }}</h3>
+            <div class="sena-body" id="s{{ loop.index }}">{{ m.texto }}</div>
+            <button type="button" class="btn-copy-sena" onclick="copiarTexto('s{{ loop.index }}', '¡Mensaje SENA copiado!')">
+                <i class="fa-solid fa-copy"></i> Copiar
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="no-results">
+        <i class="fa-solid fa-inbox" style="font-size:32px;display:block;margin-bottom:10px"></i>
+        <p>No se encontraron mensajes SENA</p>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

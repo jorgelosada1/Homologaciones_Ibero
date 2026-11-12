@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+{% block title %}Mensajes{% endblock %}
+{% block head %}
+<style>
+    .msg-toolbar { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 18px; position: sticky; top: var(--topbar-h); z-index: 5; padding: 10px 0; background: var(--bg); }
+    .msg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+    @media (max-width: 420px) { .msg-grid { grid-template-columns: minmax(0, 1fr); } }
+    .msg-card { display: flex; flex-direction: column; overflow: hidden; }
+    .msg-card .mc-head { display: flex; align-items: flex-start; gap: 10px; padding: 16px 16px 10px; }
+    .msg-card .mc-title { font-family: var(--font-display); font-weight: 650; font-size: 15.5px; line-height: 1.3; flex: 1; }
+    .msg-card .mc-body { padding: 0 16px; flex: 1; position: relative; max-height: 220px; overflow: hidden; }
+    .msg-card.expanded .mc-body { max-height: none; }
+    .msg-card .mc-body::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 60px; background: linear-gradient(transparent, var(--surface)); pointer-events: none; }
+    .msg-card.expanded .mc-body::after, .msg-card.short .mc-body::after { display: none; }
+    .msg-card .mc-foot { display: flex; gap: 6px; padding: 12px 16px; border-top: 1px solid var(--border); margin-top: 12px; align-items: center; }
+    .fav-btn { border: 0; background: none; color: var(--text-3); cursor: pointer; font-size: 16px; padding: 2px; }
+    .fav-btn.on { color: #f5b301; }
+    .msg-body-text { white-space: pre-wrap; word-wrap: break-word; font-size: 13.5px; line-height: 1.6; color: var(--text-2); }
+    .msg-body-text strong { color: var(--text); }
+</style>
+{% endblock %}
+{% block content %}
+<div class="page-head">
+    <div>
+        <h2><span class="head-icon purple"><i class="fa-solid fa-comments"></i></span> Biblioteca de mensajes</h2>
+        <p>Mensajes comerciales y de homologación SENA listos para copiar o enviar por WhatsApp. Marca tus favoritos ⭐ y personaliza el nombre del prospecto.</p>
+    </div>
+    {% if is_admin %}<div class="actions"><a class="btn btn-secondary" href="/admin/mensajes-comerciales"><i class="fa-solid fa-pen"></i> Editar mensajes</a></div>{% endif %}
+</div>
+
+<div class="msg-toolbar">
+    <div class="seg" id="tabs">
+        <button data-tab="pre"><i class="fa-solid fa-user-graduate"></i> Pregrado <span class="count" id="c-pre"></span></button>
+        <button data-tab="pos"><i class="fa-solid fa-award"></i> Posgrado <span class="count" id="c-pos"></span></button>
+        <button data-tab="sena"><i class="fa-solid fa-graduation-cap"></i> SENA <span class="count" id="c-sena"></span></button>
+        <button data-tab="fav"><i class="fa-solid fa-star"></i> Favoritos <span class="count" id="c-fav"></span></button>
+    </div>
+    <div class="input-icon" style="flex:1;min-width:220px"><i class="fa-solid fa-magnifying-glass"></i><input type="text" id="q" placeholder="Buscar programa o palabra clave…" value="{{ q }}" data-page-search><button type="button" class="input-clear" aria-label="Limpiar"><i class="fa-solid fa-xmark"></i></button></div>
+    <div class="input-icon" style="width:220px"><i class="fa-regular fa-user"></i><input type="text" id="nombre" placeholder="Nombre del prospecto"></div>
+</div>
+
+<div class="msg-grid stagger" id="grid"></div>
+<div id="empty" class="card" hidden><div class="empty"><div class="empty-icon"><i class="fa-regular fa-folder-open"></i></div><h4>Sin mensajes</h4><p id="emptyTxt">No hay mensajes que coincidan.</p></div></div>
+{% endblock %}
+{% block scripts %}
+<script>
+(() => {
+    const { escapeHtml, normalize, waFormat, copyText, openWhatsApp, store, debounce } = App;
+    const PROG = {{ programas | tojson }};
+    const SENA = {{ sena | tojson }};
+    const ALL = [
+        ...PROG.map((m, i) => ({ id: 'p' + i, tab: m.nivel === 'pos' ? 'pos' : 'pre', titulo: m.titulo, texto: m.texto.replace(/\r\n/g, '\n') })),
+        ...SENA.map((m, i) => ({ id: 's' + i + ':' + m.titulo, tab: 'sena', titulo: m.titulo, texto: m.texto.replace(/\r\n/g, '\n') })),
+    ];
+    ALL.forEach((m) => { if (m.tab !== 'sena') m.id = 'p:' + m.titulo; });
+    let tab = {{ nivel | tojson }};
+    let favs = new Set(store.get('msg-favs', []));
+    const $ = (id) => document.getElementById(id);
+
+    function personalize(t) {
+        const n = $('nombre').value.trim();
+        return n ? `¡Hola ${n}! 👋\n\n` + t : t;
+    }
+    function counts() {
+        ['pre', 'pos', 'sena'].forEach((k) => { $('c-' + k).textContent = ALL.filter((m) => m.tab === k).length; });
+        $('c-fav').textContent = ALL.filter((m) => favs.has(m.id)).length;
+    }
+    function render() {
+        const q = normalize($('q').value.trim());
+        document.querySelectorAll('#tabs button').forEach((b) => b.classList.toggle('active', b.dataset.tab === tab));
+        let list = ALL.filter((m) => tab === 'fav' ? favs.has(m.id) : m.tab === tab);
+        if (q) list = ALL.filter((m) => (tab === 'fav' ? favs.has(m.id) : true) && normalize(m.titulo + ' ' + m.texto).includes(q));
+        $('grid').innerHTML = list.map((m) => {
+            const short = m.texto.split('\n').length < 11;
+            const tabLabel = { pre: 'Pregrado', pos: 'Posgrado', sena: 'SENA' }[m.tab];
+            return `<article class="card msg-card ${short ? 'short' : ''}" data-id="${escapeHtml(m.id)}">
+                <div class="mc-head"><div class="mc-title">${escapeHtml(m.titulo)}</div>${q ? `<span class="badge">${tabLabel}</span>` : ''}<button class="fav-btn ${favs.has(m.id) ? 'on' : ''}" data-fav title="Favorito"><i class="fa-${favs.has(m.id) ? 'solid' : 'regular'} fa-star"></i></button></div>
+                <div class="mc-body"><div class="msg-body-text">${waFormat(m.texto)}</div></div>
+                <div class="mc-foot">
+                    <button class="btn btn-pink btn-sm" data-copy><i class="fa-regular fa-copy"></i> Copiar</button>
+                    <button class="btn btn-wa btn-sm" data-wa><i class="fa-brands fa-whatsapp"></i> Enviar</button>
+                    <span class="spacer"></span>
+                    ${short ? '' : '<button class="btn btn-ghost btn-sm" data-expand>Ver más</button>'}
+                </div>
+            </article>`;
+        }).join('');
+        $('empty').hidden = list.length > 0;
+        $('emptyTxt').textContent = tab === 'fav' && !q ? 'Aún no tienes favoritos. Toca la ⭐ de un mensaje para guardarlo aquí.' : 'No hay mensajes que coincidan con la búsqueda.';
+        const url = new URL(location); url.searchParams.set('nivel', tab); q ? url.searchParams.set('q', $('q').value.trim()) : url.searchParams.delete('q');
+        history.replaceState(null, '', url);
+    }
+    $('tabs').addEventListener('click', (e) => { const b = e.target.closest('[data-tab]'); if (b) { tab = b.dataset.tab; render(); } });
+    $('q').addEventListener('input', debounce(render, 150));
+    $('grid').addEventListener('click', (e) => {
+        const card = e.target.closest('.msg-card'); if (!card) return;
+        const m = ALL.find((x) => x.id === card.dataset.id);
+        if (e.target.closest('[data-copy]')) copyText(personalize(m.texto), '¡Mensaje copiado!', m.titulo);
+        if (e.target.closest('[data-wa]')) openWhatsApp('', personalize(m.texto), m.titulo);
+        if (e.target.closest('[data-expand]')) { card.classList.toggle('expanded'); e.target.closest('[data-expand]').textContent = card.classList.contains('expanded') ? 'Ver menos' : 'Ver más'; }
+        if (e.target.closest('[data-fav]')) {
+            favs.has(m.id) ? favs.delete(m.id) : favs.add(m.id);
+            store.set('msg-favs', [...favs]); counts(); render();
+        }
+    });
+    counts(); render();
+})();
+</script>
+{% endblock %}

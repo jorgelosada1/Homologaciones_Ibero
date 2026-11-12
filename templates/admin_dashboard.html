@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block title %}Administración{% endblock %}
+{% block content %}
+<div class="page-head"><div><h2><span class="head-icon purple"><i class="fa-solid fa-shield-halved"></i></span> Administración</h2><p>Mantén al día los datos que usan los asesores.</p></div></div>
+{% include "_admin_nav.html" %}
+
+<div class="grid grid-4 stagger">
+    <a class="card hoverable kpi" href="/admin/mensajes-comerciales" style="text-decoration:none"><div class="kpi-top"><span class="kpi-label">Mensajes comerciales</span><span class="kpi-icon"><i class="fa-solid fa-comments"></i></span></div><div class="kpi-value">{{ stats.mensajes_comerciales }}</div><div class="kpi-sub">{{ stats.mensajes_sena }} mensajes SENA</div></a>
+    <a class="card hoverable kpi orange" href="/admin/precios" style="text-decoration:none"><div class="kpi-top"><span class="kpi-label">Programas con precio</span><span class="kpi-icon"><i class="fa-solid fa-tags"></i></span></div><div class="kpi-value">{{ stats.precios }}</div><div class="kpi-sub">Editar valores y descuentos</div></a>
+    <a class="card hoverable kpi purple" href="/admin/piezas" style="text-decoration:none"><div class="kpi-top"><span class="kpi-label">Piezas gráficas</span><span class="kpi-icon"><i class="fa-solid fa-images"></i></span></div><div class="kpi-value">{{ stats.piezas }}</div><div class="kpi-sub">{{ stats.brochures }} pensum y brochures PDF</div></a>
+    <div class="card kpi blue"><div class="kpi-top"><span class="kpi-label">Actas cargadas</span><span class="kpi-icon"><i class="fa-solid fa-file-excel"></i></span></div><div class="kpi-value">{{ stats.titulos }}</div><div class="kpi-sub">títulos · {{ stats.combinaciones }} combinaciones</div></div>
+</div>
+
+<div class="grid grid-2 mt-2">
+    <section class="card">
+        <div class="card-head"><h3><i class="fa-solid fa-database"></i> Datos de homologación</h3></div>
+        <div class="card-body stack">
+            <p class="small muted">Sube la nueva versión del Excel. Se valida, se guarda un respaldo del anterior y los cambios quedan disponibles al instante. Solo se usan las filas de modalidad virtual (incluye "Presencial y virtual").</p>
+            <form method="POST" action="/admin/datos" enctype="multipart/form-data" class="stack" style="gap:10px;padding:14px;border:1px dashed var(--border-strong);border-radius:14px">
+                <div class="row"><strong style="flex:1"><i class="fa-solid fa-file-excel" style="color:var(--brand)"></i> Acta de homologaciones SENA Ibero</strong><a class="btn btn-ghost btn-sm" href="/admin/datos/descargar/actas"><i class="fa-solid fa-download"></i> Actual</a></div>
+                <span class="small muted">Actualizado: {{ actas_info.mtime }} · {{ actas_info.size|human_size }}</span>
+                <input type="hidden" name="tipo" value="actas">
+                <div class="row"><input type="file" name="archivo" accept=".xlsx" required style="flex:1;height:auto;padding:8px"><button class="btn btn-primary btn-sm" type="submit"><i class="fa-solid fa-upload"></i> Subir</button></div>
+            </form>
+        </div>
+    </section>
+    <div class="stack">
+        <section class="card">
+            <div class="card-head"><h3><i class="fa-solid fa-right-left"></i> Buscar y reemplazar en mensajes</h3></div>
+            <form method="POST" action="/admin/reemplazar" class="card-body stack" style="gap:12px" data-confirm="¿Aplicar el reemplazo en todos los mensajes seleccionados?">
+                <p class="small muted">Ideal para actualizar fechas o valores en todos los mensajes de una vez (ej. un valor o un texto que cambió). </p>
+                <div class="grid grid-2" style="gap:10px"><input type="text" name="buscar" placeholder="Texto a buscar" required><input type="text" name="reemplazo" placeholder="Reemplazar por"></div>
+                <div class="row"><label class="switch"><input type="checkbox" name="destinos" value="mensajes_programas.json" checked><span class="track"></span> Comerciales</label><label class="switch"><input type="checkbox" name="destinos" value="mensajes_sena.json" checked><span class="track"></span> SENA</label><span class="spacer"></span><button class="btn btn-primary btn-sm" type="submit"><i class="fa-solid fa-wand-magic-sparkles"></i> Reemplazar</button></div>
+            </form>
+        </section>
+        <section class="card">
+            <div class="card-head"><h3><i class="fa-solid fa-chart-simple"></i> Actividad (7 días)</h3><form method="POST" action="/admin/actividad/limpiar" data-confirm="¿Borrar todo el historial de actividad?"><button class="btn btn-ghost btn-sm" style="color:var(--danger)"><i class="fa-regular fa-trash-can"></i> Limpiar</button></form></div>
+            <div class="card-body">
+                <div class="grid grid-3" style="gap:10px">
+                    <div><div class="kpi-label">Búsquedas</div><div class="kpi-value" style="font-size:24px;margin-top:2px">{{ actividad.por_dia|sum }}</div></div>
+                    <div><div class="kpi-label">Copias</div><div class="kpi-value" style="font-size:24px;margin-top:2px">{{ actividad.copias }}</div></div>
+                    <div><div class="kpi-label">WhatsApp</div><div class="kpi-value" style="font-size:24px;margin-top:2px">{{ actividad.whatsapp }}</div></div>
+                </div>
+                {% if actividad.sin_resultado %}<p class="small mt-2"><b>Títulos buscados sin resultado:</b> {% for q, n in actividad.sin_resultado[:6] %}<span class="badge red" style="margin:2px">{{ q }} ({{ n }})</span>{% endfor %}</p>{% endif %}
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

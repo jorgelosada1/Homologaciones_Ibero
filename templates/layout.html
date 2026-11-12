@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>{% block title %}{{ page_title() }}{% endblock %} · Ibero</title>
+    <meta name="description" content="Sistema de homologaciones SENA de la Ibero: consulta de programas, mensajes, precios y pensum.">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="phone-prefix" content="{{ cfg.telefono_prefijo }}">
+    <meta name="theme-color" content="#f4f5f7">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icons/icon-192.png') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='icons/apple-touch-icon.png') }}">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <script>
+        (function () {
+            var t = null;
+            try { t = JSON.parse(localStorage.getItem('theme')); } catch (e) {}
+            if (!t) t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', t);
+            try { if (JSON.parse(localStorage.getItem('sidebar-collapsed'))) document.documentElement.classList.add('pre-collapsed'); } catch (e) {}
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}?v={{ asset_v }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+<script>if (document.documentElement.classList.contains('pre-collapsed')) document.body.classList.add('sidebar-collapsed');</script>
+<a href="#main" class="hidden">Saltar al contenido</a>
+<div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Navegación principal">
+        <a class="side-brand" href="/dashboard">
+            <span class="side-logo"><img src="{{ url_for('logo') }}" alt="Ibero"></span>
+            <span class="side-brand-text"><strong>Ibero</strong><span>Homologaciones SENA</span></span>
+        </a>
+        <button class="side-search" type="button" data-action="palette" title="Buscar (Ctrl+K)">
+            <i class="fa-solid fa-magnifying-glass"></i><span>Buscar…</span><kbd>Ctrl K</kbd>
+        </button>
+        <nav class="side-nav">
+            {% for section, items in NAV %}
+            <div class="side-section">
+                <div class="side-section-title">{{ section }}</div>
+                {% for href, icon, label in items %}
+                <a href="{{ href }}" class="side-link {% if nav_active(href) %}active{% endif %}" title="{{ label }}">
+                    <i class="{{ 'fa-solid ' if 'fa-brands' not in icon }}{{ icon }}"></i><span>{{ label }}</span>
+                </a>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            {% if is_admin %}
+            <div class="side-section">
+                <div class="side-section-title">Administración</div>
+                <a href="/admin/dashboard" class="side-link {% if request.path.startswith('/admin') %}active{% endif %}" title="Administración">
+                    <i class="fa-solid fa-shield-halved"></i><span>Panel admin</span>
+                </a>
+            </div>
+            {% endif %}
+        </nav>
+        <div class="side-footer">
+            <button type="button" data-action="toggle-theme" title="Cambiar tema"><i data-theme-icon class="fa-solid fa-moon"></i><span class="label">Tema</span></button>
+            <button type="button" class="desktop-only" data-action="toggle-sidebar" title="Contraer menú"><i class="fa-solid fa-angles-left"></i><span class="label">Contraer</span></button>
+        </div>
+    </aside>
+    <div class="side-overlay" id="sideOverlay"></div>
+
+    <div class="main">
+        <header class="topbar">
+            <button class="icon-btn mobile-only" type="button" data-action="toggle-sidebar" aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+            <div class="topbar-title">
+                <h1>{% block page_heading %}{{ page_title() }}{% endblock %}</h1>
+                {% block crumb %}{% endblock %}
+            </div>
+            <div class="topbar-actions">
+                <button class="search-trigger" type="button" data-action="palette" aria-label="Buscar">
+                    <i class="fa-solid fa-magnifying-glass"></i><span>Buscar títulos, páginas…</span><kbd>Ctrl K</kbd>
+                </button>
+                <div class="clock-pill" title="Hora local"><span class="live-dot"></span><span id="clock">--:--</span></div>
+                <button class="icon-btn" type="button" data-action="toggle-theme" aria-label="Cambiar tema" title="Tema claro/oscuro"><i data-theme-icon class="fa-solid fa-moon"></i></button>
+                <div class="user-menu">
+                    <button class="user-btn" type="button" data-dropdown="userMenu" aria-haspopup="true" aria-expanded="false">
+                        <span class="avatar">IN</span><span class="name">Innovación</span><i class="fa-solid fa-chevron-down" style="font-size:10px;color:var(--text-3)"></i>
+                    </button>
+                    <div class="dropdown" id="userMenu" role="menu">
+                        <div class="dropdown-header"><strong>Equipo Innovación</strong><span>Asesores Ibero</span></div>
+                        <a href="/dashboard"><i class="fa-solid fa-gauge-high"></i> Panel</a>
+                        <a href="/admin"><i class="fa-solid fa-shield-halved"></i> Administración</a>
+                        <button type="button" data-open-modal="shortcutsModal"><i class="fa-regular fa-keyboard"></i> Atajos de teclado</button>
+                        <hr>
+                        {% if is_admin %}<a href="/admin/logout"><i class="fa-solid fa-user-lock"></i> Salir de admin</a>{% endif %}
+                        <a href="/logout" class="danger"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="content" id="main">
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="app-footer">
+            <span>© {{ now.year }} Corporación Universitaria Iberoamericana · Sistema de Homologaciones v{{ app_version }}</span>
+            <span>Pulsa <kbd>?</kbd> para ver atajos · Desarrollado por <a href="#">JL</a></span>
+        </footer>
+    </div>
+</div>
+
+<!-- Paleta de comandos -->
+<div class="palette" id="palette" role="dialog" aria-modal="true" aria-label="Buscar">
+    <div class="palette-box">
+        <div class="palette-input"><i class="fa-solid fa-magnifying-glass"></i><input id="paletteInput" placeholder="Busca un título SENA, una página o una acción…" autocomplete="off"><kbd>Esc</kbd></div>
+        <div class="palette-list" id="paletteList"></div>
+        <div class="palette-foot"><span><kbd>↑</kbd><kbd>↓</kbd> navegar</span><span><kbd>Enter</kbd> abrir</span></div>
+    </div>
+</div>
+
+<!-- Atajos -->
+<div class="modal" id="shortcutsModal" aria-hidden="true">
+    <div class="modal-box">
+        <div class="modal-head"><h3><i class="fa-regular fa-keyboard" style="color:var(--brand)"></i> Atajos de teclado</h3><button class="icon-btn sm" data-close-modal aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button></div>
+        <div class="modal-body">
+            <table class="table">
+                <tbody>
+                <tr><td><kbd>Ctrl</kbd> + <kbd>K</kbd></td><td>Buscador global (títulos, páginas, acciones)</td></tr>
+                <tr><td><kbd>/</kbd></td><td>Enfocar el buscador de la página</td></tr>
+                <tr><td><kbd>g</kbd> luego <kbd>h</kbd></td><td>Ir a Homologaciones</td></tr>
+                <tr><td><kbd>g</kbd> luego <kbd>m</kbd></td><td>Ir a Mensajes</td></tr>
+                <tr><td><kbd>g</kbd> luego <kbd>r</kbd></td><td>Ir a Precios</td></tr>
+                <tr><td><kbd>g</kbd> luego <kbd>b</kbd></td><td>Ir a Brochures y pensum</td></tr>
+                <tr><td><kbd>g</kbd> luego <kbd>d</kbd></td><td>Ir al Panel</td></tr>
+                <tr><td><kbd>Esc</kbd></td><td>Cerrar ventanas</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+<script type="application/json" id="navData">[{% for section, items in NAV %}{% for href, icon, label in items %}{"label": {{ label|tojson }}, "href": {{ href|tojson }}, "icon": {{ (icon if 'fa-brands' not in icon else 'fa-comment-dots')|tojson }}}{% if not loop.last %},{% endif %}{% endfor %}{% if not loop.last %},{% endif %}{% endfor %}]</script>
+<script src="{{ url_for('static', filename='js/app.js') }}?v={{ asset_v }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

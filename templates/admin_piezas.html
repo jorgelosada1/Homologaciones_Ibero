@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+{% block title %}Piezas · Admin{% endblock %}
+{% block head %}
+<style>
+    .drop { border: 2px dashed var(--border-strong); border-radius: 16px; padding: 26px; text-align: center; transition: var(--t); cursor: pointer; background: var(--surface); }
+    .drop.over { border-color: var(--brand); background: var(--brand-soft); }
+    .drop i { font-size: 28px; color: var(--brand); }
+    .thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
+    .thumb { overflow: hidden; }
+    .thumb img { width: 100%; height: 130px; object-fit: cover; display: block; background: var(--surface-3); }
+    .thumb .tb { padding: 8px 10px; display: flex; gap: 6px; align-items: center; }
+    .thumb .tb span { flex: 1; font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .crumbs { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 13px; margin-bottom: 14px; }
+    .crumbs a { color: var(--text-2); text-decoration: none; }
+</style>
+{% endblock %}
+{% block content %}
+<div class="page-head"><div><h2><span class="head-icon purple"><i class="fa-solid fa-images"></i></span> Gestionar piezas</h2><p>Sube imágenes (puedes arrastrarlas), organízalas en carpetas y renómbralas.</p></div>
+    <div class="actions"><a class="btn btn-secondary" href="/piezas{{ '/' + subfolder if subfolder }}"><i class="fa-regular fa-eye"></i> Ver como asesor</a></div></div>
+{% include "_admin_nav.html" %}
+<nav class="crumbs"><a href="/admin/piezas"><i class="fa-solid fa-house"></i> Piezas</a>{% for c in breadcrumb %} <i class="fa-solid fa-chevron-right small muted"></i> <a href="/admin/piezas/{{ c.path }}">{{ c.name }}</a>{% endfor %}</nav>
+
+<div class="grid grid-2 mb-2">
+    <form method="POST" enctype="multipart/form-data" id="upForm">
+        <input type="hidden" name="action" value="upload">
+        <label class="drop" id="drop" for="files" style="display:block">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <p style="margin-top:8px"><b>Arrastra imágenes aquí</b> o haz clic para elegir</p>
+            <p class="small muted" id="dropInfo">PNG, JPG, GIF o WEBP · hasta 32 MB por envío</p>
+        </label>
+        <input type="file" id="files" name="imagenes" accept="image/*" multiple hidden>
+    </form>
+    <form method="POST" class="card card-pad stack" style="gap:10px">
+        <strong><i class="fa-solid fa-folder-plus" style="color:#f5b301"></i> Nueva carpeta</strong>
+        <input type="hidden" name="action" value="create_folder">
+        <div class="row"><input type="text" name="folder_name" placeholder="Nombre de la carpeta" required style="flex:1"><button class="btn btn-primary" type="submit">Crear</button></div>
+    </form>
+</div>
+
+{% if carpetas %}
+<h3 style="font-size:15px;margin:8px 0 10px">Carpetas</h3>
+<div class="grid grid-auto mb-2">
+    {% for f in carpetas %}
+    <div class="card row" style="padding:12px 14px;flex-wrap:nowrap">
+        <i class="fa-solid fa-folder" style="color:#f5b301;font-size:20px"></i>
+        <a href="/admin/piezas/{{ (subfolder + '/' + f.name) if subfolder else f.name }}" style="flex:1;text-decoration:none;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ f.name }}</a>
+        <span class="badge">{{ f.count }}</span>
+        <form method="POST" data-confirm="¿Eliminar la carpeta “{{ f.name }}” y TODO su contenido?"><input type="hidden" name="action" value="delete_folder"><input type="hidden" name="folder_name" value="{{ f.name }}"><button class="icon-btn sm" title="Eliminar carpeta"><i class="fa-regular fa-trash-can" style="color:var(--danger)"></i></button></form>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<h3 style="font-size:15px;margin:8px 0 10px">Imágenes ({{ imagenes|length }})</h3>
+{% if imagenes %}
+<div class="thumbs">
+    {% for img in imagenes %}
+    <div class="card thumb">
+        <img src="{{ url_for('static', filename=img.path) }}" alt="" loading="lazy">
+        <div class="tb">
+            <span title="{{ img.name }}">{{ img.name }}</span>
+            <button class="icon-btn sm" title="Renombrar" data-rename="{{ img.name }}"><i class="fa-solid fa-pen"></i></button>
+            <form method="POST" data-confirm="¿Eliminar {{ img.name }}?"><input type="hidden" name="action" value="delete"><input type="hidden" name="filename" value="{{ img.name }}"><button class="icon-btn sm" title="Eliminar"><i class="fa-regular fa-trash-can" style="color:var(--danger)"></i></button></form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="card"><div class="empty"><div class="empty-icon"><i class="fa-regular fa-image"></i></div><p>No hay imágenes en esta carpeta.</p></div></div>
+{% endif %}
+<form method="POST" id="renameForm" hidden><input type="hidden" name="action" value="rename"><input type="hidden" name="filename"><input type="hidden" name="new_name"></form>
+{% endblock %}
+{% block scripts %}
+<script>
+(() => {
+    const drop = document.getElementById('drop'), files = document.getElementById('files'), form = document.getElementById('upForm');
+    const send = () => { if (files.files.length) { document.getElementById('dropInfo').textContent = `Subiendo ${files.files.length} archivo(s)…`; form.submit(); } };
+    files.addEventListener('change', send);
+    ['dragenter', 'dragover'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add('over'); }));
+    ['dragleave', 'drop'].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove('over'); }));
+    drop.addEventListener('drop', (e) => { files.files = e.dataTransfer.files; send(); });
+    document.querySelectorAll('[data-rename]').forEach((b) => b.addEventListener('click', () => {
+        const old = b.dataset.rename; const nn = prompt('Nuevo nombre para ' + old, old.replace(/\.[^.]+$/, ''));
+        if (!nn || nn === old) return;
+        const f = document.getElementById('renameForm'); f.filename.value = old; f.new_name.value = nn; f.submit();
+    }));
+})();
+</script>
+{% endblock %}

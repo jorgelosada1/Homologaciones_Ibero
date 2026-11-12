@@ -1,0 +1,140 @@
+{% extends "layout.html" %}
+{% block title %}Panel{% endblock %}
+{% block head %}
+<style>
+    .welcome { display: flex; align-items: center; gap: 20px; padding: 24px 26px; border-radius: var(--radius-xl); margin-bottom: 18px; color: #f6efdd; position: relative; overflow: hidden;
+        background: radial-gradient(80% 140% at 0% 0%, rgba(201,160,60,0.5), transparent 55%), radial-gradient(60% 120% at 100% 100%, rgba(46,90,156,0.3), transparent 60%), linear-gradient(140deg, #1d2738, #0f141d); }
+    .welcome h2 { color: #fff; font-size: 26px; font-weight: 750; }
+    .welcome p { color: rgba(234,244,236,0.75); margin-top: 4px; }
+    .welcome .btn-secondary { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.15); }
+    .welcome .btn-secondary:hover { background: rgba(255,255,255,0.15); }
+    .chart-box { position: relative; height: 280px; }
+    .list-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13.5px; }
+    .list-row:last-child { border-bottom: 0; }
+    .list-row .rank { width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; font-size: 11.5px; font-weight: 700; background: var(--surface-3); color: var(--text-2); flex-shrink: 0; }
+    .list-row a { text-decoration: none; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .list-row a:hover { color: var(--brand-700); }
+    .dash-cols { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 16px; margin-top: 16px; }
+    @media (max-width: 1100px) { .dash-cols { grid-template-columns: minmax(0, 1fr); } }
+    .status-line { display: flex; align-items: center; gap: 10px; padding: 10px 0; font-size: 13.5px; }
+    .status-line i { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; }
+</style>
+{% endblock %}
+{% block content %}
+<section class="welcome fade-up">
+    <div style="flex:1;min-width:0">
+        <p class="eyebrow" style="color:#e3c372" id="greet">Hola 👋</p>
+        <h2>Panel de homologaciones</h2>
+        <p>Resumen de la oferta, la actividad del equipo y el estado de tus datos.</p>
+    </div>
+    <div class="row">
+        <a href="/" class="btn btn-primary"><i class="fa-solid fa-wand-magic-sparkles"></i> Nueva homologación</a>
+        <button class="btn btn-secondary" data-action="palette"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+    </div>
+</section>
+
+<div class="grid grid-4 stagger">
+    <div class="card kpi"><div class="kpi-top"><span class="kpi-label">Títulos SENA</span><span class="kpi-icon"><i class="fa-solid fa-graduation-cap"></i></span></div><div class="kpi-value" data-count="{{ stats.total_titulos }}">{{ stats.total_titulos }}</div><div class="kpi-sub">{{ stats.total_combinaciones }} combinaciones</div></div>
+    <div class="card kpi blue"><div class="kpi-top"><span class="kpi-label">Programas virtuales</span><span class="kpi-icon"><i class="fa-solid fa-building-columns"></i></span></div><div class="kpi-value" data-count="{{ stats.total_programas_actas }}">{{ stats.total_programas_actas }}</div><div class="kpi-sub">Hasta {{ stats.max_porcentaje }}% de créditos homologados</div></div>
+    <div class="card kpi pink"><div class="kpi-top"><span class="kpi-label">Búsquedas hoy</span><span class="kpi-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></span></div><div class="kpi-value" data-count="{{ actividad.busquedas_hoy }}">{{ actividad.busquedas_hoy }}</div><div class="kpi-sub">{{ actividad.total_busquedas }} en total · {{ actividad.copias }} copias · {{ actividad.whatsapp }} WhatsApp</div></div>
+    <div class="card kpi orange"><div class="kpi-top"><span class="kpi-label">Precio SENA promedio</span><span class="kpi-icon"><i class="fa-solid fa-coins"></i></span></div><div class="kpi-value" data-count="{{ stats.precio_promedio }}" data-format="money">{{ stats.precio_promedio|money }}</div><div class="kpi-sub">{{ stats.precio_min|money }} – {{ stats.precio_max|money }} · {{ stats.total_precios }} programas</div></div>
+</div>
+
+<div class="dash-cols">
+    <div class="card">
+        <div class="card-head"><h3><i class="fa-solid fa-chart-line"></i> Búsquedas de los últimos 14 días</h3><span class="badge green">{{ actividad.por_dia|sum }} búsquedas</span></div>
+        <div class="card-body"><div class="chart-box"><canvas id="chDias"></canvas></div></div>
+    </div>
+    <div class="stack">
+    <div class="card">
+        <div class="card-head"><h3><i class="fa-solid fa-fire"></i> Títulos más consultados</h3></div>
+        <div class="card-body" style="padding-top:6px">
+            {% for q, n in actividad.top_busquedas %}
+            <div class="list-row"><span class="rank">{{ loop.index }}</span><a href="/?q={{ q|urlencode }}" title="{{ q }}">{{ q }}</a><span class="badge">{{ n }}</span></div>
+            {% else %}
+            <div class="empty" style="padding:30px 10px"><div class="empty-icon"><i class="fa-solid fa-chart-simple"></i></div><p>Aún no hay búsquedas registradas. Empieza en <a href="/" style="color:var(--brand-700)">Homologaciones</a>.</p></div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="dash-cols">
+    <div class="card">
+        <div class="card-head"><h3><i class="fa-solid fa-building-columns"></i> Títulos homologables por programa</h3><a class="btn btn-ghost btn-sm" href="/programas">Explorar <i class="fa-solid fa-arrow-right"></i></a></div>
+        <div class="card-body"><div class="chart-box" style="height:300px"><canvas id="chProgramas"></canvas></div></div>
+    </div>
+    <div class="card">
+        <div class="card-head"><h3><i class="fa-solid fa-chart-pie"></i> % de créditos homologados</h3></div>
+        <div class="card-body"><div class="chart-box" style="height:300px"><canvas id="chDist"></canvas></div></div>
+    </div>
+</div>
+
+<div class="dash-cols">
+    <div class="card">
+        <div class="card-head"><h3><i class="fa-solid fa-tags"></i> Precio SENA por semestre (pregrado)</h3><a class="btn btn-ghost btn-sm" href="/precios">Ver precios <i class="fa-solid fa-arrow-right"></i></a></div>
+        <div class="card-body"><div class="chart-box" style="height:{{ 120 + chart.precios_labels|length * 18 }}px"><canvas id="chPrecios"></canvas></div></div>
+    </div>
+    <div class="stack">
+        <div class="card">
+            <div class="card-head"><h3><i class="fa-solid fa-circle-question"></i> Búsquedas sin resultado</h3></div>
+            <div class="card-body" style="padding-top:6px">
+                {% for q, n in actividad.sin_resultado %}
+                <div class="list-row"><span class="rank" style="background:var(--danger-soft);color:var(--danger)"><i class="fa-solid fa-xmark"></i></span><a href="/?q={{ q|urlencode }}">{{ q }}</a><span class="badge red">{{ n }}</span></div>
+                {% else %}
+                <p class="small muted" style="padding:10px 0">Todo bien: no hay búsquedas fallidas. Si aparecen, son títulos que podrían faltar en el acta.</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-head"><h3><i class="fa-solid fa-database"></i> Estado de datos</h3></div>
+            <div class="card-body" style="padding-top:4px">
+                <div class="status-line"><i style="background:var(--orange-soft);color:var(--orange)" class="fa-solid fa-book-open"></i><div style="flex:1">Pensum<div class="small muted">{{ stats.pensum_pre }} pregrado · {{ stats.pensum_pos }} posgrado</div></div></div>
+                <div class="status-line"><i style="background:var(--purple-soft);color:var(--purple)" class="fa-solid fa-images"></i><div style="flex:1">Piezas gráficas<div class="small muted">{{ stats.piezas }} imágenes</div></div></div>
+                <div class="status-line"><i style="background:var(--pink-soft);color:var(--pink)" class="fa-solid fa-comments"></i><div style="flex:1">Mensajes<div class="small muted">{{ stats.total_pregrado }} pregrado · {{ stats.total_posgrado }} posgrado · {{ stats.total_mensajes_sena }} SENA</div></div></div>
+                <a class="btn btn-secondary btn-sm btn-block mt-1" href="/brochures?nivel=pregrado"><i class="fa-solid fa-book-open"></i> Ver pensum</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(() => {
+    const h = new Date().getHours();
+    document.getElementById('greet').textContent = (h < 12 ? 'Buenos días' : h < 19 ? 'Buenas tardes' : 'Buenas noches') + ' 👋';
+    if (!window.Chart) return;
+    const C = {{ chart | tojson }};
+    const A = {{ actividad | tojson }};
+    const charts = [];
+    const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+    const PAL = ['#c9a03c', '#2f7df6', '#2e5a9c', '#f08a12', '#7c5cf0', '#14b8a6', '#eab308', '#64748b'];
+
+    function build() {
+        charts.forEach((c) => c.destroy()); charts.length = 0;
+        Chart.defaults.font.family = 'Inter, system-ui, sans-serif';
+        Chart.defaults.color = css('--text-3');
+        Chart.defaults.borderColor = css('--border');
+        const tip = { backgroundColor: css('--text'), titleColor: css('--bg'), bodyColor: css('--bg'), padding: 10, cornerRadius: 8, displayColors: false };
+        const money = (v) => '$' + Math.round(v).toLocaleString('es-CO');
+
+        const ctx = document.getElementById('chDias').getContext('2d');
+        const grad = ctx.createLinearGradient(0, 0, 0, 280); grad.addColorStop(0, 'rgba(201,160,60,0.35)'); grad.addColorStop(1, 'rgba(201,160,60,0)');
+        charts.push(new Chart(ctx, { type: 'line', data: { labels: A.dias.map((d) => { const x = new Date(d + 'T00:00'); return x.toLocaleDateString('es-CO', { day: '2-digit', month: 'short' }); }), datasets: [{ data: A.por_dia, borderColor: '#c9a03c', backgroundColor: grad, fill: true, cubicInterpolationMode: 'monotone', pointRadius: 3, pointBackgroundColor: '#c9a03c', borderWidth: 2.5 }] },
+            options: { maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: tip }, scales: { y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: css('--border') } }, x: { grid: { display: false } } } } }));
+
+        charts.push(new Chart(document.getElementById('chProgramas'), { type: 'bar', data: { labels: C.programas, datasets: [{ data: C.programas_total, backgroundColor: PAL, borderRadius: 8, barThickness: 22 }] },
+            options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { ...tip, callbacks: { label: (c) => `${c.raw} títulos SENA` } } }, scales: { x: { beginAtZero: true, grid: { color: css('--border') } }, y: { grid: { display: false }, ticks: { color: css('--text-2') } } } } }));
+
+        charts.push(new Chart(document.getElementById('chDist'), { type: 'doughnut', data: { labels: C.dist_labels, datasets: [{ data: C.dist_values, backgroundColor: PAL, borderColor: css('--surface'), borderWidth: 3 }] },
+            options: { maintainAspectRatio: false, cutout: '64%', plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, boxHeight: 10, usePointStyle: true, color: css('--text-2') } }, tooltip: { ...tip, callbacks: { label: (c) => `${c.label}: ${c.raw} combinaciones` } } } } }));
+
+        charts.push(new Chart(document.getElementById('chPrecios'), { type: 'bar', data: { labels: C.precios_labels, datasets: [{ data: C.precios_values, backgroundColor: 'rgba(240,138,18,0.85)', borderRadius: 6, barThickness: 12 }] },
+            options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { ...tip, callbacks: { label: (c) => money(c.raw) } } }, scales: { x: { ticks: { callback: (v) => '$' + (v / 1e6).toFixed(1) + 'M' }, grid: { color: css('--border') } }, y: { grid: { display: false }, ticks: { color: css('--text-2'), font: { size: 11.5 } } } } } }));
+    }
+    build();
+    window.addEventListener('themechange', () => setTimeout(build, 30));
+})();
+</script>
+{% endblock %}

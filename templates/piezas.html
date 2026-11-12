@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+{% block title %}Piezas gráficas{% endblock %}
+{% block head %}
+<style>
+    .crumbs { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 13px; margin-bottom: 18px; }
+    .crumbs a { color: var(--text-2); text-decoration: none; padding: 4px 8px; border-radius: 8px; }
+    .crumbs a:hover { background: var(--surface-3); color: var(--text); }
+    .crumbs .cur { font-weight: 600; padding: 4px 8px; }
+    .folders { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin-bottom: 26px; }
+    .folder { text-decoration: none; overflow: hidden; }
+    .folder .cover { height: 120px; background: var(--surface-3) center/cover no-repeat; position: relative; display: grid; place-items: center; color: var(--text-3); font-size: 30px; }
+    .folder .cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 40%, rgba(0,0,0,0.45)); }
+    .folder .info { padding: 12px 14px; display: flex; align-items: center; gap: 10px; }
+    .folder .info i { color: #f5b301; }
+    .folder .info strong { flex: 1; font-size: 13.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .gallery { columns: 4 240px; column-gap: 14px; }
+    .tile { break-inside: avoid; margin-bottom: 14px; overflow: hidden; position: relative; cursor: zoom-in; }
+    .tile img { width: 100%; display: block; background: var(--surface-3); min-height: 120px; transition: transform 0.4s var(--ease); }
+    .tile:hover img { transform: scale(1.03); }
+    .tile .meta { display: flex; align-items: center; gap: 8px; padding: 10px 12px; }
+    .tile .meta span { flex: 1; font-size: 12.5px; color: var(--text-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .tile .quick { position: absolute; top: 10px; right: 10px; display: flex; gap: 6px; opacity: 0; transition: opacity 0.2s; }
+    .tile:hover .quick { opacity: 1; }
+    .tile .quick a, .tile .quick button { width: 34px; height: 34px; border-radius: 10px; border: 0; background: rgba(255,255,255,0.92); color: #141b26; display: grid; place-items: center; cursor: pointer; text-decoration: none; box-shadow: var(--shadow-md); }
+    @media (hover: none) { .tile .quick { opacity: 1; } }
+</style>
+{% endblock %}
+{% block content %}
+<div class="page-head">
+    <div>
+        <h2><span class="head-icon purple"><i class="fa-solid fa-images"></i></span> Piezas gráficas</h2>
+        <p>Material de campañas listo para descargar o compartir directamente a WhatsApp desde el celular.</p>
+    </div>
+    <div class="actions">
+        <div class="input-icon" style="width:260px"><i class="fa-solid fa-magnifying-glass"></i><input type="text" id="q" placeholder="Filtrar por nombre…" data-page-search></div>
+        {% if is_admin %}<a class="btn btn-secondary" href="/admin/piezas{{ '/' + subfolder if subfolder }}"><i class="fa-solid fa-upload"></i> Gestionar</a>{% endif %}
+    </div>
+</div>
+
+<nav class="crumbs">
+    <a href="/piezas"><i class="fa-solid fa-house"></i> Piezas</a>
+    {% for c in breadcrumb %}<i class="fa-solid fa-chevron-right small muted"></i>{% if loop.last %}<span class="cur">{{ c.name }}</span>{% else %}<a href="/piezas/{{ c.path }}">{{ c.name }}</a>{% endif %}{% endfor %}
+</nav>
+
+{% if carpetas %}
+<div class="folders stagger">
+    {% for f in carpetas %}
+    <a class="card hoverable folder" href="/piezas/{{ f.path }}" data-name="{{ f.name|lower }}">
+        <div class="cover" {% if f.cover %}style="background-image:url('{{ url_for('static', filename=f.cover) }}')"{% endif %}>{% if not f.cover %}<i class="fa-regular fa-folder-open"></i>{% endif %}</div>
+        <div class="info"><i class="fa-solid fa-folder"></i><strong>{{ f.name|replace('_', ' ') }}</strong><span class="badge">{{ f.count }}</span></div>
+    </a>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if imagenes %}
+<div class="gallery" id="gallery">
+    {% for img in imagenes %}
+    <figure class="card tile" style="margin:0 0 14px" data-i="{{ loop.index0 }}" data-name="{{ img.name|lower }}">
+        <img src="{{ url_for('static', filename=img.path) }}" alt="{{ img.name }}" loading="lazy">
+        <div class="quick">
+            <button type="button" data-share title="Compartir"><i class="fa-solid fa-share-nodes"></i></button>
+            <a href="{{ url_for('static', filename=img.path) }}" download title="Descargar" onclick="event.stopPropagation()"><i class="fa-solid fa-download"></i></a>
+        </div>
+        <figcaption class="meta"><span title="{{ img.name }}">{{ img.name }}</span><span class="small muted" style="flex:none">{{ img.size|human_size }}</span></figcaption>
+    </figure>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if not carpetas and not imagenes %}
+<div class="card"><div class="empty"><div class="empty-icon"><i class="fa-regular fa-images"></i></div><h4>Esta carpeta está vacía</h4><p>Un administrador puede subir piezas desde el panel.</p></div></div>
+{% endif %}
+
+<div class="lightbox" id="lb" aria-hidden="true">
+    <img id="lbImg" alt="">
+    <button class="lb-btn lb-close" id="lbClose" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    <button class="lb-btn lb-prev" id="lbPrev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="lb-btn lb-next" id="lbNext" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+    <div class="lb-bar"><span id="lbName"></span><span id="lbCount" style="opacity:.6"></span><button class="lb-btn" id="lbShare" title="Compartir"><i class="fa-solid fa-share-nodes"></i></button><a class="lb-btn" id="lbDl" download title="Descargar"><i class="fa-solid fa-download"></i></a></div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+(() => {
+    const { normalize, toast, copyText } = App;
+    const IMGS = {{ imagenes | map(attribute='path') | list | tojson }}.map((p) => '{{ url_for("static", filename="") }}' + p);
+    const NAMES = {{ imagenes | map(attribute='name') | list | tojson }};
+    const $ = (id) => document.getElementById(id);
+    let cur = 0;
+    function show(i) {
+        cur = (i + IMGS.length) % IMGS.length;
+        $('lbImg').src = IMGS[cur]; $('lbName').textContent = NAMES[cur]; $('lbCount').textContent = `${cur + 1} / ${IMGS.length}`;
+        $('lbDl').href = IMGS[cur]; $('lbDl').setAttribute('download', NAMES[cur]);
+    }
+    function open(i) { show(i); $('lb').classList.add('open'); }
+    function close() { $('lb').classList.remove('open'); }
+    async function share(i) {
+        const url = IMGS[i], name = NAMES[i];
+        try {
+            const blob = await (await fetch(url)).blob();
+            const file = new File([blob], name, { type: blob.type });
+            if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: name }); return; }
+        } catch (e) { if (e.name === 'AbortError') return; }
+        copyText(new URL(url, location.origin).href, 'Enlace de la imagen copiado');
+    }
+    document.getElementById('gallery')?.addEventListener('click', (e) => {
+        const t = e.target.closest('.tile'); if (!t) return;
+        if (e.target.closest('[data-share]')) { e.stopPropagation(); share(+t.dataset.i); return; }
+        if (e.target.closest('a')) return;
+        open(+t.dataset.i);
+    });
+    $('lbClose').onclick = close; $('lbPrev').onclick = () => show(cur - 1); $('lbNext').onclick = () => show(cur + 1);
+    $('lbShare').onclick = () => share(cur);
+    $('lb').addEventListener('click', (e) => { if (e.target.id === 'lb') close(); });
+    document.addEventListener('keydown', (e) => { if (!$('lb').classList.contains('open')) return; if (e.key === 'ArrowLeft') show(cur - 1); if (e.key === 'ArrowRight') show(cur + 1); if (e.key === 'Escape') close(); });
+    $('q').addEventListener('input', () => { const q = normalize($('q').value); document.querySelectorAll('[data-name]').forEach((el) => { el.hidden = q && !normalize(el.dataset.name).includes(q); }); });
+})();
+</script>
+{% endblock %}

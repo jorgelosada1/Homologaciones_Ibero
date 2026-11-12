@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block title %}Precios · Admin{% endblock %}
+{% set CAMPOS = [
+    ('valor', 'Valor regular', 'num', 130), ('subsidio', '% subsidio', 'pct', 70), ('valor_lista', 'Precio con subsidio', 'num', 130),
+    ('remarketing', '% remarketing', 'pct', 70), ('pronto_pago', '% pronto pago', 'pct', 70), ('valor_final', 'Precio final no SENA', 'num', 130),
+    ('cohorte', 'Vigencia', 'txt', 140), ('descuento_sena', '% SENA', 'pct', 70), ('valor_sena', 'Precio SENA', 'num', 130),
+    ('pronto_pago_sena', '% pronto pago SENA', 'pct', 70), ('pago_sena', 'Pago total SENA', 'num', 130), ('cohorte_sena', 'Vigencia SENA', 'txt', 140),
+] %}
+{% block content %}
+<div class="page-head"><div><h2><span class="head-icon orange"><i class="fa-solid fa-tags"></i></span> Precios</h2><p>Lista regular (no SENA) y lista SENA de cada programa virtual. Deja vacíos los campos SENA si el programa no tiene precio SENA. La vigencia se escribe como en la lista (ej. <code>1RA COHORTE_27</code>).</p></div>
+    <div class="actions"><button class="btn btn-primary" data-open-modal="newModal"><i class="fa-solid fa-plus"></i> Nuevo programa</button></div></div>
+{% include "_admin_nav.html" %}
+<div class="table-wrap">
+    <table class="table">
+        <thead><tr><th>Nivel</th><th>Programa</th>{% for k, l, t, w in CAMPOS %}<th>{{ l }}</th>{% endfor %}<th class="num">Acciones</th></tr></thead>
+        <tbody>
+        {% for p in precios %}
+        <tr>
+            <td><select form="u{{ loop.index0 }}" name="nivel" style="width:auto"><option value="pre" {% if p.nivel != 'pos' %}selected{% endif %}>Pregrado</option><option value="pos" {% if p.nivel == 'pos' %}selected{% endif %}>Posgrado</option></select></td>
+            <td><input form="u{{ loop.index0 }}" type="text" name="programa" value="{{ p.programa }}" required style="min-width:240px"></td>
+            {% set i = loop.index0 %}
+            {% for k, l, t, w in CAMPOS %}
+            <td><input form="u{{ i }}" type="{{ 'text' if t == 'txt' else 'number' }}" name="{{ k }}" value="{{ p[k] if p[k] is not none }}" {% if t == 'pct' %}min="0" max="100"{% elif t == 'num' %}min="0" step="1"{% endif %} placeholder="—" style="width:{{ w }}px"></td>
+            {% endfor %}
+            <td class="num nowrap">
+                <form id="u{{ loop.index0 }}" method="POST" style="display:inline"><input type="hidden" name="action" value="update"><input type="hidden" name="index" value="{{ loop.index0 }}"><button class="btn btn-primary btn-sm" title="Guardar"><i class="fa-solid fa-floppy-disk"></i></button></form>
+                <form method="POST" style="display:inline" data-confirm="¿Eliminar {{ p.programa }}?"><input type="hidden" name="action" value="delete"><input type="hidden" name="index" value="{{ loop.index0 }}"><button class="btn btn-danger-soft btn-sm" title="Eliminar"><i class="fa-regular fa-trash-can"></i></button></form>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="modal" id="newModal" aria-hidden="true"><div class="modal-box lg">
+    <form method="POST">
+        <div class="modal-head"><h3><i class="fa-solid fa-plus" style="color:var(--brand)"></i> Nuevo programa</h3><button type="button" class="icon-btn sm" data-close-modal><i class="fa-solid fa-xmark"></i></button></div>
+        <div class="modal-body stack" style="gap:12px">
+            <input type="hidden" name="action" value="add">
+            <div class="row"><select name="nivel" style="width:auto"><option value="pre">Pregrado</option><option value="pos">Posgrado</option></select><input type="text" name="programa" placeholder="Nombre del programa" required style="flex:1"></div>
+            <div class="grid grid-3" style="gap:10px">
+                {% for k, l, t, w in CAMPOS %}
+                <div class="field"><label class="label">{{ l }}</label><input type="{{ 'text' if t == 'txt' else 'number' }}" name="{{ k }}" {% if k in ('valor', 'valor_final') %}required{% endif %}></div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="modal-foot"><button type="button" class="btn btn-secondary" data-close-modal>Cancelar</button><button class="btn btn-primary" type="submit">Crear</button></div>
+    </form>
+</div></div>
+{% endblock %}

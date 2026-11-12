@@ -1,0 +1,20 @@
+# Despliegue con Docker Compose:  docker compose up -d --build
+services:
+  homologaciones-ibero:
+    build: .
+    container_name: homologaciones-ibero
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      PORT: "8000"
+    ports:
+      - "127.0.0.1:8000:8000"   # solo local; Nginx/Apache publica el dominio con HTTPS
+    volumes:
+      - homologaciones_data:/app/data                 # mensajes, precios, configuración, acta subida y pensum PDF
+      - homologaciones_piezas:/app/static/piezas      # imágenes subidas desde el admin
+      - homologaciones_brochures:/app/static/brochures
+
+volumes:
+  homologaciones_data:
+  homologaciones_piezas:
+  homologaciones_brochures:
