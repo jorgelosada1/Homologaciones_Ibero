@@ -155,159 +155,198 @@
       "o": "Es solo números.",
       "r": [
         "Tomas decisiones que impactan empresas y sociedad."
-      ]
+      ],
+      "programas": []
     },
     {
       "prog": "Ingeniería de Sistemas",
-      "plus": "ing-sistemas",
       "tipo": "pregrado",
       "o": "Es solo programación.",
       "r": [
         "Combina tecnología, análisis y gestión."
+      ],
+      "programas": [
+        "pre-15"
       ]
     },
     {
       "prog": "Ingeniería Industrial",
-      "plus": "ing-industrial",
       "tipo": "pregrado",
       "o": "No sé en qué puedo trabajar.",
       "r": [
         "Es una de las ingenierías más versátiles del mercado."
+      ],
+      "programas": [
+        "pre-16"
       ]
     },
     {
       "prog": "Marketing y Negocios Internacionales",
-      "plus": "marketing-ni",
       "tipo": "pregrado",
       "o": "Es igual a administración.",
       "r": [
         "Se enfoca en ventas, clientes y crecimiento del negocio."
+      ],
+      "programas": [
+        "pre-01"
       ]
     },
     {
       "prog": "Seguridad y Salud en el Trabajo",
-      "plus": "sst",
       "tipo": "pregrado",
       "o": "No tiene mucha salida laboral.",
       "r": [
         "Todas las empresas están obligadas por ley."
+      ],
+      "programas": [
+        "pre-26"
       ]
     },
     {
       "prog": "Tecnología en Logística",
-      "plus": "tec-logistica",
       "tipo": "pregrado",
       "o": "Es muy operativa.",
       "r": [
         "Incluye gestión, planeación y control."
+      ],
+      "programas": [
+        "pre-17"
       ]
     },
     {
       "prog": "Trabajo Social",
-      "plus": "trabajo-social",
       "tipo": "pregrado",
       "o": "Me gusta ayudar a las personas, pero no sé si estudiar Trabajo Social me dé estabilidad laboral.",
       "r": [
         "Es una formación para intervenir en realidades sociales, acompañar comunidades y participar en proyectos de bienestar y desarrollo social. Te permite prepararte para aportar profesionalmente en diferentes contextos."
+      ],
+      "programas": [
+        "pre-29"
       ]
     },
     {
       "prog": "Derecho",
-      "plus": "derecho",
       "tipo": "pregrado",
       "o": "Hay muchos abogados, ¿realmente vale la pena estudiar Derecho?",
       "r": [
         "Más allá de ejercer como abogado litigante, puedes orientar tu perfil hacia la asesoría jurídica, el sector público, las empresas, la contratación y otros campos, según tu formación y experiencia."
+      ],
+      "programas": [
+        "pre-11",
+        "pre-12"
       ]
     },
     {
       "prog": "Licenciatura en Matemáticas",
-      "plus": "lic-matematicas",
       "tipo": "pregrado",
       "o": "No quiero dedicarme únicamente a dar clases de matemáticas.",
       "r": [
         "La licenciatura te prepara para enseñar matemáticas y desarrollar pensamiento lógico y analítico. Puedes explorar distintos contextos educativos y proyectos de formación, de acuerdo con tu perfil."
+      ],
+      "programas": [
+        "pre-22"
       ]
     },
     {
       "prog": "Licenciatura en Educación Infantil",
-      "plus": "lic-infantil",
       "tipo": "pregrado",
       "o": "Me gusta trabajar con niños, pero ¿qué oportunidades tengo después de graduarme?",
       "r": [
         "Te preparas para acompañar el desarrollo y aprendizaje durante la primera infancia, con posibilidades en instituciones educativas, proyectos de atención infantil y programas de desarrollo integral."
+      ],
+      "programas": [
+        "pre-19",
+        "pre-18"
       ]
     },
     {
       "prog": "Licenciatura en Educación Especial",
-      "plus": "lic-especial",
       "tipo": "pregrado",
       "o": "¿No es un campo demasiado limitado?",
       "r": [
         "La educación inclusiva requiere profesionales que comprendan las diferentes necesidades de aprendizaje y promuevan la participación de todos. Tu formación puede ser valiosa en contextos educativos y proyectos de inclusión."
+      ],
+      "programas": [
+        "pre-31",
+        "pre-21"
       ]
     },
     {
       "prog": "Mercadeo y Publicidad",
-      "plus": "mercadeo-publicidad",
       "tipo": "pregrado",
       "o": "Con las redes sociales, ¿para qué estudiar Mercadeo y Publicidad?",
       "r": [
         "Publicar en redes es solo una parte del trabajo. La formación permite comprender al consumidor, construir estrategias de marca, investigar mercados y conectar la creatividad con los objetivos del negocio."
+      ],
+      "programas": [
+        "pre-04"
       ]
     },
     {
       "prog": "Negocios Internacionales",
-      "plus": "negocios-internacionales",
       "tipo": "pregrado",
       "o": "Si no hablo inglés perfectamente, ¿puedo estudiar Negocios Internacionales?",
       "r": [
         "Puedes desarrollar tu perfil mientras fortaleces tus competencias en idiomas. La carrera aborda los negocios, los mercados y las operaciones internacionales; es importante revisar los requisitos y las competencias lingüísticas que exige el programa."
+      ],
+      "programas": [
+        "pre-05"
       ]
     },
     {
       "prog": "Administración Financiera",
-      "plus": "admin-financiera",
       "tipo": "pregrado",
       "o": "¿No es lo mismo que estudiar Contaduría Pública?",
       "r": [
         "Se relacionan, pero tienen enfoques diferentes. Administración Financiera se centra en analizar recursos, evaluar inversiones y apoyar decisiones financieras; Contaduría se orienta al reconocimiento, análisis, control y presentación de la información contable."
+      ],
+      "programas": [
+        "pre-08",
+        "pre-09"
       ]
     },
     {
       "prog": "Administración de Empresas",
-      "plus": "admin-empresas",
       "tipo": "pregrado",
       "o": "Administración de Empresas es muy general, ¿no sería mejor estudiar algo más específico?",
       "r": [
         "Su amplitud puede ser una ventaja: te permite comprender cómo funciona una organización y orientar tu desarrollo hacia áreas como gestión, talento humano, mercadeo, operaciones o finanzas."
+      ],
+      "programas": [
+        "pre-03"
       ]
     },
     {
       "prog": "Administración en Salud",
-      "plus": "admin-salud",
       "tipo": "pregrado",
       "o": "Si quiero trabajar en salud, ¿no debería estudiar una carrera asistencial?",
       "r": [
         "No todos los profesionales del sector salud atienden pacientes directamente. Esta formación se orienta a la gestión administrativa de organizaciones y servicios de salud, apoyando procesos, recursos y decisiones institucionales."
+      ],
+      "programas": [
+        "pre-25"
       ]
     },
     {
       "prog": "Contaduría Pública Virtual",
-      "plus": "contaduria",
       "tipo": "pregrado",
       "o": "¿Una carrera de Contaduría virtual me prepara igual para el mundo laboral?",
       "r": [
         "La modalidad virtual puede permitirte desarrollar los conocimientos contables y financieros mientras organizas tus tiempos. Lo importante es conocer el plan de estudios, las actividades prácticas y las herramientas que utiliza el programa."
+      ],
+      "programas": [
+        "pre-06"
       ]
     },
     {
       "prog": "Ingeniería de Software",
-      "plus": "ing-software",
       "tipo": "pregrado",
       "o": "La inteligencia artificial ya programa, ¿para qué estudiar Ingeniería de Software?",
       "r": [
         "Crear software va mucho más allá de escribir código. También implica analizar necesidades, diseñar soluciones, probar sistemas, gestionar proyectos y garantizar calidad y seguridad. La IA puede ser una herramienta de apoyo, pero se necesita criterio técnico para utilizarla bien."
+      ],
+      "programas": [
+        "pre-13"
       ]
     },
     {
@@ -316,6 +355,9 @@
       "o": "¿Para qué hacer un doctorado si ya tengo una maestría?",
       "r": [
         "El doctorado te permite profundizar en la investigación y producir conocimiento original en educación. Es una opción para quienes buscan fortalecer su trayectoria investigativa, académica o de liderazgo educativo."
+      ],
+      "programas": [
+        "pos-28"
       ]
     },
     {
@@ -324,6 +366,9 @@
       "o": "Ya soy docente y tengo experiencia, ¿qué más me puede aportar una maestría?",
       "r": [
         "La experiencia es fundamental, y una maestría puede complementarla con herramientas para analizar problemas educativos, fortalecer las prácticas pedagógicas y asumir nuevos retos académicos o de gestión."
+      ],
+      "programas": [
+        "pos-22"
       ]
     },
     {
@@ -332,6 +377,9 @@
       "o": "Ya manejo proyectos en mi trabajo, ¿necesito una maestría para hacerlo?",
       "r": [
         "La experiencia te aporta práctica; la formación de posgrado puede ayudarte a fortalecer la planificación, la gestión de riesgos, los recursos y la toma de decisiones para dirigir proyectos de mayor complejidad."
+      ],
+      "programas": [
+        "pos-26"
       ]
     },
     {
@@ -340,6 +388,9 @@
       "o": "Ya tengo una especialización en SST, ¿qué gano estudiando una maestría?",
       "r": [
         "Puedes profundizar en el análisis de riesgos, la gestión estratégica y la toma de decisiones en SST. La pertinencia depende de tu especialización, tus responsabilidades actuales y el perfil al que quieres llegar."
+      ],
+      "programas": [
+        "pos-27"
       ]
     },
     {
@@ -348,6 +399,9 @@
       "o": "Ya utilizo plataformas virtuales para enseñar, ¿qué más puedo aprender?",
       "r": [
         "Utilizar una plataforma es solo una parte de la educación digital. Una formación de este nivel puede ayudarte a diseñar experiencias de aprendizaje, integrar tecnologías y evaluar cómo mejorar los procesos educativos."
+      ],
+      "programas": [
+        "pos-23"
       ]
     },
     {
@@ -356,6 +410,10 @@
       "o": "¿Un MBA realmente me ayuda a crecer profesionalmente?",
       "r": [
         "Un MBA busca fortalecer una visión integral del negocio y la capacidad para tomar decisiones estratégicas. Puede ser pertinente si quieres avanzar hacia cargos de dirección, gerencia o liderazgo empresarial."
+      ],
+      "programas": [
+        "pos-24",
+        "pos-25"
       ]
     },
     {
@@ -364,7 +422,8 @@
       "o": "¿La epidemiología es solo para médicos?",
       "r": [
         "La epidemiología estudia la distribución y los determinantes de los eventos relacionados con la salud. Su aplicación puede involucrar distintos perfiles profesionales, según los requisitos de admisión y el enfoque del programa."
-      ]
+      ],
+      "programas": []
     },
     {
       "prog": "Maestría en Ingeniería de Software",
@@ -372,7 +431,8 @@
       "o": "Ya soy desarrollador, ¿no sería mejor aprender nuevas tecnologías por mi cuenta?",
       "r": [
         "Aprender herramientas por cuenta propia es valioso. Una maestría puede complementar ese conocimiento con una visión más profunda de arquitectura, calidad, procesos y decisiones de ingeniería, según su plan de estudios."
-      ]
+      ],
+      "programas": []
     },
     {
       "prog": "Especialización en Inteligencia de Negocios",
@@ -380,7 +440,8 @@
       "o": "Si ya manejo Excel y Power BI, ¿para qué especializarme en Inteligencia de Negocios?",
       "r": [
         "Las herramientas son el medio; el valor está en convertir datos en decisiones. La especialización puede ayudarte a fortalecer el análisis, la interpretación de información y su aplicación a los objetivos del negocio."
-      ]
+      ],
+      "programas": []
     },
     {
       "prog": "Especialización en Gestión de Procesos Logísticos y Redes de Valor",
@@ -388,6 +449,9 @@
       "o": "Ya trabajo en logística, ¿qué me puede aportar una especialización?",
       "r": [
         "Puede ayudarte a pasar de ejecutar operaciones a analizar y mejorar procesos, coordinar actores de la cadena de suministro y tomar decisiones para optimizar recursos y resultados."
+      ],
+      "programas": [
+        "pos-15"
       ]
     },
     {
@@ -396,6 +460,9 @@
       "o": "La inteligencia artificial cambia muy rápido; ¿no se quedará desactualizado lo que estudie?",
       "r": [
         "Las herramientas evolucionan, pero comprender sus fundamentos y aplicaciones te ayuda a evaluar nuevas soluciones y utilizarlas de manera estratégica. Antes de inscribirte, revisa qué tecnologías, proyectos y contenidos incluye el plan vigente."
+      ],
+      "programas": [
+        "pos-16"
       ]
     },
     {
@@ -404,6 +471,9 @@
       "o": "Ya trabajo en el sector salud, ¿para qué especializarme en salud pública?",
       "r": [
         "La salud pública amplía la mirada más allá de la atención individual: permite analizar necesidades colectivas, prevención, programas de intervención y gestión de iniciativas orientadas al bienestar de las poblaciones."
+      ],
+      "programas": [
+        "pos-17"
       ]
     },
     {
@@ -412,6 +482,9 @@
       "o": "Ya tengo experiencia manejando presupuestos, ¿qué me aporta esta especialización?",
       "r": [
         "Puede ayudarte a fortalecer el análisis financiero, la evaluación de inversiones, la planeación y la toma de decisiones para contribuir a la sostenibilidad de una organización."
+      ],
+      "programas": [
+        "pos-08"
       ]
     },
     {
@@ -420,6 +493,9 @@
       "o": "¿No es lo mismo que la especialización en Seguridad y Salud en el Trabajo?",
       "r": [
         "La diferencia debe revisarse en el plan de estudios. Por su enfoque gerencial, esta especialización se orienta a fortalecer la dirección, la planificación y la toma de decisiones del sistema de SST, no solamente su ejecución operativa."
+      ],
+      "programas": [
+        "pos-06"
       ]
     },
     {
@@ -428,6 +504,9 @@
       "o": "¿La calidad en salud no es responsabilidad exclusiva de las clínicas y los hospitales?",
       "r": [
         "La calidad involucra procesos, equipos, indicadores, seguridad del paciente y mejora continua. Esta formación puede aportar herramientas para gestionar y evaluar esos componentes dentro de las organizaciones de salud."
+      ],
+      "programas": [
+        "pos-04"
       ]
     },
     {
@@ -436,6 +515,10 @@
       "o": "Ya trabajo con niños y adolescentes, ¿qué más necesito aprender?",
       "r": [
         "La experiencia cotidiana puede fortalecerse con herramientas para comprender el desarrollo integral, identificar necesidades y apoyar intervenciones más estructuradas en los distintos contextos de la infancia y la adolescencia."
+      ],
+      "programas": [
+        "pos-01",
+        "pos-02"
       ]
     },
     {
@@ -444,6 +527,9 @@
       "o": "¿Esta especialización es solo para psicólogos?",
       "r": [
         "Su pertinencia depende de los requisitos de ingreso y del perfil profesional. El enfoque de neuropsicología aplicada a la educación puede ayudar a comprender los procesos cognitivos relacionados con el aprendizaje; conviene verificar qué perfiles admite IBERO y qué alcances profesionales tiene el título."
+      ],
+      "programas": [
+        "pos-03"
       ]
     },
     {
@@ -452,6 +538,9 @@
       "o": "No soy ingeniero de sistemas, ¿puedo estudiar Ciberseguridad?",
       "r": [
         "La ciberseguridad abarca tecnología, gestión de riesgos, políticas y protección de la información. La posibilidad de ingresar depende de los requisitos específicos del programa y de los conocimientos previos que solicite."
+      ],
+      "programas": [
+        "pos-14"
       ]
     },
     {
@@ -460,6 +549,9 @@
       "o": "¿Por qué estudiar una especialización si ya existen certificaciones en gestión de proyectos?",
       "r": [
         "Las certificaciones y la especialización pueden cumplir propósitos distintos. La especialización ofrece una ruta académica estructurada para profundizar en la gestión de proyectos; puedes comparar el plan de estudios con las competencias que necesitas desarrollar."
+      ],
+      "programas": [
+        "pos-07"
       ]
     },
     {
@@ -468,6 +560,9 @@
       "o": "Ya tengo varios años de experiencia liderando equipos, ¿realmente necesito estudiar Alta Gerencia?",
       "r": [
         "La experiencia te da conocimiento del negocio; la formación puede ayudarte a fortalecer la visión estratégica, el liderazgo y la toma de decisiones. Es especialmente relevante si buscas prepararte para responsabilidades de mayor alcance."
+      ],
+      "programas": [
+        "pos-10"
       ]
     },
     {
@@ -476,6 +571,9 @@
       "o": "Puedo aprender marketing digital con cursos gratuitos, ¿para qué pagar una especialización?",
       "r": [
         "Los cursos cortos pueden enseñarte herramientas puntuales. Una especialización puede ofrecer una ruta de aprendizaje más estructurada para integrar estrategia, audiencias, canales, métricas y objetivos comerciales, según su plan de estudios."
+      ],
+      "programas": [
+        "pos-09"
       ]
     },
     {
@@ -484,6 +582,9 @@
       "o": "No soy experto en matemáticas ni programación, ¿puedo estudiar Analítica y Big Data?",
       "r": [
         "El nivel de conocimientos técnicos requerido depende del programa. La formación en analítica combina el uso de datos con su interpretación para apoyar decisiones; revisemos los requisitos de ingreso y las herramientas que trabajarás."
+      ],
+      "programas": [
+        "pos-13"
       ]
     },
     {
@@ -492,6 +593,9 @@
       "o": "Ya trabajo en una institución de salud, ¿no puedo aprender auditoría directamente en el trabajo?",
       "r": [
         "La práctica es importante, pero una especialización puede ayudarte a estructurar conocimientos sobre evaluación, seguimiento, calidad y cumplimiento de procesos. Revisa si el enfoque coincide con el tipo de auditoría en el que deseas profundizar."
+      ],
+      "programas": [
+        "pos-05"
       ]
     },
     {
@@ -500,6 +604,9 @@
       "o": "Si soy contador público, ¿para qué necesito una especialización en Revisoría Fiscal?",
       "r": [
         "La formación contable es la base, mientras que la especialización permite profundizar en las responsabilidades, los procedimientos y los criterios relacionados con la revisoría fiscal. Es pertinente si quieres orientar tu carrera hacia ese campo."
+      ],
+      "programas": [
+        "pos-19"
       ]
     },
     {
@@ -508,6 +615,9 @@
       "o": "Tengo experiencia en Recursos Humanos, ¿qué me aportaría una especialización?",
       "r": [
         "Puede ayudarte a fortalecer la gestión estratégica del talento, el desarrollo de las personas y la alineación de las prácticas de gestión humana con los objetivos organizacionales, de acuerdo con los contenidos del programa."
+      ],
+      "programas": [
+        "pos-18"
       ]
     },
     {
@@ -516,6 +626,9 @@
       "o": "Soy profesional en mi área, ¿no basta con saber del tema para enseñar en la universidad?",
       "r": [
         "Dominar una disciplina no siempre significa saber cómo enseñarla. Esta especialización puede ayudarte a fortalecer las estrategias pedagógicas, la evaluación y el diseño de experiencias de aprendizaje en educación superior."
+      ],
+      "programas": [
+        "pos-20"
       ]
     },
     {
@@ -524,6 +637,9 @@
       "o": "Soy abogado, ¿qué diferencia hace especializarme en Derecho Administrativo?",
       "r": [
         "Te permite profundizar en las relaciones entre la administración pública y los ciudadanos, así como en los procedimientos y asuntos jurídicos propios de este ámbito. Es una opción para orientar tu perfil hacia el sector público, la asesoría o la gestión jurídico-administrativa."
+      ],
+      "programas": [
+        "pos-21"
       ]
     }
   ],
@@ -634,5 +750,43 @@
     "origen": "https://d13p412flothha.cloudfront.net",
     "pagina": "https://ibero.finky.la/",
     "solicitar": "https://app.finky.la/registro"
-  }
+  },
+  "objeciones_admisiones": [
+    {
+      "o": "¿El título virtual vale lo mismo que uno presencial?",
+      "r": [
+        "Sí. En Colombia el Ministerio de Educación otorga registro calificado bajo idénticos estándares de calidad. El diploma y el acta no diferencian modalidad y tienen plena validez legal, laboral y para escalafón."
+      ]
+    },
+    {
+      "o": "No tengo tiempo libre fijo para conectarme a clases.",
+      "r": [
+        "El Aula 3.0 opera 24/7. Los encuentros sincrónicos son complementarios, no obligatorios y quedan grabados para verlos al día siguiente."
+      ]
+    },
+    {
+      "o": "Tengo materias de otra universidad cursadas hace tiempo.",
+      "r": [
+        "En IBERO aceptamos estudios de hasta 7 años de antigüedad (SENA, TyT, universidades) y hasta 20 años para títulos de Escuelas Normales Superiores."
+      ],
+      "homologacion": true
+    },
+    {
+      "o": "No tengo el valor de contado para la matrícula.",
+      "dinero": true,
+      "r": [
+        "Contamos con financiación directa institucional ágil a través del Crédito ROMBO y, como respaldo preferencial, convenio con FINKY, además de descuentos institucionales."
+      ]
+    }
+  ],
+  "ruta_financiacion": [
+    {
+      "t": "Crédito directo IBERO · ROMBO (Estudia Ya)",
+      "d": "Primera opción de financiación directa institucional."
+    },
+    {
+      "t": "Crédito FINKY",
+      "d": "Respaldo cuando el aspirante es rechazado en ROMBO."
+    }
+  ]
 }

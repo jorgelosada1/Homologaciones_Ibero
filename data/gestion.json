@@ -1,0 +1,521 @@
+{
+  "fuente": "Asistente Comercial Inteligente IBERO · Guía de Gestión Comercial y Admisiones",
+  "aviso": "La información de esta guía es de uso privado e institucional de la Corporación Universitaria Iberoamericana (Ley 1581 de 2012 y Ley 2300 de 2023). Está prohibido compartirla, reproducirla, almacenarla o usarla para fines externos, beneficio de terceros o entrenamiento de modelos de IA.",
+  "secciones": [
+    {
+      "id": "canales",
+      "n": 1,
+      "icon": "fa-route",
+      "titulo": "Canal de solicitudes",
+      "sub": "Aspirantes y estudiantes nuevos: por dónde se tramita cada solicitud.",
+      "tabla": {
+        "columnas": [
+          "Tipo de Solicitud",
+          "Drive Seguimiento",
+          "Correo Electrónico",
+          "Grupo WhatsApp",
+          "Servicio Estudiante"
+        ],
+        "filas": [
+          [
+            "Cambios de Período / Cambios de Programa",
+            "✔",
+            "✔",
+            "—",
+            "—"
+          ],
+          [
+            "Actualización OM / Solicitud de Descuento / Solicitud de Admisión",
+            "✔",
+            "—",
+            "✔",
+            "—"
+          ],
+          [
+            "Solicitud Aval Académico / Solicitud Actas Homologación",
+            "✔",
+            "—",
+            "✔",
+            "—"
+          ],
+          [
+            "Corrección de Descuentos / Corrección Actas Homologación",
+            "✔",
+            "✔",
+            "✔",
+            "—"
+          ],
+          [
+            "Plataforma Estudiantes / Incidencias Estudiantes",
+            "—",
+            "—",
+            "—",
+            "✔"
+          ],
+          [
+            "Cancelación de Créditos ROMBO",
+            "—",
+            "✔",
+            "✔",
+            "—"
+          ],
+          [
+            "Reportar Abonos / Reportar Pagos",
+            "✔",
+            "✔ (Abonos)",
+            "✔",
+            "—"
+          ],
+          [
+            "Faltan Credenciales Atenea / Validar Continuidad de Gestión",
+            "✔",
+            "—",
+            "✔",
+            "—"
+          ],
+          [
+            "Agregar Ítem Documento Atenea",
+            "—",
+            "—",
+            "✔",
+            "—"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "sello",
+      "n": 2,
+      "icon": "fa-stamp",
+      "titulo": "Gestión con sello financiero",
+      "items": [
+        {
+          "t": "Sin carta de intención",
+          "d": "Cambios de período con sello financiero durante los primeros 15 días después de iniciar clases."
+        },
+        {
+          "t": "Con carta de intención",
+          "d": "Pasados 15 días del inicio de clases se tramita directamente con Servicio al Estudiante; el estudiante debe asumir la diferencia de valor."
+        },
+        {
+          "t": "Anulación de crédito ROMBO",
+          "d": "Aplica para cancelación del crédito ROMBO, inactivación de período, cambio de período académico, realizar crédito o cruce de saldo."
+        },
+        {
+          "t": "Retención / devolución de dinero",
+          "d": "Inactivación de período académico, cambio de período o cruce de saldo."
+        }
+      ],
+      "nota": "Las solicitudes por correo se envían a los destinatarios oficiales de sello financiero; las solicitudes con Servicio se dirigen al asesor de Servicio al Estudiante a cargo."
+    },
+    {
+      "id": "documentos",
+      "n": 3,
+      "icon": "fa-file-pdf",
+      "titulo": "Documentos a cargar por tipo de ingreso",
+      "sub": "100% en formato PDF legible. Todos los soportes deben ser legibles, sin recortes, con membretes, escudos, firmas y datos completos, sin duplicados.",
+      "tabla": {
+        "columnas": [
+          "Documento Requerido (PDF)",
+          "1er Ing. Pregrado",
+          "1er Ing. Posgrado",
+          "1er Ing. Doctorado",
+          "SENA Pregrado",
+          "SENA Posgrado",
+          "Transf. Pregrado",
+          "Transf. Posgrado",
+          "Interno Preg/Posg"
+        ],
+        "filas": [
+          [
+            "Documento de Identidad Legible",
+            "✔",
+            "✔",
+            "✔",
+            "✔",
+            "✔",
+            "✔",
+            "✔",
+            "✔"
+          ],
+          [
+            "Formato Verificación Académica",
+            "✔",
+            "✔",
+            "✔",
+            "✔",
+            "✔",
+            "✔",
+            "✔",
+            "✔"
+          ],
+          [
+            "Diploma o Acta de Grado Bachiller",
+            "✔",
+            "—",
+            "—",
+            "✔",
+            "—",
+            "✔",
+            "—",
+            "✔ (Preg)"
+          ],
+          [
+            "Resultado Pruebas Saber 11 (ICFES)",
+            "✔",
+            "—",
+            "—",
+            "✔",
+            "—",
+            "✔",
+            "—",
+            "✔ (Preg)"
+          ],
+          [
+            "Acta de Compromiso Saber 11 (si aplica)",
+            "✔",
+            "—",
+            "—",
+            "✔",
+            "—",
+            "✔",
+            "—",
+            "✔ (Preg)"
+          ],
+          [
+            "Diploma o Acta de Grado de Pregrado",
+            "—",
+            "✔",
+            "✔",
+            "—",
+            "✔",
+            "—",
+            "✔",
+            "✔"
+          ],
+          [
+            "Acta de Compromiso Homologación (si aplica)",
+            "—",
+            "—",
+            "—",
+            "✔",
+            "—",
+            "✔",
+            "✔",
+            "✔"
+          ],
+          [
+            "Diploma o Acta del Programa a Homologar",
+            "—",
+            "—",
+            "—",
+            "✔",
+            "—",
+            "✔",
+            "✔",
+            "✔"
+          ],
+          [
+            "Certificado de Notas",
+            "—",
+            "—",
+            "—",
+            "✔",
+            "—",
+            "✔",
+            "✔",
+            "—"
+          ],
+          [
+            "Contenidos Programáticos",
+            "—",
+            "—",
+            "—",
+            "—",
+            "—",
+            "✔",
+            "✔",
+            "—"
+          ],
+          [
+            "Soporte de Descuento (si aplica)",
+            "✔",
+            "✔",
+            "—",
+            "✔",
+            "✔",
+            "✔",
+            "✔",
+            "✔"
+          ],
+          [
+            "Doctorado: Diploma Maestría, Cert. Laboral, Hoja de Vida, Ficha Investigación, Carta Respaldo",
+            "—",
+            "—",
+            "✔ Todos",
+            "—",
+            "—",
+            "—",
+            "—",
+            "✔ (Doc)"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "otros_docs",
+      "n": 4,
+      "icon": "fa-id-card",
+      "titulo": "Otros documentos (convenios y beneficiarios)",
+      "grupos": [
+        {
+          "t": "Convenio SENA",
+          "items": [
+            "Estudiante / aprendiz: contrato de aprendizaje, pantallazo de la plataforma o constancia de estudio.",
+            "Funcionario SENA: certificación laboral vigente.",
+            "Contratista SENA: contrato laboral y/o certificado laboral.",
+            "Beneficiario (hijo o cónyuge): certificación laboral del funcionario + registro civil de nacimiento o registro de matrimonio."
+          ]
+        },
+        {
+          "t": "Convenio Policía Nacional y otros",
+          "items": [
+            "Policía activo: carné de servicios y certificación vigente.",
+            "Policía beneficiario (hijo o cónyuge): certificación laboral del funcionario + registro civil del hijo/a y/o registro de matrimonio del cónyuge.",
+            "Asistentes por ICFES: PIN de pago (si aplica)."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "descuentos",
+      "n": 5,
+      "icon": "fa-percent",
+      "titulo": "Descuentos por convenio y graduados IBERO",
+      "tabla": {
+        "columnas": [
+          "Tipo de Vinculación / Concepto",
+          "Pregrado",
+          "Posgrado",
+          "Educación Continuada"
+        ],
+        "filas": [
+          [
+            "Graduado de PREGRADO IBERO",
+            "15%",
+            "30%",
+            "25%"
+          ],
+          [
+            "Graduado de POSGRADO IBERO",
+            "10%",
+            "25%",
+            "20%"
+          ],
+          [
+            "Graduado de EDUCACIÓN CONTINUADA",
+            "0%",
+            "0%",
+            "15%"
+          ],
+          [
+            "Familiares de Graduados (Hijos, padres, hermanos, esposo/a o compañero/a permanente)",
+            "15%",
+            "20%",
+            "20%"
+          ]
+        ]
+      },
+      "notas": [
+        "Convenio SENA: aplica para estudiantes, egresados, contratistas, funcionarios y familiar (hijo/a, cónyuge).",
+        "Convenio Policía Nacional: aplica para funcionarios y familiar (hijo/a, cónyuge).",
+        "Doctorado en Educación: maneja exclusivamente descuento especial de lanzamiento."
+      ]
+    },
+    {
+      "id": "rechazos",
+      "n": 6,
+      "icon": "fa-ban",
+      "titulo": "Motivos frecuentes de rechazo",
+      "grupos": [
+        {
+          "t": "Causales por documentos",
+          "items": [
+            "Documentos incompletos, repetidos o duplicados.",
+            "Documentos borrosos o no legibles.",
+            "Documentos recortados (sin membrete, escudos, firmas o código QR legible; cédula sin numeración bajo el código de barras).",
+            "Archivos en formato distinto a PDF.",
+            "Actas de compromiso modificadas, con tachones, fechas erróneas o firmas no válidas (prohibido pegar recorte de firma de la cédula o usar caligrafía de apps; debe ser manuscrita o digital legal)."
+          ]
+        },
+        {
+          "t": "Causales por datos",
+          "items": [
+            "Nombres y apellidos no coinciden exactamente con la cédula.",
+            "Fechas de expedición no coinciden con los documentos físicos.",
+            "Registro Saber 11 (ICFES) errado o inconsistente."
+          ]
+        }
+      ],
+      "regla": "Todo diploma, acta o sábana debe mostrar claramente: nombre completo, cédula, fecha de expedición, número de libro y folio."
+    },
+    {
+      "id": "tiempos",
+      "n": 7,
+      "icon": "fa-stopwatch",
+      "titulo": "Tiempos oficiales de respuesta",
+      "items": [
+        {
+          "t": "Admisión",
+          "d": "6 a 8 horas +"
+        },
+        {
+          "t": "Homologación",
+          "d": "5 a 7 días hábiles"
+        },
+        {
+          "t": "Cambio de período",
+          "d": "2 a 4 días hábiles"
+        },
+        {
+          "t": "Cambio de programa",
+          "d": "2 a 4 días hábiles"
+        },
+        {
+          "t": "Validación académica",
+          "d": "5 a 12 días hábiles",
+          "x": "Depende de la respuesta de la entidad donde se validan los soportes."
+        }
+      ],
+      "nota": "Las homologaciones tramitadas por Atenea llegan al correo registrado por el operador. Las devoluciones por datos o documentos generan reprocesos y amplían los tiempos de respuesta."
+    },
+    {
+      "id": "homologacion",
+      "n": 8,
+      "icon": "fa-clock-rotate-left",
+      "titulo": "Antigüedad para crear casos de homologación",
+      "items": [
+        {
+          "t": "SENA",
+          "d": "Máx. 7 años de terminación"
+        },
+        {
+          "t": "Técnicos y tecnólogos (TyT)",
+          "d": "Máx. 7 años de terminación"
+        },
+        {
+          "t": "Pregrados o semestres cursados",
+          "d": "Máx. 7 años de terminación"
+        },
+        {
+          "t": "Posgrados o semestres cursados",
+          "d": "Máx. 7 años de terminación"
+        },
+        {
+          "t": "Escuelas Normales Superiores (normalistas)",
+          "d": "Títulos hasta con 20 años de expedición"
+        }
+      ],
+      "nota": "Si aplica, carga el certificado de notas y los contenidos programáticos para crear el caso."
+    },
+    {
+      "id": "oferta",
+      "n": 9,
+      "icon": "fa-list-check",
+      "titulo": "Oferta por formulario de inscripción",
+      "sub": "Qué formulario usar (ATENEA, ZOHO o Admisiones presencial) según el programa y la cohorte."
+    },
+    {
+      "id": "links",
+      "n": 10,
+      "icon": "fa-link",
+      "titulo": "Links de gestión, inscripción y financiación",
+      "links": [
+        {
+          "id": "lnk-01",
+          "category": "Inscripción ATENEA",
+          "title": "Creación ATENEA (Marketing Form)",
+          "url": "https://www.ibero.edu.co/programas",
+          "note": "Formulario de creación de aspirantes asignados a Atenea"
+        },
+        {
+          "id": "lnk-02",
+          "category": "Inscripción ATENEA",
+          "title": "Portal del Candidato ATENEA (Área de Usuarios)",
+          "url": "https://www.ibero.edu.co/programas",
+          "note": "Portal de seguimiento y cargue de documentos Atenea"
+        },
+        {
+          "id": "lnk-03",
+          "category": "Inscripción ZOHO",
+          "title": "Inscripción Zoho (Corporación Universitaria Iberoamericana)",
+          "url": "https://www.ibero.edu.co/programas",
+          "note": "Formulario oficial para programas asignados a Zoho"
+        },
+        {
+          "id": "lnk-04",
+          "category": "Inscripción ZOHO",
+          "title": "Cargue Documentos Zoho",
+          "url": "https://campus.ibero.edu.co/archivos-inscripcion",
+          "note": "Enlace directo para adjuntar soportes PDF en Zoho"
+        },
+        {
+          "id": "lnk-05",
+          "category": "Gestión Académica",
+          "title": "Página Web Oficial IBERO - Oferta Programas",
+          "url": "https://www.ibero.edu.co/programas",
+          "note": "Fuente oficial pública de programas académicos"
+        },
+        {
+          "id": "lnk-06",
+          "category": "Gestión Académica",
+          "title": "Consulta Resultados ICFES (Saber 11)",
+          "url": "https://resultadossaber11.icfes.gov.co/login",
+          "note": "Verificación oficial de registro SNP y puntaje Saber 11"
+        },
+        {
+          "id": "lnk-07",
+          "category": "Gestión Académica",
+          "title": "Consulta Título y Notas SENA",
+          "url": "https://certificados.sena.edu.co/CertificadoDigital/com.sena.consultacer",
+          "note": "Validación de certificados SENA para admisión y homologación"
+        },
+        {
+          "id": "lnk-08",
+          "category": "Gestión Académica",
+          "title": "Portal de Autogestión (Credenciales Aspirante)",
+          "url": "http://autoservicio.iberoamericana.edu.co:8091/genusuario/consulta_usuario.html",
+          "note": "Consulta de usuario y credenciales institucionales"
+        },
+        {
+          "id": "lnk-09",
+          "category": "Financiación",
+          "title": "Crédito Directo IBERO - ROMBO (Estudia Ya)",
+          "url": "https://www.ibero.edu.co/programas",
+          "note": "Primera opción de financiación directa institucional"
+        },
+        {
+          "id": "lnk-10",
+          "category": "Financiación",
+          "title": "Crédito FINKY (Respaldo ante rechazo ROMBO)",
+          "url": "https://finky.la/",
+          "note": "Alternativa exclusiva para aspirantes rechazados en ROMBO"
+        },
+        {
+          "id": "lnk-11",
+          "category": "Apoyo Comercial",
+          "title": "Material de Apoyo Atenea / Operador Comercial",
+          "url": "https://www.ibero.edu.co/programas",
+          "note": "Actas de compromiso, calendario académico y rutas de homologación SENA/Policía"
+        },
+        {
+          "id": "lnk-12",
+          "category": "Apoyo Comercial",
+          "title": "Formulario Novedades Cursos de Inglés",
+          "url": "https://www.ibero.edu.co/programas",
+          "note": "Reporte de novedades de niveles de inglés"
+        }
+      ]
+    }
+  ]
+}

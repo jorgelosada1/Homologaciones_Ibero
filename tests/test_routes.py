@@ -132,7 +132,8 @@ def test_404_bonito(client):
 
 
 # ---------- Comercial: PLUS, objeciones y simuladores ----------
-COMERCIAL = ["/plus", "/plus?p=derecho", "/objeciones", "/simuladores", "/simuladores?programa=Derecho"]
+COMERCIAL = ["/plus", "/plus?p=derecho", "/plus?p=pos-24", "/objeciones", "/gestion", "/simuladores",
+             "/simuladores?programa=Derecho", "/simuladores?programa=MBA&nivel=pos"]
 
 
 @pytest.mark.parametrize("path", COMERCIAL)
@@ -140,7 +141,7 @@ def test_paginas_comerciales_cargan(client, path):
     assert client.get(path).status_code == 200
 
 
-@pytest.mark.parametrize("path", ["/plus", "/objeciones", "/simuladores"])
+@pytest.mark.parametrize("path", ["/plus", "/objeciones", "/gestion", "/simuladores"])
 def test_paginas_comerciales_requieren_login(app, path):
     r = app.test_client().get(path)
     assert r.status_code == 302 and "/login" in r.headers["Location"]
@@ -148,7 +149,7 @@ def test_paginas_comerciales_requieren_login(app, path):
 
 def test_menu_tiene_modulos_comerciales(client):
     html = client.get("/").get_data(as_text=True)
-    for path in ("/plus", "/objeciones", "/simuladores"):
+    for path in ("/plus", "/objeciones", "/simuladores", "/gestion"):
         assert f'href="{path}"' in html
 
 
@@ -161,16 +162,32 @@ def test_modulo_comercial_oculto(client, monkeypatch):
 
 def test_plus_con_precio_y_sin_cruces(client):
     import app as app_module
-    progs = {p["id"]: p for p in app_module.programas_plus()}
-    assert len(progs) == 24 and all(p["discurso"] or p.get("aviso") for p in progs.values())
-    assert progs["derecho"]["precio"]["programa"] == "Derecho"
-    assert progs["ing-sistemas"]["precio"]["fecha_ingreso"] == "Febrero 2027 · 1ra cohorte"
-    # Marketing y Negocios Internacionales es presencial: no toma el precio de Negocios Internacionales (virtual)
-    assert progs["marketing-ni"]["precio"] is None
+    progs = {p["id"]: p for p in app_module.catalogo_programas()}
+    assert len(progs) == 59
+    assert all(p["plus"]["discurso"] or p["plus"].get("aviso") for p in progs.values() if p["plus"])
+    assert progs["pre-11"]["plus"]["id"] == "derecho" and progs["pre-11"]["precio"]["programa"] == "Derecho"
+    assert progs["pre-15"]["precio"]["fecha_ingreso"] == "Febrero 2027 · 1ra cohorte"
+    # Los presenciales no toman el precio del virtual (p. ej. Marketing y Negocios Internacionales)
+    assert progs["pre-01"]["precio"] is None and progs["pre-12"]["precio"] is None
+    assert progs["pos-24"]["precio"]["nivel"] == "pos" and progs["pos-25"]["precio"] is None
     html = client.get("/plus").get_data(as_text=True)
-    assert "Ingeniería de Sistemas" in html and "Febrero 2027" in html
+    assert "Ingeniería de Sistemas" in html and "Doctorado en Educación" in html and "Febrero 2027" in html
+
+
+def test_gestion_muestra_lineamientos(client):
+    html = client.get("/gestion").get_data(as_text=True)
+    for txt in ("Ley 1581", "Canal de solicitudes", "sello financiero", "Formato Verificación Académica",
+                "Regla de oro", "5 a 7 días hábiles", "Títulos hasta con 20 años", "resultadossaber11.icfes.gov.co"):
+        assert txt in html, txt
+    assert 'id="homologacion"' in html and html.count('class="ok"') > 40
+
+
+def test_objeciones_incluye_admisiones(client):
+    html = client.get("/objeciones").get_data(as_text=True)
+    assert "Admisiones y financiación" in html and "Escuelas Normales Superiores" in html and "pos-" in html
 
 
 def test_simuladores_incrustan_finky_ibero(client):
     html = client.get("/simuladores").get_data(as_text=True)
     assert "universityId=77" in html and "tasa_mensual" in html and "Febrero 2027" in html
+    assert "Ruta de financiación" in html and html.index('data-tab="rombo"') < html.index('data-tab="finky"')

@@ -227,9 +227,10 @@ NAV = [
     ("Comercial", [
         ("/mensajes", "fa-comments", "Mensajes"),
         ("/precios", "fa-tags", "Precios"),
-        ("/plus", "fa-star", "PLUS pregrados"),
+        ("/plus", "fa-graduation-cap", "Programas y PLUS"),
         ("/objeciones", "fa-handshake", "Objeciones y filtros"),
         ("/simuladores", "fa-calculator", "Simuladores de crédito"),
+        ("/gestion", "fa-list-check", "Gestión y admisiones"),
     ]),
     ("Recursos", [
         ("/piezas", "fa-images", "Piezas gráficas"),
@@ -240,11 +241,13 @@ NAV = [
 # Módulos que se pueden ocultar desde Administración → Configuración
 MODULOS = {
     "piezas": {"label": "Piezas gráficas", "prefixes": ("/piezas",)},
-    "plus": {"label": "PLUS pregrados", "prefixes": ("/plus",)},
+    "plus": {"label": "Programas y PLUS", "prefixes": ("/plus",)},
     "objeciones": {"label": "Objeciones y preguntas filtro", "prefixes": ("/objeciones",)},
     "simuladores": {"label": "Simuladores de crédito", "prefixes": ("/simuladores",)},
+    "gestion": {"label": "Gestión y admisiones", "prefixes": ("/gestion",)},
 }
-NAV_MODULO = {"/piezas": "piezas", "/plus": "plus", "/objeciones": "objeciones", "/simuladores": "simuladores"}
+NAV_MODULO = {"/piezas": "piezas", "/plus": "plus", "/objeciones": "objeciones", "/simuladores": "simuladores",
+              "/gestion": "gestion"}
 
 TITLES = {item[0]: item[2] for _, items in NAV for item in items}
 TITLES.update({"/sena": "Mensajes SENA", "/admin": "Administración"})
@@ -488,21 +491,26 @@ def precio_resumen(p):
             "fecha_ingreso": cohorte_texto(p.get("cohorte_sena") or p.get("cohorte"))}
 
 
-def programas_plus():
-    """Fichas PLUS de pregrado con su precio vigente de la lista (si lo hay)."""
-    programas = []
-    for p in store.json("plus_pregrados.json", []):
-        modalidad = next((v for k, v in p.get("datos", []) if k == "Modalidad"), "")
-        # La lista de precios es solo virtual: un programa presencial no toma el precio de otro
-        precio = None if norm(modalidad) == "PRESENCIAL" else store.match_precio(p["nombre"], "pre")
-        programas.append({**p, "precio": precio_resumen(precio)})
-    return programas
+def catalogo_programas():
+    """Catálogo oficial (pregrado y posgrado) con su ficha PLUS y su precio vigente de la lista.
+
+    `data/catalogo.json` viene del Asistente Comercial IBERO; cada programa indica su ficha PLUS
+    (`plus`, del Excel PLUS_PREGRADOS_IBERO) y su nombre en la lista de precios (`precio`).
+    """
+    plus = {p["id"]: p for p in store.json("plus_pregrados.json", [])}
+    precios = {(p["programa"], p.get("nivel", "pre")): p for p in store.precios()}
+    out = []
+    for c in store.json("catalogo.json", []):
+        ref = c.get("precio")
+        precio = precios.get((ref["programa"], ref["nivel"])) if ref else None
+        out.append({**c, "plus_id": c.get("plus"), "plus": plus.get(c.get("plus")), "precio": precio_resumen(precio)})
+    return out
 
 
 @app.route("/plus")
 @login_required
 def plus():
-    return render_template("plus.html", programas=programas_plus(), objeciones=comercial().get("objeciones_programa", []),
+    return render_template("plus.html", programas=catalogo_programas(), objeciones=comercial().get("objeciones_programa", []),
                            fechas=fechas_ingreso())
 
 
@@ -510,9 +518,20 @@ def plus():
 @login_required
 def objeciones():
     c = comercial()
+    nombres = {p["id"]: p["nombre"] for p in store.json("catalogo.json", [])}
     return render_template("objeciones.html", generales=c.get("objeciones_generales", []),
                            por_nivel=c.get("objeciones_nivel", []), por_programa=c.get("objeciones_programa", []),
+                           admisiones=c.get("objeciones_admisiones", []), nombres=nombres,
                            filtro=c.get("preguntas_filtro", []), fechas=fechas_ingreso())
+
+
+@app.route("/gestion")
+@login_required
+def gestion():
+    oferta = [{"id": p["id"], "nombre": p["nombre"], "nivel": p["nivel"], "modalidad": p["modalidad"],
+               "facultad": p["facultad"], "crm2027": p["crm2027"], "crm2026": p["crm2026"]}
+              for p in store.json("catalogo.json", [])]
+    return render_template("gestion.html", guia=store.json("gestion.json", {}) or {}, oferta=oferta)
 
 
 @app.route("/simuladores")
@@ -522,8 +541,9 @@ def simuladores():
     precios_lista = [precio_resumen(p) for p in store.precios()]
     precios_lista.sort(key=lambda p: (p["nivel"] != "pre", norm(p["programa"])))
     return render_template("simuladores.html", rombo=c.get("rombo", {}), finky=c.get("finky", {}),
-                           precios=precios_lista, fechas=fechas_ingreso(),
-                           programa=request.args.get("programa", "")[:120])
+                           ruta=c.get("ruta_financiacion", []), precios=precios_lista, fechas=fechas_ingreso(),
+                           programa=request.args.get("programa", "")[:120],
+                           nivel="pos" if request.args.get("nivel") == "pos" else "pre")
 
 
 # =====================================================

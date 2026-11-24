@@ -1,3 +1,4 @@
+import json
 from core.data import (DataStore, buscar_homologacion, cohorte_texto, resolve_titles,
                        titulo_sena)
 from core.messages import mensaje_homologacion, mensaje_precios
@@ -128,8 +129,32 @@ def test_comercial_datos():
     assert sum(1 for o in c["objeciones_generales"] if o.get("p")) == 7  # tabla "pregunta para continuar"
     assert len(c["preguntas_filtro"]) == 7
     assert c["rombo"] == {"tasa_mensual": 1.85, "cuota_inicial": 15, "fee": 69000, "planes": [4, 6, 12], "valor_ejemplo": 2455236}
+    ids = {p["id"] for p in store.json("catalogo.json", [])}
+    assert all(set(o.get("programas", [])) <= ids for o in c["objeciones_programa"])
+    assert sum(1 for o in c["objeciones_programa"] if o.get("programas")) >= 40
+    assert len(c["objeciones_admisiones"]) == 4
+    assert [r["t"].split()[1] for r in c["ruta_financiacion"]] == ["directo", "FINKY"]
+
+
+def test_catalogo_pregrado_y_posgrado():
+    cat = store.json("catalogo.json", [])
+    niveles = [p["nivel"] for p in cat]
+    assert len(cat) == 59 and len({p["id"] for p in cat}) == 59
+    assert (niveles.count("Pregrado"), niveles.count("Especialización"), niveles.count("Maestría"), niveles.count("Doctorado")) == (31, 21, 6, 1)
     plus_ids = {p["id"] for p in store.json("plus_pregrados.json", [])}
-    assert all(o["plus"] in plus_ids for o in c["objeciones_programa"] if o.get("plus"))
+    assert all(p["plus"] in plus_ids for p in cat if p.get("plus"))
+    assert all(p["crm2027"] and p["crm2026"] and p["objetivo"] and p["requisitos"] for p in cat)
+
+
+def test_guia_de_gestion():
+    g = store.json("gestion.json", {})
+    assert "Ley 1581" in g["aviso"]
+    ids = [s["id"] for s in g["secciones"]]
+    assert ids == ["canales", "sello", "documentos", "otros_docs", "descuentos", "rechazos", "tiempos", "homologacion", "oferta", "links"]
+    sec = {s["id"]: s for s in g["secciones"]}
+    assert all(len(f) == len(sec[t]["tabla"]["columnas"]) for t in ("canales", "documentos", "descuentos") for f in sec[t]["tabla"]["filas"])
+    assert len(sec["links"]["links"]) == 12
+    assert "@" not in json.dumps(sec["sello"])  # sin correos personales en el repo público
 
 
 def test_fechas_ingreso_marca_una_proxima():

@@ -116,9 +116,11 @@
         nivel: {{ por_nivel | tojson }}.map((o) => ({ ...o, etiqueta: o.nivel })),
         pregrado: {{ por_programa | tojson }}.filter((o) => o.tipo === 'pregrado').map((o) => ({ ...o, etiqueta: o.prog })),
         posgrado: {{ por_programa | tojson }}.filter((o) => o.tipo === 'posgrado').map((o) => ({ ...o, etiqueta: o.prog })),
+        admisiones: {{ admisiones | tojson }}.map((o) => ({ ...o, etiqueta: o.etiqueta || 'Admisiones' })),
     };
+    const NOMBRES = {{ nombres | tojson }};
     const FILTRO = {{ filtro | tojson }};
-    const GRUPOS = [['generales', 'Generales'], ['nivel', 'Por nivel'], ['pregrado', 'Pregrados'], ['posgrado', 'Posgrados']];
+    const GRUPOS = [['generales', 'Generales'], ['nivel', 'Por nivel'], ['pregrado', 'Pregrados'], ['posgrado', 'Posgrados'], ['admisiones', 'Admisiones y financiación']];
     let grupo = 'generales';
 
     // ---------- Pestañas (#filtro abre la segunda) ----------
@@ -149,15 +151,16 @@
             ${o.p ? `<div class="obj-next"><span class="obj-k">Pregunta para continuar</span>${escapeHtml(o.p)}</div>` : ''}
             <div class="obj-foot">
                 <button type="button" class="btn btn-secondary btn-sm" data-copiar="${g}:${i}"><i class="fa-regular fa-copy"></i> Copiar respuesta</button>
-                ${o.dinero ? `<a class="btn btn-ghost btn-sm" href="/simuladores"><i class="fa-solid fa-calculator"></i> Simular cuota</a>` : ''}
-                ${o.plus ? `<a class="btn btn-ghost btn-sm" href="/plus?p=${encodeURIComponent(o.plus)}"><i class="fa-solid fa-star"></i> Ver PLUS</a>` : ''}
+                ${o.dinero ? `<a class="btn btn-ghost btn-sm" href="/simuladores#rombo"><i class="fa-solid fa-calculator"></i> Simular cuota</a>` : ''}
+                ${o.homologacion ? `<a class="btn btn-ghost btn-sm" href="/gestion#homologacion"><i class="fa-solid fa-clock-rotate-left"></i> Antigüedad permitida</a>` : ''}
+                ${(o.programas || []).slice(0, 2).map((id) => `<a class="btn btn-ghost btn-sm" href="/plus?p=${encodeURIComponent(id)}" title="${escapeHtml(NOMBRES[id] || '')}"><i class="fa-solid fa-graduation-cap"></i> ${(o.programas.length > 1 ? escapeHtml(NOMBRES[id] || 'Ver programa') : 'Ver programa')}</a>`).join('')}
             </div>
         </article>`;
     }
 
     function pintar() {
         const q = normalize($('obBuscar').value.trim());
-        const coincide = (o) => !q || q.split(/\s+/).every((w) => normalize([o.o, o.r.join(' '), o.p, o.etiqueta].join(' ')).includes(w));
+        const coincide = (o) => !q || q.split(/\s+/).every((w) => normalize([o.o, o.r.join(' '), o.p, o.etiqueta, ...(o.programas || []).map((id) => NOMBRES[id])].join(' ')).includes(w));
         let html = '', total = 0;
         (q ? GRUPOS : GRUPOS.filter((g) => g[0] === grupo)).forEach(([id, nombre]) => {
             const items = OBJ[id].map((o, i) => [o, i]).filter(([o]) => coincide(o));

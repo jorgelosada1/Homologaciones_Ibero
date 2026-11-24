@@ -664,4 +664,5 @@ input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius
 .obj-a p { margin: 0; }
 .obj-next { background: var(--brand-soft); border-left: 3px solid var(--brand); border-radius: 10px; padding: 10px 12px; font-size: 13.5px; font-weight: 600; color: var(--text); }
 .obj-foot { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.obj-foot .btn { white-space: normal; text-align: left; max-width: 100%; line-height: 1.3; }
 .sub-h { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); margin: 10px 0 2px; grid-column: 1 / -1; }
