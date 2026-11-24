@@ -11,7 +11,6 @@ y un mensaje listo para WhatsApp.
   estimados por cursar, precio SENA, pago del primer periodo con pronto pago y cohorte.
 - **Mensaje listo** para copiar o abrir en WhatsApp, con o sin precios, y **Crear imagen**: un PNG 1080×1350
   con gráficas de lo que homologa cada carrera (para pegar en WhatsApp).
-- **Explorar programas**: búsqueda inversa (qué títulos SENA homologan en cada carrera).
 - **Precios**: pregrado y posgrado virtual con la lista SENA (precio SENA, pronto pago, pago total) y la
   lista regular (subsidio Ibero, remarketing, precio final). Ofertas listas para WhatsApp y descarga en Excel.
 - **Mensajes**: biblioteca de mensajes por programa y para egresados SENA (variable `{cohorte}`).
@@ -25,8 +24,14 @@ y un mensaje listo para WhatsApp.
   (15 % de cuota inicial, fee $69.000, 1,85 % mensual, 4, 6 o 12 cuotas) con precarga del valor del semestre
   desde la lista de precios y resumen para WhatsApp.
 - **Brochures y pensum**: PDF por pregrado/posgrado, con visor. Se suben desde Administración → Brochures.
-- **Capacitación e IA**: guía rápida y asistente (local o con Claude si se configura `ANTHROPIC_API_KEY`).
 - **Administración**: precios, mensajes, configuración, piezas gráficas, pensum y carga del acta.
+
+## Marca
+
+Sigue el Manual de Marca IBERO 2026: tipografía **Montserrat** (extra bold en títulos, bold en subtítulos,
+regular en texto), colores **#4A4848** (neutral black U), **#DFC14E** (7404 U), **#D0AB4B** (110 U) y blanco,
+y acentos con los colores por facultad. El logo oficial está en `static/brand/` (`logo-ibero.png` horizontal con
+endoso PFU, `simbolo.png` y `favicon.png`); sobre el menú gris se usa la versión positiva en recuadro blanco.
 
 ## Datos
 
@@ -60,4 +65,4 @@ python -m pytest -q      # pruebas
 Persistir entre despliegues: `data/` (incluye acta subida, pensum y backups), `static/piezas/` y `static/brochures/`.
 
 Variables de entorno: ver `.env.example` (`SECRET_KEY`, `APP_USER`, `APP_PASSWORD`, `ADMIN_PASSWORD`,
-`SESSION_COOKIE_SECURE`, `ANTHROPIC_API_KEY` opcional).
+`SESSION_COOKIE_SECURE`).

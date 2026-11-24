@@ -1,8 +1,9 @@
 import pytest
 
-PAGES = ["/", "/dashboard", "/programas", "/mensajes", "/mensajes?nivel=sena", "/mensajes?nivel=pos", "/precios",
-         "/precios?nivel=pos", "/piezas", "/brochures", "/capacitacion", "/brochures?nivel=posgrado"]
-QUITADOS = ["/presencial", "/simulador", "/whatsapp", "/cruce", "/aguachica", "/parametrizacion", "/flujos"]
+PAGES = ["/", "/mensajes", "/mensajes?nivel=sena", "/mensajes?nivel=pos", "/precios",
+         "/precios?nivel=pos", "/piezas", "/brochures", "/brochures?nivel=posgrado"]
+QUITADOS = ["/presencial", "/simulador", "/whatsapp", "/cruce", "/aguachica", "/parametrizacion", "/flujos",
+            "/dashboard", "/programas", "/capacitacion", "/stats"]
 
 
 def test_login_requerido(app):
@@ -40,10 +41,8 @@ def test_api_titulos_fuzzy(client):
     assert any("Logística" in i["titulo"] for i in d["items"])
 
 
-def test_api_asistente_local(client, monkeypatch):
-    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
-    d = client.post("/api/asistente", json={"message": "precio de ingenieria industrial"}).get_json()
-    assert d["ok"] and d["source"] == "local" and "Ingeniería Industrial" in d["reply"]
+def test_asistente_quitado(client):
+    assert client.post("/api/asistente", json={"message": "hola"}).status_code == 404
 
 
 @pytest.mark.parametrize("path", QUITADOS)

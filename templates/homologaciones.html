@@ -4,11 +4,10 @@
 <style>
     .homo-hero {
         position: relative; z-index: 20; overflow: visible; padding: 28px; border-radius: var(--radius-xl);
-        background: radial-gradient(80% 120% at 0% 0%, rgba(201,160,60,0.18), transparent 55%),
-                    radial-gradient(60% 100% at 100% 0%, rgba(46,90,156,0.08), transparent 60%), var(--surface);
+        background: var(--surface); border-top: 4px solid var(--brand);
         border: 1px solid var(--border); box-shadow: var(--shadow-sm);
     }
-    .homo-hero h2 { font-size: 28px; font-weight: 750; letter-spacing: -0.03em; }
+    .homo-hero h2 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; }
     .homo-hero .lead { color: var(--text-2); margin-top: 6px; }
     .big-search { display: flex; gap: 10px; margin-top: 20px; }
     .big-search .ac { flex: 1; }
@@ -104,7 +103,7 @@
 <div id="results"></div>
 
 <section id="welcome" class="welcome-grid stagger">
-    <a class="card hoverable quick" href="/programas"><i class="fa-solid fa-diagram-project" style="background:var(--blue-soft);color:var(--blue)"></i><strong>Explorar por programa</strong><span>Qué títulos homologan cada carrera</span></a>
+    <a class="card hoverable quick" href="/plus"><i class="fa-solid fa-star" style="background:var(--blue-soft);color:var(--blue)"></i><strong>PLUS pregrados</strong><span>Discurso y ventajas de cada carrera</span></a>
     <a class="card hoverable quick" href="/brochures?nivel=pregrado"><i class="fa-solid fa-book-open" style="background:var(--orange-soft);color:var(--orange)"></i><strong>Pensum de programas</strong><span>Plan de estudios en PDF</span></a>
     <a class="card hoverable quick" href="/mensajes"><i class="fa-solid fa-comments" style="background:var(--purple-soft);color:var(--purple)"></i><strong>Biblioteca de mensajes</strong><span>Pregrado, posgrado y SENA</span></a>
     <a class="card hoverable quick" href="/precios"><i class="fa-solid fa-tags" style="background:var(--pink-soft);color:var(--pink)"></i><strong>Precios SENA</strong><span>Pregrado y posgrado virtual</span></a>
@@ -276,7 +275,7 @@
             st.innerHTML = `<div class="alert warning mt-2 fade-up"><i class="fa-solid fa-wand-magic-sparkles"></i><div>No encontré “<b>${escapeHtml(d.query)}</b>” exacto. Mostrando <b>${escapeHtml(d.grupos[0].titulo)}</b>.${d.sugerencias.length ? ` <span class="muted">También podría ser:</span> ` + d.sugerencias.map((s) => `<button class="chip" style="margin:3px" data-q="${escapeHtml(s)}">${escapeHtml(s)}</button>`).join('') : ''}</div></div>`;
         }
         if (!d.grupos.length) {
-            $('results').innerHTML = `<div class="card mt-2 fade-up"><div class="empty"><div class="empty-icon"><i class="fa-solid fa-magnifying-glass"></i></div><h4>No encontré homologaciones para “${escapeHtml(d.query)}”</h4><p>Revisa el nombre del título o prueba con palabras clave (ej. “logística”, “contable”).</p>${d.sugerencias.length ? `<div class="row" style="justify-content:center;margin-top:16px">${d.sugerencias.map((s) => `<button class="chip" data-q="${escapeHtml(s)}">${escapeHtml(s)}</button>`).join('')}</div>` : ''}<div class="row" style="justify-content:center;margin-top:16px"><a class="btn btn-secondary btn-sm" href="/programas"><i class="fa-solid fa-diagram-project"></i> Explorar programas</a></div></div></div>`;
+            $('results').innerHTML = `<div class="card mt-2 fade-up"><div class="empty"><div class="empty-icon"><i class="fa-solid fa-magnifying-glass"></i></div><h4>No encontré homologaciones para “${escapeHtml(d.query)}”</h4><p>Revisa el nombre del título o prueba con palabras clave (ej. “logística”, “contable”).</p>${d.sugerencias.length ? `<div class="row" style="justify-content:center;margin-top:16px">${d.sugerencias.map((s) => `<button class="chip" data-q="${escapeHtml(s)}">${escapeHtml(s)}</button>`).join('')}</div>` : ''}<div class="row" style="justify-content:center;margin-top:16px"><a class="btn btn-secondary btn-sm" href="/plus"><i class="fa-solid fa-star"></i> Ver PLUS de pregrados</a></div></div></div>`;
             return;
         }
         const groups = d.grupos.map((g) => `

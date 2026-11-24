@@ -1,4 +1,4 @@
-from core.data import (DataStore, buscar_homologacion, cohorte_texto, explorar_programas, resolve_titles,
+from core.data import (DataStore, buscar_homologacion, cohorte_texto, resolve_titles,
                        titulo_sena)
 from core.messages import mensaje_homologacion, mensaje_precios
 from core.text import fix_text_enc, money, norm, pretty_name, program_similarity, similarity
@@ -80,13 +80,6 @@ def test_mensaje_formato_whatsapp():
     assert "Créditos homologados: 55 de 158" in msg and "Precio SENA" in msg and "toda la carrera" in msg
     pr = mensaje_precios([p for g in res["grupos"] for p in g["programas"]], store.config)
     assert "Pronto pago" in pr
-
-
-def test_explorar_programas():
-    progs = explorar_programas(store)
-    assert progs and all(p["total"] >= 1 for p in progs)
-    ii = next(p for p in progs if p["programa"] == "Ingeniería Industrial")
-    assert ii["max_porcentaje"] >= ii["min_porcentaje"]
 
 
 def test_precios_ibero():

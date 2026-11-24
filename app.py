@@ -10,15 +10,13 @@ import shutil
 from datetime import datetime, timedelta
 from functools import wraps
 
-import pandas as pd
 from flask import (Flask, Response, abort, jsonify, redirect, render_template, request,
                    send_file, send_from_directory, session, url_for)
 from werkzeug.utils import secure_filename
 
 from core.activity import ActivityLog
-from core.assistant import answer as assistant_answer, claude_available
 from core.data import (ACTAS_NOMBRE, DATA_DIR, DEFAULT_CONFIG, DataStore, actas_file, cohorte_texto,
-                       ruta_subida, buscar_homologacion, explorar_programas, rank_titles, validar_actas)
+                       ruta_subida, buscar_homologacion, rank_titles, validar_actas)
 from core.pensum import PENSUM_DIRS, buscar_pensum, listar as listar_pensum
 from core.messages import mensaje_homologacion, mensaje_precios
 from core.security import LoginLimiter, check_password, init_csrf
@@ -224,9 +222,7 @@ def global_logout():
 # =====================================================
 NAV = [
     ("Principal", [
-        ("/dashboard", "fa-gauge-high", "Panel"),
         ("/", "fa-building-columns", "Homologaciones"),
-        ("/programas", "fa-diagram-project", "Explorar programas"),
     ]),
     ("Comercial", [
         ("/mensajes", "fa-comments", "Mensajes"),
@@ -238,20 +234,17 @@ NAV = [
     ("Recursos", [
         ("/piezas", "fa-images", "Piezas gráficas"),
         ("/brochures", "fa-file-pdf", "Brochures y pensum"),
-        ("/capacitacion", "fa-user-graduate", "Capacitación e IA"),
     ]),
 ]
 
 # Módulos que se pueden ocultar desde Administración → Configuración
 MODULOS = {
     "piezas": {"label": "Piezas gráficas", "prefixes": ("/piezas",)},
-    "capacitacion": {"label": "Capacitación e IA", "prefixes": ("/capacitacion",)},
     "plus": {"label": "PLUS pregrados", "prefixes": ("/plus",)},
     "objeciones": {"label": "Objeciones y preguntas filtro", "prefixes": ("/objeciones",)},
     "simuladores": {"label": "Simuladores de crédito", "prefixes": ("/simuladores",)},
 }
-NAV_MODULO = {"/piezas": "piezas", "/capacitacion": "capacitacion", "/plus": "plus", "/objeciones": "objeciones",
-              "/simuladores": "simuladores"}
+NAV_MODULO = {"/piezas": "piezas", "/plus": "plus", "/objeciones": "objeciones", "/simuladores": "simuladores"}
 
 TITLES = {item[0]: item[2] for _, items in NAV for item in items}
 TITLES.update({"/sena": "Mensajes SENA", "/admin": "Administración"})
@@ -426,12 +419,6 @@ def api_track():
 # =====================================================
 # EXPLORAR PROGRAMAS (BÚSQUEDA INVERSA)
 # =====================================================
-@app.route("/programas")
-@login_required
-def programas():
-    return render_template("programas.html", programas=explorar_programas(store))
-
-
 # =====================================================
 # MENSAJES
 # =====================================================
@@ -537,75 +524,6 @@ def simuladores():
     return render_template("simuladores.html", rombo=c.get("rombo", {}), finky=c.get("finky", {}),
                            precios=precios_lista, fechas=fechas_ingreso(),
                            programa=request.args.get("programa", "")[:120])
-
-
-# =====================================================
-# PANEL / ESTADÍSTICAS
-# =====================================================
-@app.route("/dashboard")
-@login_required
-def dashboard():
-    precios_data = [p for p in store.precios() if p.get("nivel", "pre") == "pre"]
-    valores = [p.get("valor_sena") or p["valor_final"] for p in precios_data] or [0]
-    progs = explorar_programas(store)
-    df = store.actas()
-    pct = (df["ch"] / df["cp"] * 100).fillna(0) if len(df) else pd.Series(dtype=float)
-    rangos = [(0, 20), (20, 40), (40, 60), (60, 101)]
-    mensajes_programas = store.mensajes_programas()
-    stats = {
-        "total_titulos": len(store.titulos()),
-        "total_combinaciones": int(len(df)),
-        "total_programas_actas": len(progs),
-        "total_pregrado": len([m for m in mensajes_programas if m.get("nivel") == "pre"]),
-        "total_posgrado": len([m for m in mensajes_programas if m.get("nivel") == "pos"]),
-        "total_mensajes_sena": len(store.mensajes_sena()),
-        "total_precios": len(precios_data),
-        "precio_min": min(valores),
-        "precio_max": max(valores),
-        "precio_promedio": int(sum(valores) / len(valores)),
-        "piezas": count_images(PIEZAS_DIR),
-        "max_porcentaje": int(round(pct.max())) if len(pct) else 0,
-        "pensum_pre": len(listar_pensum("pregrado")),
-        "pensum_pos": len(listar_pensum("posgrado")),
-    }
-    orden = sorted(precios_data, key=lambda x: x.get("valor_sena") or x["valor_final"])
-    chart = {
-        "programas": [p["display"] for p in progs],
-        "programas_total": [p["total"] for p in progs],
-        "dist_labels": [f"{a}–{min(b, 100)}%" for a, b in rangos],
-        "dist_values": [int(((pct >= a) & (pct < b)).sum()) for a, b in rangos],
-        "precios_labels": [p["programa"] for p in orden],
-        "precios_values": [p.get("valor_sena") or p["valor_final"] for p in orden],
-    }
-    return render_template("dashboard.html", stats=stats, chart=chart, actividad=activity.summary(14))
-
-
-@app.route("/stats")
-@login_required
-def stats():
-    return redirect(url_for("dashboard"))
-
-
-# =====================================================
-# PÁGINAS DE CONTENIDO
-# =====================================================
-@app.route("/capacitacion")
-@login_required
-def capacitacion():
-    return render_template("capacitacion.html", ia_claude=claude_available())
-
-
-@app.route("/capacitacion/api/chat", methods=["POST"])
-@app.route("/api/asistente", methods=["POST"])
-@login_required
-def api_chat():
-    data = request.get_json(silent=True) or {}
-    msg = str(data.get("message", "")).strip()[:2000]
-    if not msg:
-        return jsonify({"ok": False, "error": "Mensaje vacío"}), 400
-    text, source = assistant_answer(msg, data.get("history") or [], store)
-    activity.log("asistente", msg, 1)
-    return jsonify({"ok": True, "reply": text, "response": text, "source": source})
 
 
 # =====================================================

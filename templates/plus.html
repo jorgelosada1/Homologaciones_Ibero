@@ -12,9 +12,9 @@
     @media (max-width: 980px) { .plist-items { max-height: 340px; } }
     .pitem { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; cursor: pointer; border: 1px solid transparent; width: 100%; background: none; text-align: left; color: var(--text); transition: var(--t); }
     .pitem:hover { background: var(--surface-2); }
-    .pitem.active { background: var(--brand-soft); border-color: rgba(201,160,60,0.35); }
+    .pitem.active { background: var(--brand-soft); border-color: rgba(208,171,75,0.35); }
     .pitem .pi { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--surface-3); color: var(--text-2); flex-shrink: 0; font-size: 14px; }
-    .pitem.active .pi { background: var(--brand); color: #1a1406; }
+    .pitem.active .pi { background: var(--brand); color: #2B2A2A; }
     .pitem .nm { display: block; font-weight: 600; font-size: 13.5px; line-height: 1.25; }
     .pitem .mt { font-size: 12px; color: var(--text-3); }
     .pd-head { padding: 22px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px 18px; align-items: start; }
@@ -78,6 +78,8 @@
     const CATS = [['todos', 'Todos'], ['educacion', 'Educación'], ['negocios', 'Negocios'], ['ingenieria', 'Ingeniería'], ['social', 'Salud y social']];
     const CAT_NOMBRE = { educacion: 'Educación', negocios: 'Negocios', ingenieria: 'Ingeniería y tecnología', social: 'Salud, social y derecho' };
     const ICONO = { educacion: 'fa-chalkboard-user', negocios: 'fa-briefcase', ingenieria: 'fa-laptop-code', social: 'fa-hand-holding-heart' };
+    // Colores por facultad del manual de marca (Educación, Cs. Empresariales, Ingeniería, Salud)
+    const COLOR = { educacion: 'var(--orange)', negocios: 'var(--pink)', ingenieria: 'var(--brand-700)', social: 'var(--blue)' };
     const dato = (p, k) => (p.datos.find((d) => d[0] === k) || [])[1] || '';
     PROGS.forEach((p) => { p._idx = normalize([p.nombre, p.nivel, ...p.descripcion, ...p.plus.map((x) => x.t + ' ' + x.c.join(' ')), ...p.perfil, ...p.materias, ...p.campo].join(' ')); });
 
@@ -102,7 +104,7 @@
         const lista = PROGS.map((p, i) => [p, i]).filter(([p]) => (cat === 'todos' || p.categoria === cat) && (!q || q.split(/\s+/).every((w) => p._idx.includes(w))));
         $('pLista').innerHTML = lista.length ? lista.map(([p, i]) => `
             <button type="button" class="pitem ${i === cur ? 'active' : ''}" data-i="${i}">
-                <span class="pi"><i class="fa-solid ${ICONO[p.categoria] || 'fa-graduation-cap'}"></i></span>
+                <span class="pi"${i === cur ? '' : ` style="color:${COLOR[p.categoria] || 'inherit'}"`}><i class="fa-solid ${ICONO[p.categoria] || 'fa-graduation-cap'}"></i></span>
                 <span style="min-width:0"><span class="nm">${escapeHtml(p.nombre)}</span><span class="mt">${escapeHtml([p.nivel, dato(p, 'Modalidad'), dato(p, 'Duración')].filter(Boolean).join(' · '))}</span></span>
             </button>`).join('') : '<p class="small muted" style="padding:12px">Sin resultados.</p>';
     }

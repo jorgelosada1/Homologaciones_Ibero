@@ -2,12 +2,14 @@
 (function () {
     'use strict';
     const W = 1080, PAD = 64;
+    // Colores del manual de marca IBERO: #4A4848 (neutral black U), #DFC14E (7404 U), #D0AB4B (110 U), blanco
     const C = {
-        green: '#c9a03c', green2: '#9a7620', greenSoft: '#f6efdd', ink: '#141b26', text2: '#4a5463', text3: '#8a93a1',
-        line: '#e3e6eb', card: '#f6f7f9', pink: '#2e5a9c', pinkSoft: '#e6edf8', dark: '#141b26', white: '#ffffff',
+        green: '#D0AB4B', gold: '#DFC14E', green2: '#8F7020', greenSoft: '#FBF5DF', ink: '#2B2A2A', text2: '#5D5B5C', text3: '#8E8A87',
+        line: '#E3E1DD', card: '#F7F6F4', pink: '#4A4848', pinkSoft: '#EEEDEB', dark: '#4A4848', white: '#ffffff',
     };
-    const DISPLAY = 'Outfit, "Segoe UI", system-ui, sans-serif';
-    const BODY = 'Inter, "Segoe UI", system-ui, sans-serif';
+    // Tipografía corporativa: Montserrat
+    const DISPLAY = 'Montserrat, "Segoe UI", system-ui, sans-serif';
+    const BODY = 'Montserrat, "Segoe UI", system-ui, sans-serif';
     const money = (n) => '$' + Math.round(Number(n) || 0).toLocaleString('es-CO');
 
     function font(ctx, weight, size, fam) { ctx.font = `${weight} ${size}px ${fam}`; }
@@ -55,8 +57,7 @@
         const pct = Math.max(0, Math.min(100, p.porcentaje || 0));
         ctx.lineCap = 'round'; ctx.lineWidth = lw; ctx.strokeStyle = C.line;
         ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
-        const g = ctx.createLinearGradient(cx - r, cy - r, cx + r, cy + r); g.addColorStop(0, '#e3c372'); g.addColorStop(1, C.green2);
-        ctx.strokeStyle = g; ctx.beginPath(); ctx.arc(cx, cy, r, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * pct / 100); ctx.stroke();
+        ctx.strokeStyle = C.green; ctx.beginPath(); ctx.arc(cx, cy, r, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * pct / 100); ctx.stroke();
         ctx.textAlign = 'center'; ctx.fillStyle = C.ink; font(ctx, 800, Math.round(r * 0.62), DISPLAY);
         ctx.fillText(`${pct}%`, cx, cy + (r > 60 ? 4 : r * 0.22));
         if (r > 60) { ctx.fillStyle = C.text2; font(ctx, 600, 16, BODY); ctx.fillText('de créditos', cx, cy + 30); }
@@ -81,7 +82,7 @@
         for (let i = 0; i < n; i++) {
             const sx = x0 + i * (size + gap), done = i < p.homologados;
             ctx.fillStyle = done ? C.green : C.white; rr(ctx, sx, yy, size, barH, 11); ctx.fill();
-            if (!done) { ctx.strokeStyle = '#cfd5de'; ctx.lineWidth = 2; rr(ctx, sx, yy, size, barH, 11); ctx.stroke(); }
+            if (!done) { ctx.strokeStyle = '#CFCBC5'; ctx.lineWidth = 2; rr(ctx, sx, yy, size, barH, 11); ctx.stroke(); }
             ctx.fillStyle = done ? C.white : C.text3; font(ctx, 700, size > 40 ? 16 : 13, BODY); ctx.textAlign = 'center';
             ctx.fillText(`S${i + 1}`, sx + size / 2, yy + barH / 2 + 6); ctx.textAlign = 'left';
         }
@@ -100,8 +101,8 @@
     }
 
     async function generar({ titulo, programas, nombre, conPrecio, cfg }) {
-        try { await Promise.all(['800 56px Outfit', '700 32px Outfit', '600 22px Inter', '700 22px Inter', '800 22px Inter'].map((f) => document.fonts.load(f))); } catch (e) { /* fuentes del sistema */ }
-        const logo = await loadImg('/logo.jpg');
+        try { await Promise.all(['800 50px Montserrat', '700 32px Montserrat', '500 19px Montserrat', '600 22px Montserrat', '700 22px Montserrat', '800 22px Montserrat'].map((f) => document.fonts.load(f))); } catch (e) { /* fuentes del sistema */ }
+        const logo = await loadImg('/static/brand/logo-ibero.png');
         const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
         const ctx = cv.getContext('2d');
         ctx.fillStyle = C.white; ctx.fillRect(0, 0, W, H);
@@ -112,19 +113,27 @@
         const ahorro = conPrecio ? Math.max(0, ...programas.map((p) => (p.precio && p.precio.ahorro_total) || 0)) : 0;
 
         // ---- Encabezado
-        font(ctx, 800, 50, DISPLAY);
+        font(ctx, 800, 46, DISPLAY);
         const head = wrap(ctx, 'Tu título SENA te acerca a tu carrera profesional', W - PAD * 2, 2);
-        const heroH = 168 + (nombre ? 40 : 0) + head.length * 58 + 24 + 52 + 38;
-        const hg = ctx.createLinearGradient(0, 0, W, heroH); hg.addColorStop(0, '#2c3a52'); hg.addColorStop(1, '#141b26');
-        ctx.fillStyle = hg; ctx.fillRect(0, 0, W, heroH);
-        ctx.save(); ctx.globalAlpha = 0.12; ctx.fillStyle = C.white; ctx.beginPath(); ctx.arc(W - 70, 40, 230, 0, Math.PI * 2); ctx.fill(); ctx.restore();
-        ctx.fillStyle = C.white; rr(ctx, PAD, 50, 88, 88, 22); ctx.fill();
-        if (logo) ctx.drawImage(logo, PAD + 12, 62, 64, 64);
-        ctx.fillStyle = C.white; font(ctx, 800, 40, DISPLAY); ctx.fillText('Ibero', PAD + 112, 92);
-        ctx.globalAlpha = 0.88; font(ctx, 600, 20, BODY); ctx.fillText('Homologación para egresados SENA · 100% virtual', PAD + 112, 124); ctx.globalAlpha = 1;
+        const heroH = 168 + (nombre ? 40 : 0) + head.length * 56 + 24 + 52 + 38;
+        // Fondo gris de marca y "sol" dorado del sistema gráfico (dos mitades, sin degradados)
+        ctx.fillStyle = C.dark; ctx.fillRect(0, 0, W, heroH);
+        ctx.save(); ctx.beginPath(); ctx.rect(0, 0, W, heroH); ctx.clip();
+        const sx = W - 30, sy = 62, sr = 128;
+        ctx.fillStyle = C.gold; ctx.beginPath(); ctx.arc(sx, sy, sr, Math.PI, 0); ctx.fill();
+        ctx.fillStyle = C.green; ctx.beginPath(); ctx.arc(sx, sy, sr, 0, Math.PI); ctx.fill();
+        ctx.restore();
+        // Logo IBERO (versión positiva) en recuadro blanco + separador + nombre del área
+        const lh = 66, lwid = logo ? Math.round(lh * logo.width / logo.height) : 170, bx = PAD, by = 44, bw0 = lwid + 40, bh0 = lh + 30;
+        ctx.fillStyle = C.white; rr(ctx, bx, by, bw0, bh0, 18); ctx.fill();
+        if (logo) ctx.drawImage(logo, bx + 20, by + 15, lwid, lh);
+        const tx = bx + bw0 + 28;
+        ctx.fillStyle = C.white; ctx.globalAlpha = 0.5; ctx.fillRect(tx, by + 12, 2, bh0 - 24); ctx.globalAlpha = 1;
+        font(ctx, 700, 25, DISPLAY); ctx.fillText('Homologación SENA', tx + 26, by + 44);
+        ctx.globalAlpha = 0.85; font(ctx, 500, 19, BODY); ctx.fillText('Para egresados SENA · 100% virtual', tx + 26, by + 74); ctx.globalAlpha = 1;
         let y = 196;
         if (nombre) { font(ctx, 600, 28, BODY); ctx.fillText(`¡Hola, ${nombre}!`, PAD, y); y += 40; }
-        font(ctx, 800, 50, DISPLAY); head.forEach((l) => { ctx.fillText(l, PAD, y + 44); y += 58; });
+        font(ctx, 800, 46, DISPLAY); head.forEach((l) => { ctx.fillText(l, PAD, y + 42); y += 56; });
         y += 24;
         font(ctx, 600, 17, BODY); const lbl = 'TU TÍTULO'; const lw0 = ctx.measureText(lbl).width;
         font(ctx, 700, 23, BODY); const t1 = wrap(ctx, titulo, W - PAD * 2 - lw0 - 76, 1)[0];
@@ -154,16 +163,15 @@
         // ---- Banda: ahorro e inicio de clases
         if (banda) {
             const bw = W - PAD * 2;
-            const ag = ctx.createLinearGradient(PAD, 0, W - PAD, 0); ag.addColorStop(0, C.pink); ag.addColorStop(1, '#4f7fc4');
-            ctx.fillStyle = ag; rr(ctx, PAD, bandaY, bw, 104, 28); ctx.fill();
-            ctx.fillStyle = C.white;
+            ctx.fillStyle = C.gold; rr(ctx, PAD, bandaY, bw, 104, 28); ctx.fill();
+            ctx.fillStyle = C.ink;
             const col = (bx, label, value) => {
-                ctx.globalAlpha = 0.9; font(ctx, 600, 20, BODY); ctx.fillText(label, bx, bandaY + 40); ctx.globalAlpha = 1;
-                font(ctx, 800, 36, DISPLAY); ctx.fillText(value, bx, bandaY + 82);
+                ctx.globalAlpha = 0.8; font(ctx, 600, 20, BODY); ctx.fillText(label, bx, bandaY + 40); ctx.globalAlpha = 1;
+                font(ctx, 800, 34, DISPLAY); ctx.fillText(value, bx, bandaY + 82);
             };
             if (ahorro && inicioComun) {
                 col(PAD + 34, 'Ahorro estimado', `Hasta ${money(ahorro)}`);
-                ctx.globalAlpha = 0.35; ctx.fillRect(PAD + bw * 0.55, bandaY + 22, 2, 60); ctx.globalAlpha = 1;
+                ctx.globalAlpha = 0.3; ctx.fillRect(PAD + bw * 0.55, bandaY + 22, 2, 60); ctx.globalAlpha = 1;
                 const ini = partesInicio(inicioComun);
                 col(PAD + bw * 0.55 + 32, ini.coh ? `Ingreso · ${ini.coh}` : 'Cohorte', ini.fecha);
             } else if (ahorro) col(PAD + 34, 'Ahorro estimado frente al valor regular', `Hasta ${money(ahorro)}`);

@@ -446,32 +446,6 @@ def buscar_homologacion(store, query):
     }
 
 
-def explorar_programas(store):
-    """Vista inversa: por cada programa, qué títulos SENA homologan."""
-    df = store.actas()
-    out = []
-    from .pensum import buscar_pensum
-    for prog, sub in df.groupby("programa"):
-        titulos = []
-        for _, r in sub.iterrows():
-            ch, cp = _to_num(r["ch"]), _to_num(r["cp"])
-            _, h, f = semestres_de(store, prog, ch, cp, _to_num(r["sem"], None))
-            titulos.append({"titulo": r["titulo"], "homologados": h, "faltantes": f,
-                            "creditos": int(round(ch)), "creditos_programa": int(round(cp)),
-                            "porcentaje": round(ch / cp * 100) if cp else 0})
-        titulos.sort(key=lambda x: (-x["creditos"], norm(x["titulo"])))
-        ps = [t["porcentaje"] for t in titulos] or [0]
-        pen = buscar_pensum(prog)
-        out.append({
-            "programa": prog, "display": prog, "titulos": titulos, "total": len(titulos),
-            "pensum": pen["archivo"] if pen else None,
-            "max_porcentaje": max(ps), "min_porcentaje": min(ps),
-            "promedio": round(sum(ps) / len(ps)), "precio": store.match_precio(prog),
-        })
-    out.sort(key=lambda p: -p["total"])
-    return out
-
-
 def validar_actas(path):
     try:
         df = load_actas(path)

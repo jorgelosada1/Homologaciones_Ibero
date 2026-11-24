@@ -5,34 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingresar · Homologaciones Ibero</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='icons/icon-192.png') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='brand/favicon.png') }}">
     <link rel="manifest" href="/manifest.webmanifest">
     <script>(function(){var t=null;try{t=JSON.parse(localStorage.getItem('theme'))}catch(e){}if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})();</script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}?v={{ asset_v }}">
     <style>
         body { display: grid; grid-template-columns: 1.1fr 1fr; min-height: 100vh; }
+        /* Sistema gráfico IBERO: bloque gris de marca + "sol" dorado (dos mitades) + línea blanca */
         .hero {
-            position: relative; overflow: hidden; color: #f6efdd; padding: 48px 56px; display: flex; flex-direction: column; justify-content: space-between;
-            background: radial-gradient(90% 70% at 10% 0%, rgba(201,160,60,0.45), transparent 60%),
-                        radial-gradient(70% 60% at 100% 100%, rgba(46,90,156,0.28), transparent 60%),
-                        linear-gradient(160deg, #1d2738, #0f141d);
+            position: relative; overflow: hidden; color: #fff; padding: 48px 56px; display: flex; flex-direction: column; justify-content: space-between;
+            background: #4A4848;
         }
-        .hero::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 44px 44px; mask-image: linear-gradient(180deg, #000, transparent 85%); pointer-events: none; }
+        .hero::before { content: ""; position: absolute; width: 360px; height: 360px; right: -130px; top: -130px; border-radius: 50%; background: linear-gradient(to bottom, #DFC14E 50%, #D0AB4B 50%); }
         .hero > * { position: relative; z-index: 1; }
-        .hero-brand { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-weight: 700; font-size: 20px; }
-        .hero-brand .logo { width: 44px; height: 44px; border-radius: 12px; background: #fff; display: grid; place-items: center; }
-        .hero-brand .logo img { width: 32px; }
-        .hero h1 { color: #fff; font-size: clamp(32px, 4vw, 50px); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; max-width: 560px; }
-        .hero h1 em { font-style: normal; background: linear-gradient(90deg, #e3c372, #c9a03c); -webkit-background-clip: text; background-clip: text; color: transparent; }
-        .hero p.lead { color: rgba(236,240,246,0.72); font-size: 16px; margin-top: 16px; max-width: 480px; line-height: 1.6; }
+        .hero-brand { display: inline-flex; align-self: flex-start; background: #fff; border-radius: 16px; padding: 14px 18px 12px; }
+        .hero-brand img { width: 230px; height: auto; display: block; }
+        .hero .eyebrow { color: #DFC14E; }
+        .hero h1 { color: #fff; font-size: clamp(32px, 4vw, 48px); font-weight: 800; line-height: 1.08; letter-spacing: -0.02em; max-width: 560px; }
+        .hero h1 em { font-style: normal; color: #DFC14E; }
+        .hero p.lead { color: rgba(255,255,255,0.78); font-size: 16px; margin-top: 16px; max-width: 480px; line-height: 1.6; }
         .hero-feats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 34px; max-width: 520px; }
-        .hero-feat { display: flex; gap: 12px; align-items: flex-start; padding: 14px; border-radius: 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); }
-        .hero-feat i { color: #e3c372; margin-top: 2px; }
+        .hero-feat { display: flex; gap: 12px; align-items: flex-start; padding: 14px; border-radius: 14px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); }
+        .hero-feat i { color: #DFC14E; margin-top: 2px; }
         .hero-feat strong { display: block; color: #fff; font-size: 13.5px; }
-        .hero-feat span { font-size: 12px; color: rgba(236,240,246,0.6); }
-        .hero small { color: rgba(236,240,246,0.45); font-size: 12px; }
+        .hero-feat span { font-size: 12px; color: rgba(255,255,255,0.65); }
+        .login-mark { width: 46px; height: auto; display: block; margin-bottom: 22px; }
+        .hero small { color: rgba(255,255,255,0.6); font-size: 12px; }
         .panel { display: flex; align-items: center; justify-content: center; padding: 40px 24px; background: var(--bg); position: relative; }
         .login { width: 100%; max-width: 380px; }
         .login h2 { font-size: 28px; font-weight: 700; }
@@ -49,16 +49,16 @@
 </head>
 <body>
 <section class="hero">
-    <div class="hero-brand"><span class="logo"><img src="{{ url_for('logo') }}" alt=""></span> Ibero</div>
+    <div class="hero-brand"><img src="{{ url_for('static', filename='brand/logo-ibero.png') }}" alt="IBERO · Planeta Formación y Universidades" width="640" height="249"></div>
     <div>
-        <p class="eyebrow" style="color:var(--brand-200, #e9cf8f)">Sistema de homologaciones · {{ cfg.anio }}</p>
+        <p class="eyebrow">Sistema de homologaciones · {{ cfg.anio }}</p>
         <h1 style="margin-top:12px">Convierte cada título SENA en una <em>carrera profesional</em>.</h1>
         <p class="lead">Consulta homologaciones al instante, genera mensajes listos para WhatsApp, revisa precios SENA y pensum, todo en un solo lugar.</p>
         <div class="hero-feats">
             <div class="hero-feat"><i class="fa-solid fa-wand-magic-sparkles"></i><div><strong>Búsqueda inteligente</strong><span>Tolera tildes y errores de escritura</span></div></div>
             <div class="hero-feat"><i class="fa-brands fa-whatsapp"></i><div><strong>Envío por WhatsApp</strong><span>Mensajes listos con un clic</span></div></div>
             <div class="hero-feat"><i class="fa-solid fa-image"></i><div><strong>Imagen para WhatsApp</strong><span>Gráfica de lo que homologa</span></div></div>
-            <div class="hero-feat"><i class="fa-solid fa-robot"></i><div><strong>Asistente</strong><span>Resuelve dudas de asesores</span></div></div>
+            <div class="hero-feat"><i class="fa-solid fa-calculator"></i><div><strong>Simuladores y guion</strong><span>Crédito, PLUS y objeciones</span></div></div>
         </div>
     </div>
     <small>© {{ now.year }} Corporación Universitaria Iberoamericana · Uso interno</small>
@@ -67,7 +67,7 @@
     <button class="icon-btn theme-fab" type="button" data-action="toggle-theme" aria-label="Cambiar tema"><i data-theme-icon class="fa-solid fa-moon"></i></button>
     <form class="login fade-up" method="POST" autocomplete="on">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <div class="side-logo" style="margin-bottom:22px;width:48px;height:48px;border-radius:14px"><img src="{{ url_for('logo') }}" alt="" style="width:34px;height:34px"></div>
+        <img class="login-mark" src="{{ url_for('static', filename='brand/simbolo.png') }}" alt="IBERO" width="190" height="211">
         <h2>Bienvenido de nuevo</h2>
         <p class="sub">Ingresa con las credenciales de tu equipo.</p>
         {% if error %}<div class="alert error" style="margin-bottom:16px"><i class="fa-solid fa-circle-exclamation"></i><span>{{ error }}</span></div>{% endif %}
