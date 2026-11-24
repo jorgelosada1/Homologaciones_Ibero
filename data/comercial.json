@@ -1,0 +1,638 @@
+{
+  "fuente": "Objeciones y preguntas filtro.docx · ROMBO Simulación financiación Iberoamericana (CUOTA FIJA) · Finky IBERO",
+  "fechas_ingreso": [
+    {
+      "mes": "Febrero 2027",
+      "cohorte": "1ra cohorte",
+      "desde": "2027-02-01"
+    },
+    {
+      "mes": "Abril 2027",
+      "cohorte": "2da cohorte",
+      "desde": "2027-04-01"
+    },
+    {
+      "mes": "Junio 2027",
+      "cohorte": "3ra cohorte",
+      "desde": "2027-06-01"
+    },
+    {
+      "mes": "Agosto 2027",
+      "cohorte": "4ta cohorte",
+      "desde": "2027-08-01"
+    },
+    {
+      "mes": "Octubre 2027",
+      "cohorte": "5ta cohorte",
+      "desde": "2027-10-01"
+    }
+  ],
+  "objeciones_generales": [
+    {
+      "o": "No tengo tiempo para estudiar.",
+      "r": [
+        "La modalidad es flexible y está diseñada para personas que trabajan."
+      ],
+      "p": "¿Qué disponibilidad tienes actualmente para dedicarle a tus estudios?"
+    },
+    {
+      "o": "Ahora no es el momento.",
+      "r": [
+        "¿Qué tiene que pasar para que este sí sea el momento? ¿Qué te detiene?"
+      ]
+    },
+    {
+      "o": "No sé si pueda sostener el pago.",
+      "dinero": true,
+      "r": [
+        "Entiendo, si inicias ahora te vas a dar cuenta que estudiar mejora tu perfil y tus ingresos futuros. ¿Qué tal si hablas con tu jefe, y le mencionas la posibilidad de un ascenso?"
+      ]
+    },
+    {
+      "o": "Hace mucho no estudio.",
+      "r": [
+        "Iniciamos desde la base y te acompañamos durante todo el proceso."
+      ]
+    },
+    {
+      "o": "Me preocupa que sea virtual.",
+      "r": [
+        "La virtualidad tiene acompañamiento docente, clases estructuradas y prácticas aplicadas."
+      ]
+    },
+    {
+      "o": "Es muy caro.",
+      "dinero": true,
+      "r": [
+        "Es una inversión en crecimiento profesional y mejores oportunidades laborales."
+      ],
+      "p": "¿Tu principal dificultad es el valor total o el pago mensual?"
+    },
+    {
+      "o": "Tengo que pensarlo.",
+      "r": [
+        "¿Qué es exactamente lo que necesitas analizar para ayudarte?",
+        "Te entiendo, separar tu cupo hoy te permite avanzar sin perder más tiempo, piensa en esto."
+      ],
+      "p": "Claro, ¿qué aspecto te gustaría tener más claro antes de tomar la decisión?"
+    },
+    {
+      "o": "Otra universidad es más barata.",
+      "r": [
+        "Aquí pagas por flexibilidad, acompañamiento y calidad académica."
+      ],
+      "p": "Además del precio, ¿qué otros aspectos estás comparando entre las instituciones?"
+    },
+    {
+      "o": "Debo consultarlo con…",
+      "r": [
+        "Genial que tengas personas a tu alrededor que te ayuden en la toma de decisiones, si quieres, te ayudo a explicarlo o lo revisamos todos en una reunión."
+      ]
+    },
+    {
+      "o": "No sé si tenga salida laboral.",
+      "r": [
+        "Los programas están alineados con necesidades reales del mercado laboral."
+      ],
+      "p": "¿En qué área te gustaría trabajar o hacia qué cargo quieres proyectarte?"
+    },
+    {
+      "o": "Ya tengo experiencia, ¿para qué estudiar?",
+      "r": [
+        "El título te permite crecer en cargo, salario y proyección profesional."
+      ],
+      "p": "¿Qué te gustaría lograr profesionalmente que hoy todavía no has alcanzado?"
+    },
+    {
+      "o": "Es un campo muy específico.",
+      "r": [
+        "Precisamente por eso es un perfil más valorado y mejor remunerado."
+      ]
+    },
+    {
+      "o": "Es una inversión (valor) alta.",
+      "dinero": true,
+      "r": [
+        "Es una inversión en tu crecimiento profesional y empleabilidad a largo plazo, luego dará los frutos económicos."
+      ]
+    },
+    {
+      "o": "Me quedé sin trabajo y ahora no tengo cómo pagar mis estudios.",
+      "dinero": true,
+      "r": [
+        "Entiendo que en este momento tu prioridad es recuperar tu estabilidad económica. Podemos revisar las alternativas de financiación disponibles y las condiciones para iniciar. Además, seguir formándote puede ayudarte a fortalecer tu hoja de vida y ampliar tus oportunidades en la búsqueda de empleo."
+      ],
+      "p": "¿Te gustaría que revisáramos las alternativas disponibles para que puedas evaluar si es viable iniciar?"
+    }
+  ],
+  "objeciones_nivel": [
+    {
+      "nivel": "Tecnologías",
+      "o": "¿Una tecnología sí vale la pena?",
+      "r": [
+        "Permite rápida inserción laboral y crecimiento práctico."
+      ]
+    },
+    {
+      "nivel": "Profesionales",
+      "o": "¿Para qué estudiar si ya trabajo?",
+      "r": [
+        "El título te permite ascender y mejorar ingresos."
+      ]
+    },
+    {
+      "nivel": "Posgrados",
+      "o": "¿Vale la pena especializarse?",
+      "r": [
+        "Te posiciona como experto y mejora tu perfil profesional."
+      ]
+    }
+  ],
+  "objeciones_programa": [
+    {
+      "prog": "Economía",
+      "tipo": "pregrado",
+      "o": "Es solo números.",
+      "r": [
+        "Tomas decisiones que impactan empresas y sociedad."
+      ]
+    },
+    {
+      "prog": "Ingeniería de Sistemas",
+      "plus": "ing-sistemas",
+      "tipo": "pregrado",
+      "o": "Es solo programación.",
+      "r": [
+        "Combina tecnología, análisis y gestión."
+      ]
+    },
+    {
+      "prog": "Ingeniería Industrial",
+      "plus": "ing-industrial",
+      "tipo": "pregrado",
+      "o": "No sé en qué puedo trabajar.",
+      "r": [
+        "Es una de las ingenierías más versátiles del mercado."
+      ]
+    },
+    {
+      "prog": "Marketing y Negocios Internacionales",
+      "plus": "marketing-ni",
+      "tipo": "pregrado",
+      "o": "Es igual a administración.",
+      "r": [
+        "Se enfoca en ventas, clientes y crecimiento del negocio."
+      ]
+    },
+    {
+      "prog": "Seguridad y Salud en el Trabajo",
+      "plus": "sst",
+      "tipo": "pregrado",
+      "o": "No tiene mucha salida laboral.",
+      "r": [
+        "Todas las empresas están obligadas por ley."
+      ]
+    },
+    {
+      "prog": "Tecnología en Logística",
+      "plus": "tec-logistica",
+      "tipo": "pregrado",
+      "o": "Es muy operativa.",
+      "r": [
+        "Incluye gestión, planeación y control."
+      ]
+    },
+    {
+      "prog": "Trabajo Social",
+      "plus": "trabajo-social",
+      "tipo": "pregrado",
+      "o": "Me gusta ayudar a las personas, pero no sé si estudiar Trabajo Social me dé estabilidad laboral.",
+      "r": [
+        "Es una formación para intervenir en realidades sociales, acompañar comunidades y participar en proyectos de bienestar y desarrollo social. Te permite prepararte para aportar profesionalmente en diferentes contextos."
+      ]
+    },
+    {
+      "prog": "Derecho",
+      "plus": "derecho",
+      "tipo": "pregrado",
+      "o": "Hay muchos abogados, ¿realmente vale la pena estudiar Derecho?",
+      "r": [
+        "Más allá de ejercer como abogado litigante, puedes orientar tu perfil hacia la asesoría jurídica, el sector público, las empresas, la contratación y otros campos, según tu formación y experiencia."
+      ]
+    },
+    {
+      "prog": "Licenciatura en Matemáticas",
+      "plus": "lic-matematicas",
+      "tipo": "pregrado",
+      "o": "No quiero dedicarme únicamente a dar clases de matemáticas.",
+      "r": [
+        "La licenciatura te prepara para enseñar matemáticas y desarrollar pensamiento lógico y analítico. Puedes explorar distintos contextos educativos y proyectos de formación, de acuerdo con tu perfil."
+      ]
+    },
+    {
+      "prog": "Licenciatura en Educación Infantil",
+      "plus": "lic-infantil",
+      "tipo": "pregrado",
+      "o": "Me gusta trabajar con niños, pero ¿qué oportunidades tengo después de graduarme?",
+      "r": [
+        "Te preparas para acompañar el desarrollo y aprendizaje durante la primera infancia, con posibilidades en instituciones educativas, proyectos de atención infantil y programas de desarrollo integral."
+      ]
+    },
+    {
+      "prog": "Licenciatura en Educación Especial",
+      "plus": "lic-especial",
+      "tipo": "pregrado",
+      "o": "¿No es un campo demasiado limitado?",
+      "r": [
+        "La educación inclusiva requiere profesionales que comprendan las diferentes necesidades de aprendizaje y promuevan la participación de todos. Tu formación puede ser valiosa en contextos educativos y proyectos de inclusión."
+      ]
+    },
+    {
+      "prog": "Mercadeo y Publicidad",
+      "plus": "mercadeo-publicidad",
+      "tipo": "pregrado",
+      "o": "Con las redes sociales, ¿para qué estudiar Mercadeo y Publicidad?",
+      "r": [
+        "Publicar en redes es solo una parte del trabajo. La formación permite comprender al consumidor, construir estrategias de marca, investigar mercados y conectar la creatividad con los objetivos del negocio."
+      ]
+    },
+    {
+      "prog": "Negocios Internacionales",
+      "plus": "negocios-internacionales",
+      "tipo": "pregrado",
+      "o": "Si no hablo inglés perfectamente, ¿puedo estudiar Negocios Internacionales?",
+      "r": [
+        "Puedes desarrollar tu perfil mientras fortaleces tus competencias en idiomas. La carrera aborda los negocios, los mercados y las operaciones internacionales; es importante revisar los requisitos y las competencias lingüísticas que exige el programa."
+      ]
+    },
+    {
+      "prog": "Administración Financiera",
+      "plus": "admin-financiera",
+      "tipo": "pregrado",
+      "o": "¿No es lo mismo que estudiar Contaduría Pública?",
+      "r": [
+        "Se relacionan, pero tienen enfoques diferentes. Administración Financiera se centra en analizar recursos, evaluar inversiones y apoyar decisiones financieras; Contaduría se orienta al reconocimiento, análisis, control y presentación de la información contable."
+      ]
+    },
+    {
+      "prog": "Administración de Empresas",
+      "plus": "admin-empresas",
+      "tipo": "pregrado",
+      "o": "Administración de Empresas es muy general, ¿no sería mejor estudiar algo más específico?",
+      "r": [
+        "Su amplitud puede ser una ventaja: te permite comprender cómo funciona una organización y orientar tu desarrollo hacia áreas como gestión, talento humano, mercadeo, operaciones o finanzas."
+      ]
+    },
+    {
+      "prog": "Administración en Salud",
+      "plus": "admin-salud",
+      "tipo": "pregrado",
+      "o": "Si quiero trabajar en salud, ¿no debería estudiar una carrera asistencial?",
+      "r": [
+        "No todos los profesionales del sector salud atienden pacientes directamente. Esta formación se orienta a la gestión administrativa de organizaciones y servicios de salud, apoyando procesos, recursos y decisiones institucionales."
+      ]
+    },
+    {
+      "prog": "Contaduría Pública Virtual",
+      "plus": "contaduria",
+      "tipo": "pregrado",
+      "o": "¿Una carrera de Contaduría virtual me prepara igual para el mundo laboral?",
+      "r": [
+        "La modalidad virtual puede permitirte desarrollar los conocimientos contables y financieros mientras organizas tus tiempos. Lo importante es conocer el plan de estudios, las actividades prácticas y las herramientas que utiliza el programa."
+      ]
+    },
+    {
+      "prog": "Ingeniería de Software",
+      "plus": "ing-software",
+      "tipo": "pregrado",
+      "o": "La inteligencia artificial ya programa, ¿para qué estudiar Ingeniería de Software?",
+      "r": [
+        "Crear software va mucho más allá de escribir código. También implica analizar necesidades, diseñar soluciones, probar sistemas, gestionar proyectos y garantizar calidad y seguridad. La IA puede ser una herramienta de apoyo, pero se necesita criterio técnico para utilizarla bien."
+      ]
+    },
+    {
+      "prog": "Doctorado en Educación",
+      "tipo": "posgrado",
+      "o": "¿Para qué hacer un doctorado si ya tengo una maestría?",
+      "r": [
+        "El doctorado te permite profundizar en la investigación y producir conocimiento original en educación. Es una opción para quienes buscan fortalecer su trayectoria investigativa, académica o de liderazgo educativo."
+      ]
+    },
+    {
+      "prog": "Maestría en Educación",
+      "tipo": "posgrado",
+      "o": "Ya soy docente y tengo experiencia, ¿qué más me puede aportar una maestría?",
+      "r": [
+        "La experiencia es fundamental, y una maestría puede complementarla con herramientas para analizar problemas educativos, fortalecer las prácticas pedagógicas y asumir nuevos retos académicos o de gestión."
+      ]
+    },
+    {
+      "prog": "Maestría en Gerencia de Proyectos",
+      "tipo": "posgrado",
+      "o": "Ya manejo proyectos en mi trabajo, ¿necesito una maestría para hacerlo?",
+      "r": [
+        "La experiencia te aporta práctica; la formación de posgrado puede ayudarte a fortalecer la planificación, la gestión de riesgos, los recursos y la toma de decisiones para dirigir proyectos de mayor complejidad."
+      ]
+    },
+    {
+      "prog": "Maestría en Seguridad y Salud en el Trabajo",
+      "tipo": "posgrado",
+      "o": "Ya tengo una especialización en SST, ¿qué gano estudiando una maestría?",
+      "r": [
+        "Puedes profundizar en el análisis de riesgos, la gestión estratégica y la toma de decisiones en SST. La pertinencia depende de tu especialización, tus responsabilidades actuales y el perfil al que quieres llegar."
+      ]
+    },
+    {
+      "prog": "Maestría en Ambientes Digitales para la Educación",
+      "tipo": "posgrado",
+      "o": "Ya utilizo plataformas virtuales para enseñar, ¿qué más puedo aprender?",
+      "r": [
+        "Utilizar una plataforma es solo una parte de la educación digital. Una formación de este nivel puede ayudarte a diseñar experiencias de aprendizaje, integrar tecnologías y evaluar cómo mejorar los procesos educativos."
+      ]
+    },
+    {
+      "prog": "Maestría en Administración de Empresas (MBA)",
+      "tipo": "posgrado",
+      "o": "¿Un MBA realmente me ayuda a crecer profesionalmente?",
+      "r": [
+        "Un MBA busca fortalecer una visión integral del negocio y la capacidad para tomar decisiones estratégicas. Puede ser pertinente si quieres avanzar hacia cargos de dirección, gerencia o liderazgo empresarial."
+      ]
+    },
+    {
+      "prog": "Maestría en Epidemiología",
+      "tipo": "posgrado",
+      "o": "¿La epidemiología es solo para médicos?",
+      "r": [
+        "La epidemiología estudia la distribución y los determinantes de los eventos relacionados con la salud. Su aplicación puede involucrar distintos perfiles profesionales, según los requisitos de admisión y el enfoque del programa."
+      ]
+    },
+    {
+      "prog": "Maestría en Ingeniería de Software",
+      "tipo": "posgrado",
+      "o": "Ya soy desarrollador, ¿no sería mejor aprender nuevas tecnologías por mi cuenta?",
+      "r": [
+        "Aprender herramientas por cuenta propia es valioso. Una maestría puede complementar ese conocimiento con una visión más profunda de arquitectura, calidad, procesos y decisiones de ingeniería, según su plan de estudios."
+      ]
+    },
+    {
+      "prog": "Especialización en Inteligencia de Negocios",
+      "tipo": "posgrado",
+      "o": "Si ya manejo Excel y Power BI, ¿para qué especializarme en Inteligencia de Negocios?",
+      "r": [
+        "Las herramientas son el medio; el valor está en convertir datos en decisiones. La especialización puede ayudarte a fortalecer el análisis, la interpretación de información y su aplicación a los objetivos del negocio."
+      ]
+    },
+    {
+      "prog": "Especialización en Gestión de Procesos Logísticos y Redes de Valor",
+      "tipo": "posgrado",
+      "o": "Ya trabajo en logística, ¿qué me puede aportar una especialización?",
+      "r": [
+        "Puede ayudarte a pasar de ejecutar operaciones a analizar y mejorar procesos, coordinar actores de la cadena de suministro y tomar decisiones para optimizar recursos y resultados."
+      ]
+    },
+    {
+      "prog": "Especialización en Inteligencia Artificial",
+      "tipo": "posgrado",
+      "o": "La inteligencia artificial cambia muy rápido; ¿no se quedará desactualizado lo que estudie?",
+      "r": [
+        "Las herramientas evolucionan, pero comprender sus fundamentos y aplicaciones te ayuda a evaluar nuevas soluciones y utilizarlas de manera estratégica. Antes de inscribirte, revisa qué tecnologías, proyectos y contenidos incluye el plan vigente."
+      ]
+    },
+    {
+      "prog": "Especialización en Gestión de la Salud Pública",
+      "tipo": "posgrado",
+      "o": "Ya trabajo en el sector salud, ¿para qué especializarme en salud pública?",
+      "r": [
+        "La salud pública amplía la mirada más allá de la atención individual: permite analizar necesidades colectivas, prevención, programas de intervención y gestión de iniciativas orientadas al bienestar de las poblaciones."
+      ]
+    },
+    {
+      "prog": "Especialización en Gerencia Financiera",
+      "tipo": "posgrado",
+      "o": "Ya tengo experiencia manejando presupuestos, ¿qué me aporta esta especialización?",
+      "r": [
+        "Puede ayudarte a fortalecer el análisis financiero, la evaluación de inversiones, la planeación y la toma de decisiones para contribuir a la sostenibilidad de una organización."
+      ]
+    },
+    {
+      "prog": "Especialización en Gerencia de la Seguridad y Salud en el Trabajo",
+      "tipo": "posgrado",
+      "o": "¿No es lo mismo que la especialización en Seguridad y Salud en el Trabajo?",
+      "r": [
+        "La diferencia debe revisarse en el plan de estudios. Por su enfoque gerencial, esta especialización se orienta a fortalecer la dirección, la planificación y la toma de decisiones del sistema de SST, no solamente su ejecución operativa."
+      ]
+    },
+    {
+      "prog": "Especialización en Gerencia de la Calidad en Salud Virtual",
+      "tipo": "posgrado",
+      "o": "¿La calidad en salud no es responsabilidad exclusiva de las clínicas y los hospitales?",
+      "r": [
+        "La calidad involucra procesos, equipos, indicadores, seguridad del paciente y mejora continua. Esta formación puede aportar herramientas para gestionar y evaluar esos componentes dentro de las organizaciones de salud."
+      ]
+    },
+    {
+      "prog": "Especialización en Desarrollo Integral de la Infancia y la Adolescencia",
+      "tipo": "posgrado",
+      "o": "Ya trabajo con niños y adolescentes, ¿qué más necesito aprender?",
+      "r": [
+        "La experiencia cotidiana puede fortalecerse con herramientas para comprender el desarrollo integral, identificar necesidades y apoyar intervenciones más estructuradas en los distintos contextos de la infancia y la adolescencia."
+      ]
+    },
+    {
+      "prog": "Especialización en Neuropsicología de la Educación",
+      "tipo": "posgrado",
+      "o": "¿Esta especialización es solo para psicólogos?",
+      "r": [
+        "Su pertinencia depende de los requisitos de ingreso y del perfil profesional. El enfoque de neuropsicología aplicada a la educación puede ayudar a comprender los procesos cognitivos relacionados con el aprendizaje; conviene verificar qué perfiles admite IBERO y qué alcances profesionales tiene el título."
+      ]
+    },
+    {
+      "prog": "Especialización en Ciberseguridad Virtual",
+      "tipo": "posgrado",
+      "o": "No soy ingeniero de sistemas, ¿puedo estudiar Ciberseguridad?",
+      "r": [
+        "La ciberseguridad abarca tecnología, gestión de riesgos, políticas y protección de la información. La posibilidad de ingresar depende de los requisitos específicos del programa y de los conocimientos previos que solicite."
+      ]
+    },
+    {
+      "prog": "Especialización en Gerencia de Proyectos",
+      "tipo": "posgrado",
+      "o": "¿Por qué estudiar una especialización si ya existen certificaciones en gestión de proyectos?",
+      "r": [
+        "Las certificaciones y la especialización pueden cumplir propósitos distintos. La especialización ofrece una ruta académica estructurada para profundizar en la gestión de proyectos; puedes comparar el plan de estudios con las competencias que necesitas desarrollar."
+      ]
+    },
+    {
+      "prog": "Especialización en Alta Gerencia Virtual",
+      "tipo": "posgrado",
+      "o": "Ya tengo varios años de experiencia liderando equipos, ¿realmente necesito estudiar Alta Gerencia?",
+      "r": [
+        "La experiencia te da conocimiento del negocio; la formación puede ayudarte a fortalecer la visión estratégica, el liderazgo y la toma de decisiones. Es especialmente relevante si buscas prepararte para responsabilidades de mayor alcance."
+      ]
+    },
+    {
+      "prog": "Especialización en Marketing Digital Virtual",
+      "tipo": "posgrado",
+      "o": "Puedo aprender marketing digital con cursos gratuitos, ¿para qué pagar una especialización?",
+      "r": [
+        "Los cursos cortos pueden enseñarte herramientas puntuales. Una especialización puede ofrecer una ruta de aprendizaje más estructurada para integrar estrategia, audiencias, canales, métricas y objetivos comerciales, según su plan de estudios."
+      ]
+    },
+    {
+      "prog": "Especialización en Analítica y Big Data",
+      "tipo": "posgrado",
+      "o": "No soy experto en matemáticas ni programación, ¿puedo estudiar Analítica y Big Data?",
+      "r": [
+        "El nivel de conocimientos técnicos requerido depende del programa. La formación en analítica combina el uso de datos con su interpretación para apoyar decisiones; revisemos los requisitos de ingreso y las herramientas que trabajarás."
+      ]
+    },
+    {
+      "prog": "Especialización en Auditoría en Salud",
+      "tipo": "posgrado",
+      "o": "Ya trabajo en una institución de salud, ¿no puedo aprender auditoría directamente en el trabajo?",
+      "r": [
+        "La práctica es importante, pero una especialización puede ayudarte a estructurar conocimientos sobre evaluación, seguimiento, calidad y cumplimiento de procesos. Revisa si el enfoque coincide con el tipo de auditoría en el que deseas profundizar."
+      ]
+    },
+    {
+      "prog": "Especialización en Revisoría Fiscal",
+      "tipo": "posgrado",
+      "o": "Si soy contador público, ¿para qué necesito una especialización en Revisoría Fiscal?",
+      "r": [
+        "La formación contable es la base, mientras que la especialización permite profundizar en las responsabilidades, los procedimientos y los criterios relacionados con la revisoría fiscal. Es pertinente si quieres orientar tu carrera hacia ese campo."
+      ]
+    },
+    {
+      "prog": "Especialización en Talento Humano",
+      "tipo": "posgrado",
+      "o": "Tengo experiencia en Recursos Humanos, ¿qué me aportaría una especialización?",
+      "r": [
+        "Puede ayudarte a fortalecer la gestión estratégica del talento, el desarrollo de las personas y la alineación de las prácticas de gestión humana con los objetivos organizacionales, de acuerdo con los contenidos del programa."
+      ]
+    },
+    {
+      "prog": "Especialización en Docencia Universitaria",
+      "tipo": "posgrado",
+      "o": "Soy profesional en mi área, ¿no basta con saber del tema para enseñar en la universidad?",
+      "r": [
+        "Dominar una disciplina no siempre significa saber cómo enseñarla. Esta especialización puede ayudarte a fortalecer las estrategias pedagógicas, la evaluación y el diseño de experiencias de aprendizaje en educación superior."
+      ]
+    },
+    {
+      "prog": "Especialización en Derecho Administrativo",
+      "tipo": "posgrado",
+      "o": "Soy abogado, ¿qué diferencia hace especializarme en Derecho Administrativo?",
+      "r": [
+        "Te permite profundizar en las relaciones entre la administración pública y los ciudadanos, así como en los procedimientos y asuntos jurídicos propios de este ámbito. Es una opción para orientar tu perfil hacia el sector público, la asesoría o la gestión jurídico-administrativa."
+      ]
+    }
+  ],
+  "preguntas_filtro": [
+    {
+      "t": "Romper el hielo y contexto",
+      "icon": "fa-hand",
+      "q": [
+        "¿Qué fue lo que más te llamó la atención del programa?",
+        "¿En qué momento de tu vida laboral te encuentras hoy?",
+        "¿Estás trabajando actualmente?"
+      ],
+      "para": [
+        "Romper el hielo",
+        "Medir interés real",
+        "Ajustar el tono (emocional o racional)"
+      ]
+    },
+    {
+      "t": "Perfil académico",
+      "icon": "fa-graduation-cap",
+      "q": [
+        "¿Qué nivel de estudios tienes actualmente?",
+        "¿Hace cuánto terminaste tu último estudio?",
+        "¿Has estudiado antes en modalidad virtual o a distancia?"
+      ],
+      "para": [
+        "Validar si aplica al programa",
+        "Medir posibles miedos académicos o a la modalidad"
+      ]
+    },
+    {
+      "t": "Perfil laboral",
+      "icon": "fa-briefcase",
+      "q": [
+        "¿En qué trabajas actualmente?",
+        "¿Ese trabajo está relacionado con lo que quieres estudiar?",
+        "¿Qué te gustaría mejorar: cargo, salario o proyección?"
+      ],
+      "para": [
+        "Conectar el programa con su realidad",
+        "Identificar discurso de crecimiento o estabilidad"
+      ]
+    },
+    {
+      "t": "Dolor y motivación",
+      "icon": "fa-fire",
+      "q": [
+        "¿Qué es lo que hoy te está frenando profesionalmente?",
+        "Si no estudias ahora, ¿qué crees que pasará en uno o dos años?",
+        "¿Qué te gustaría lograr con este estudio?"
+      ],
+      "para": [
+        "Activar emoción",
+        "Preparar el cierre"
+      ]
+    },
+    {
+      "t": "Tiempo y disponibilidad",
+      "icon": "fa-clock",
+      "q": [
+        "¿Cuántas horas a la semana podrías dedicarle al estudio?",
+        "¿Qué días te quedarían más fáciles para estudiar?"
+      ],
+      "para": [
+        "Anticipar objeciones",
+        "Usar el PLUS de flexibilidad"
+      ]
+    },
+    {
+      "t": "Económicas (sin asustar)",
+      "icon": "fa-sack-dollar",
+      "q": [
+        "Cuando piensas en estudiar, ¿qué es lo que más te preocupa: tiempo, dinero o ambas?",
+        "¿Tú mismo tomas la decisión económica o la compartes con alguien?"
+      ],
+      "para": [
+        "Detectar la objeción real",
+        "Preparar la técnica de cierre adecuada"
+      ]
+    },
+    {
+      "t": "Decisión",
+      "icon": "fa-handshake",
+      "q": [
+        "Si el programa se ajusta a lo que buscas, ¿te gustaría iniciar en {cohorte}?",
+        "¿Qué necesitarías para tomar la decisión hoy?"
+      ],
+      "para": [
+        "Medir intención real",
+        "Activar cierre directo o alternativo"
+      ]
+    }
+  ],
+  "rombo": {
+    "tasa_mensual": 1.85,
+    "cuota_inicial": 15,
+    "fee": 69000,
+    "planes": [
+      4,
+      6,
+      12
+    ],
+    "valor_ejemplo": 2455236
+  },
+  "finky": {
+    "simulador": "https://d13p412flothha.cloudfront.net/new-simulador.html?universityId=77&secondaryColor=c9a03c",
+    "origen": "https://d13p412flothha.cloudfront.net",
+    "pagina": "https://ibero.finky.la/",
+    "solicitar": "https://app.finky.la/registro"
+  }
+}

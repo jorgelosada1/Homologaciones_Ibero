@@ -15,6 +15,15 @@ y un mensaje listo para WhatsApp.
 - **Precios**: pregrado y posgrado virtual con la lista SENA (precio SENA, pronto pago, pago total) y la
   lista regular (subsidio Ibero, remarketing, precio final). Ofertas listas para WhatsApp y descarga en Excel.
 - **Mensajes**: biblioteca de mensajes por programa y para egresados SENA (variable `{cohorte}`).
+- **Fechas de ingreso**: la vigencia de la lista de precios se muestra como fecha
+  (`1RA COHORTE_27` → *Febrero 2027 · 1ra cohorte*; 2da abril, 3ra junio, 4ta agosto, 5ta octubre).
+- **PLUS pregrados**: ficha de cada pregrado con discurso (copiar), PLUS y ventajas, perfil profesional,
+  materias, campo laboral, objeción frecuente y precio vigente de la lista.
+- **Objeciones y filtros**: objeciones generales (con la *pregunta para continuar*), por nivel, por pregrado y
+  por posgrado; preguntas filtro en 7 pasos con casillas y clasificador de lead (caliente / tibio / frío).
+- **Simuladores de crédito**: Finky (simulador oficial incrustado, Ibero ya seleccionada) y Rombo cuota fija
+  (15 % de cuota inicial, fee $69.000, 1,85 % mensual, 4, 6 o 12 cuotas) con precarga del valor del semestre
+  desde la lista de precios y resumen para WhatsApp.
 - **Brochures y pensum**: PDF por pregrado/posgrado, con visor. Se suben desde Administración → Brochures.
 - **Capacitación e IA**: guía rápida y asistente (local o con Claude si se configura `ANTHROPIC_API_KEY`).
 - **Administración**: precios, mensajes, configuración, piezas gráficas, pensum y carga del acta.
@@ -27,6 +36,8 @@ y un mensaje listo para WhatsApp.
 | `data/precios.json` | Listas de precios SENA y regular (pregrado y posgrado virtual). |
 | `data/mensajes_programas.json`, `data/mensajes_sena.json` | Mensajes guardados. |
 | `data/config.json` | Configuración (cohorte por defecto, nombre del asesor, módulos visibles). |
+| `data/plus_pregrados.json` | PLUS de los 24 pregrados (desde `PLUS_PREGRADOS_IBERO.xlsx`). |
+| `data/comercial.json` | Fechas de ingreso 2027, objeciones, preguntas filtro y parámetros de los simuladores Finky y Rombo. |
 | `data/pensum/pregrado`, `data/pensum/posgrado` | PDF de pensum. Se enlazan solos con cada carrera por nombre. |
 
 Los semestres son una **equivalencia aproximada**: el acta trae créditos y un estimado de semestres pendientes;

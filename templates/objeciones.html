@@ -1,0 +1,223 @@
+{% extends "layout.html" %}
+{% block title %}Objeciones y preguntas filtro{% endblock %}
+{% block head %}
+<style>
+    .ob-panel[hidden] { display: none !important; }
+    .ob-tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 16px; }
+    .ob-tools .input-icon { flex: 1 1 280px; min-width: 0; }
+    .ob-alert { margin-bottom: 16px; text-decoration: none; }
+    .ob-alert:hover { border-color: var(--brand); }
+    .filtro-grid { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 18px; align-items: start; }
+    @media (max-width: 1100px) { .filtro-grid { grid-template-columns: minmax(0, 1fr); } }
+    .pasos { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+    .paso { padding: 16px 18px; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 4px 14px; }
+    .paso-n { grid-row: span 3; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--surface-3); color: var(--text-2); font-family: var(--font-display); font-weight: 700; font-size: 16px; transition: var(--t); }
+    .paso.completo .paso-n { background: var(--brand); color: #1a1406; }
+    .paso h3 { font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; margin: 0; align-self: center; }
+    .paso h3 i { color: var(--brand-700); font-size: 14px; }
+    .preguntas { display: grid; gap: 6px; margin-top: 8px; }
+    .pq { display: flex; align-items: flex-start; gap: 10px; padding: 9px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface-2); cursor: pointer; font-size: 13.5px; line-height: 1.45; transition: var(--t); }
+    .pq:hover { border-color: var(--border-strong); }
+    .content .pq input[type="checkbox"] { margin-top: 2px; flex-shrink: 0; }
+    .pq input:checked + span { color: var(--text-3); text-decoration: line-through; }
+    .para { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 8px; }
+    .para .badge { white-space: normal; line-height: 1.35; }
+    .clasif { position: sticky; top: calc(var(--topbar-h) + 16px); padding: 18px; }
+    @media (max-width: 1100px) { .clasif { position: static; } }
+    .clasif h3 { font-size: 15px; font-weight: 700; display: flex; gap: 8px; align-items: center; margin: 0 0 4px; }
+    .clasif h3 i { color: var(--brand-700); }
+    .tg { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--border); margin-top: 8px; cursor: pointer; }
+    .tg b { display: block; font-size: 13.5px; }
+    .tg small { display: block; font-size: 12px; color: var(--text-3); }
+    .lead-res { margin-top: 12px; border-radius: 12px; padding: 12px 14px; font-size: 13.5px; line-height: 1.5; background: var(--surface-2); color: var(--text-2); }
+    .lead-res b { display: block; font-family: var(--font-display); font-size: 17px; margin-bottom: 2px; }
+    .lead-res.caliente { background: var(--danger-soft); } .lead-res.caliente b { color: var(--danger); }
+    .lead-res.tibio { background: var(--warning-soft); } .lead-res.tibio b { color: var(--warning); }
+    .lead-res.frio { background: var(--blue-soft); } .lead-res.frio b { color: var(--blue); }
+    .leyenda { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 5px; font-size: 12.5px; color: var(--text-2); }
+    .leyenda li { display: flex; gap: 6px; align-items: baseline; }
+    .regla { margin-top: 18px; padding: 20px 22px; display: flex; gap: 16px; align-items: center; background: var(--side-bg); color: #fff; border-color: var(--side-bg); }
+    .regla .head-icon { background: var(--brand); color: #1a1406; }
+    .regla strong { display: block; font-family: var(--font-display); font-size: 19px; }
+    .regla span { color: rgba(255, 255, 255, 0.72); font-size: 13.5px; }
+</style>
+{% endblock %}
+{% block content %}
+<div class="page-head">
+    <div>
+        <h2><span class="head-icon"><i class="fa-solid fa-handshake"></i></span> Objeciones y preguntas filtro</h2>
+        <p>Respuesta corta para cada objeción, la pregunta para seguir la conversación y las preguntas para calificar el lead y cerrar.</p>
+    </div>
+</div>
+
+<div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="objeciones" aria-selected="true"><i class="fa-solid fa-comments"></i> Objeciones</button>
+    <button class="tab" role="tab" data-tab="filtro" aria-selected="false"><i class="fa-solid fa-filter"></i> Preguntas filtro</button>
+</div>
+
+<!-- ===== Objeciones ===== -->
+<section class="ob-panel" data-panel="objeciones">
+    <a class="alert warning ob-alert" href="#filtro" data-ir="filtro">
+        <i class="fa-solid fa-lightbulb"></i>
+        <span><strong>Ojo:</strong> recordemos siempre las preguntas filtro o el debate de objeciones con preguntas que llevan al cierre.</span>
+    </a>
+    <div class="ob-tools">
+        <div class="input-icon"><i class="fa-solid fa-magnifying-glass"></i><input type="search" id="obBuscar" placeholder="Buscar objeción, respuesta o programa…" autocomplete="off" data-page-search aria-label="Buscar objeción"></div>
+        <div class="seg" id="obGrupos" role="group" aria-label="Tipo de objeción"></div>
+    </div>
+    <div class="obj-grid" id="obLista"></div>
+    <div class="empty" id="obVacio" hidden><div class="empty-icon"><i class="fa-solid fa-magnifying-glass"></i></div><h4>Sin resultados</h4><p class="muted">Prueba con otra palabra.</p></div>
+</section>
+
+<!-- ===== Preguntas filtro ===== -->
+<section class="ob-panel" data-panel="filtro" hidden>
+    <div class="alert info" style="margin-bottom:16px">
+        <i class="fa-solid fa-bullseye"></i>
+        <span>Clave para la <strong>calificación del lead</strong>: identificar rápido si el prospecto <strong>califica</strong>, <strong>qué programa ofrecer</strong> y <strong>cómo cerrar</strong>. No son preguntas sueltas: síguelas en orden y marca las que ya hiciste.</span>
+    </div>
+    <div class="filtro-grid">
+        <ol class="pasos" id="pasos"></ol>
+        <aside class="card clasif" aria-labelledby="clasifTit">
+            <h3 id="clasifTit"><i class="fa-solid fa-temperature-half"></i> Clasificación rápida del lead</h3>
+            <p class="small muted">Marca lo que ya identificaste en la llamada:</p>
+            <div id="toggles">
+                <label class="tg switch"><input type="checkbox" value="motivacion"><span class="track"></span><span><b>Motivación</b><small>Sabe qué quiere lograr</small></span></label>
+                <label class="tg switch"><input type="checkbox" value="tiempo"><span class="track"></span><span><b>Tiempo</b><small>Tiene disponibilidad para estudiar</small></span></label>
+                <label class="tg switch"><input type="checkbox" value="decision"><span class="track"></span><span><b>Decisión</b><small>Puede decidir e iniciar</small></span></label>
+                <label class="tg switch"><input type="checkbox" value="objecion"><span class="track"></span><span><b>Objeción clara</b><small>Hay algo puntual que lo frena</small></span></label>
+            </div>
+            <div class="lead-res" id="leadRes" aria-live="polite"></div>
+            <ul class="leyenda">
+                <li>🔥 <span><strong>Caliente:</strong> tiene motivación + tiempo + decisión.</span></li>
+                <li>🟡 <span><strong>Tibio:</strong> tiene interés, pero una objeción clara.</span></li>
+                <li>❄️ <span><strong>Frío:</strong> solo curioseando, sin decisión.</span></li>
+            </ul>
+            <button type="button" class="btn btn-secondary btn-sm btn-block mt-3" id="nuevaLlamada"><i class="fa-solid fa-rotate-left"></i> Nueva llamada</button>
+        </aside>
+    </div>
+    <div class="card regla">
+        <span class="head-icon"><i class="fa-solid fa-trophy"></i></span>
+        <div>
+            <strong>Quien pregunta bien, vende mejor. Sin preguntas filtro, no hay cierre efectivo.</strong>
+            <span>¡Vamos por esos cierres y matrículas efectivas, equipo!</span>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+(() => {
+    const { escapeHtml, normalize, copyText } = App;
+    const $ = (id) => document.getElementById(id);
+    const FECHAS = {{ fechas | tojson }};
+    const PROX = FECHAS.find((f) => f.proxima) || FECHAS[0];
+    const OBJ = {
+        generales: {{ generales | tojson }},
+        nivel: {{ por_nivel | tojson }}.map((o) => ({ ...o, etiqueta: o.nivel })),
+        pregrado: {{ por_programa | tojson }}.filter((o) => o.tipo === 'pregrado').map((o) => ({ ...o, etiqueta: o.prog })),
+        posgrado: {{ por_programa | tojson }}.filter((o) => o.tipo === 'posgrado').map((o) => ({ ...o, etiqueta: o.prog })),
+    };
+    const FILTRO = {{ filtro | tojson }};
+    const GRUPOS = [['generales', 'Generales'], ['nivel', 'Por nivel'], ['pregrado', 'Pregrados'], ['posgrado', 'Posgrados']];
+    let grupo = 'generales';
+
+    // ---------- Pestañas (#filtro abre la segunda) ----------
+    function mostrarTab(t) {
+        document.querySelectorAll('.tabs .tab').forEach((b) => { const on = b.dataset.tab === t; b.classList.toggle('active', on); b.setAttribute('aria-selected', on); });
+        document.querySelectorAll('.ob-panel').forEach((p) => { p.hidden = p.dataset.panel !== t; });
+    }
+    document.querySelectorAll('.tabs .tab').forEach((b) => b.addEventListener('click', () => { history.replaceState(null, '', '#' + b.dataset.tab); mostrarTab(b.dataset.tab); }));
+    document.querySelectorAll('[data-ir]').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); history.replaceState(null, '', '#' + a.dataset.ir); mostrarTab(a.dataset.ir); window.scrollTo({ top: 0, behavior: 'smooth' }); }));
+    const tabDelHash = () => mostrarTab(location.hash === '#filtro' ? 'filtro' : 'objeciones');
+    window.addEventListener('hashchange', tabDelHash);
+    tabDelHash();
+
+    // ---------- Objeciones ----------
+    function pintarGrupos() {
+        $('obGrupos').innerHTML = GRUPOS.map(([id, n]) => `<button type="button" data-g="${id}" class="${id === grupo ? 'active' : ''}" aria-pressed="${id === grupo}">${n} <span class="count">${OBJ[id].length}</span></button>`).join('');
+    }
+    $('obGrupos').addEventListener('click', (e) => {
+        const b = e.target.closest('[data-g]'); if (!b) return;
+        grupo = b.dataset.g; $('obBuscar').value = ''; pintarGrupos(); pintar();
+    });
+
+    function tarjeta(o, g, i) {
+        return `<article class="card obj-card">
+            ${o.etiqueta ? `<span class="obj-tag">${escapeHtml(o.etiqueta)}</span>` : ''}
+            <p class="obj-q">${escapeHtml(o.o)}</p>
+            <div class="obj-a"><span class="obj-k">Respuesta corta</span>${o.r.map((r) => `<p>${escapeHtml(r)}</p>`).join('')}</div>
+            ${o.p ? `<div class="obj-next"><span class="obj-k">Pregunta para continuar</span>${escapeHtml(o.p)}</div>` : ''}
+            <div class="obj-foot">
+                <button type="button" class="btn btn-secondary btn-sm" data-copiar="${g}:${i}"><i class="fa-regular fa-copy"></i> Copiar respuesta</button>
+                ${o.dinero ? `<a class="btn btn-ghost btn-sm" href="/simuladores"><i class="fa-solid fa-calculator"></i> Simular cuota</a>` : ''}
+                ${o.plus ? `<a class="btn btn-ghost btn-sm" href="/plus?p=${encodeURIComponent(o.plus)}"><i class="fa-solid fa-star"></i> Ver PLUS</a>` : ''}
+            </div>
+        </article>`;
+    }
+
+    function pintar() {
+        const q = normalize($('obBuscar').value.trim());
+        const coincide = (o) => !q || q.split(/\s+/).every((w) => normalize([o.o, o.r.join(' '), o.p, o.etiqueta].join(' ')).includes(w));
+        let html = '', total = 0;
+        (q ? GRUPOS : GRUPOS.filter((g) => g[0] === grupo)).forEach(([id, nombre]) => {
+            const items = OBJ[id].map((o, i) => [o, i]).filter(([o]) => coincide(o));
+            if (!items.length) return;
+            total += items.length;
+            if (q) html += `<h3 class="sub-h">${nombre}</h3>`;
+            html += items.map(([o, i]) => tarjeta(o, id, i)).join('');
+        });
+        $('obLista').innerHTML = html;
+        $('obVacio').hidden = total > 0;
+    }
+    $('obBuscar').addEventListener('input', pintar);
+    $('obLista').addEventListener('click', (e) => {
+        const b = e.target.closest('[data-copiar]'); if (!b) return;
+        const [g, i] = b.dataset.copiar.split(':');
+        const o = OBJ[g][Number(i)];
+        copyText([o.r.join(' '), o.p].filter(Boolean).join('\n\n'), 'Respuesta copiada');
+    });
+
+    // ---------- Preguntas filtro ----------
+    const cohorte = PROX ? `${PROX.mes} (${PROX.cohorte})` : 'esta cohorte';
+    $('pasos').innerHTML = FILTRO.map((p, i) => `
+        <li class="card paso">
+            <span class="paso-n" aria-hidden="true">${i + 1}</span>
+            <h3><i class="fa-solid ${escapeHtml(p.icon)}"></i> ${escapeHtml(p.t)}</h3>
+            <div class="preguntas">${p.q.map((q) => `<label class="pq"><input type="checkbox"><span>${escapeHtml(q.replace('{cohorte}', cohorte))}</span></label>`).join('')}</div>
+            <div class="para"><span class="obj-k" style="margin:0 4px 0 0">Para qué sirven</span>${p.para.map((x) => `<span class="badge green">${escapeHtml(x)}</span>`).join('')}</div>
+        </li>`).join('');
+    $('pasos').addEventListener('change', (e) => {
+        const li = e.target.closest('.paso'); if (!li) return;
+        li.classList.toggle('completo', [...li.querySelectorAll('input')].every((c) => c.checked));
+    });
+
+    function clasificar() {
+        const v = {};
+        $('toggles').querySelectorAll('input').forEach((i) => { v[i.value] = i.checked; });
+        const r = $('leadRes');
+        if (!Object.values(v).some(Boolean)) { r.className = 'lead-res'; r.textContent = 'Marca lo que identificaste para clasificar el lead.'; return; }
+        const prox = PROX ? `${PROX.mes} · ${PROX.cohorte}` : 'la próxima cohorte';
+        if (v.motivacion && v.tiempo && v.decision && !v.objecion) {
+            r.className = 'lead-res caliente';
+            r.innerHTML = `<b>🔥 Lead caliente</b>Tiene motivación, tiempo y decisión. Activa el cierre directo para <strong>${escapeHtml(prox)}</strong>.`;
+        } else if (v.motivacion || v.decision) {
+            r.className = 'lead-res tibio';
+            r.innerHTML = `<b>🟡 Lead tibio</b>Tiene interés, pero algo lo frena. Detecta la objeción real y respóndela con su pregunta para continuar. <a href="#objeciones" data-ir2="objeciones">Ver objeciones</a>`;
+        } else {
+            r.className = 'lead-res frio';
+            r.innerHTML = `<b>❄️ Lead frío</b>Solo está curioseando, sin decisión. Vuelve a las preguntas de dolor y motivación (paso 4).`;
+        }
+    }
+    $('toggles').addEventListener('change', clasificar);
+    $('leadRes').addEventListener('click', (e) => { const a = e.target.closest('[data-ir2]'); if (a) { e.preventDefault(); history.replaceState(null, '', '#objeciones'); mostrarTab('objeciones'); window.scrollTo({ top: 0, behavior: 'smooth' }); } });
+    $('nuevaLlamada').addEventListener('click', () => {
+        document.querySelectorAll('[data-panel="filtro"] input[type="checkbox"]').forEach((c) => { c.checked = false; });
+        document.querySelectorAll('.paso.completo').forEach((li) => li.classList.remove('completo'));
+        clasificar();
+        App.toast('Listo para una nueva llamada');
+    });
+
+    pintarGrupos(); pintar(); clasificar();
+})();
+</script>
+{% endblock %}

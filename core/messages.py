@@ -45,7 +45,7 @@ def mensaje_homologacion(resultado, cfg, nombre="", incluir_precios=False, aseso
                 else:
                     texto += f"💰 Valor semestre: {money(pr['valor_final'])}\n"
             if incluir_precios and p.get("inicio"):
-                texto += f"📅 Cohorte: {p['inicio']}\n"
+                texto += f"📅 Fecha de ingreso: {p['inicio']}\n"
             texto += "\n"
     texto += ("¿Te gustaría recibir más información sobre este programa?\n\n" if total == 1
               else "¿De cuál de estas opciones te gustaría recibir más información?\n\n")
@@ -77,7 +77,7 @@ def mensaje_precios(programas, cfg):
             texto += f"✅ *Valor semestre: {money(pr['valor_final'])}*\n"
         texto += f"📚 Tiempo estimado por cursar: {_sem(p['faltantes'])}\n"
         if p.get("inicio"):
-            texto += f"📅 Cohorte: *{p['inicio']}*\n"
+            texto += f"📅 Fecha de ingreso: *{p['inicio']}*\n"
         texto += "\n"
     if any(p["precio"].get("tipo_descuento") == "SENA" for p in con_precio):
         texto += "_El descuento SENA se mantiene durante toda la carrera. El pronto pago aplica solo para el primer periodo. "

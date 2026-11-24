@@ -130,3 +130,48 @@ def test_path_traversal_piezas(client):
 def test_404_bonito(client):
     r = client.get("/no-existe")
     assert r.status_code == 404 and "no existe" in r.get_data(as_text=True)
+
+
+# ---------- Comercial: PLUS, objeciones y simuladores ----------
+COMERCIAL = ["/plus", "/plus?p=derecho", "/objeciones", "/simuladores", "/simuladores?programa=Derecho"]
+
+
+@pytest.mark.parametrize("path", COMERCIAL)
+def test_paginas_comerciales_cargan(client, path):
+    assert client.get(path).status_code == 200
+
+
+@pytest.mark.parametrize("path", ["/plus", "/objeciones", "/simuladores"])
+def test_paginas_comerciales_requieren_login(app, path):
+    r = app.test_client().get(path)
+    assert r.status_code == 302 and "/login" in r.headers["Location"]
+
+
+def test_menu_tiene_modulos_comerciales(client):
+    html = client.get("/").get_data(as_text=True)
+    for path in ("/plus", "/objeciones", "/simuladores"):
+        assert f'href="{path}"' in html
+
+
+def test_modulo_comercial_oculto(client, monkeypatch):
+    import app as app_module
+    monkeypatch.setattr(app_module, "modulos_ocultos", lambda: {"simuladores"})
+    assert client.get("/simuladores").status_code == 302
+    assert 'href="/simuladores"' not in client.get("/").get_data(as_text=True)
+
+
+def test_plus_con_precio_y_sin_cruces(client):
+    import app as app_module
+    progs = {p["id"]: p for p in app_module.programas_plus()}
+    assert len(progs) == 24 and all(p["discurso"] or p.get("aviso") for p in progs.values())
+    assert progs["derecho"]["precio"]["programa"] == "Derecho"
+    assert progs["ing-sistemas"]["precio"]["fecha_ingreso"] == "Febrero 2027 · 1ra cohorte"
+    # Marketing y Negocios Internacionales es presencial: no toma el precio de Negocios Internacionales (virtual)
+    assert progs["marketing-ni"]["precio"] is None
+    html = client.get("/plus").get_data(as_text=True)
+    assert "Ingeniería de Sistemas" in html and "Febrero 2027" in html
+
+
+def test_simuladores_incrustan_finky_ibero(client):
+    html = client.get("/simuladores").get_data(as_text=True)
+    assert "universityId=77" in html and "tasa_mensual" in html and "Febrero 2027" in html

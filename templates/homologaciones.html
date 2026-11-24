@@ -251,7 +251,7 @@
             <div class="money-grid">
                 <div class="money-cell ${esSena ? 'hl' : ''}"><small>${esSena ? 'Precio SENA' : 'Semestre'}</small><strong>${money(pr.valor_final)}</strong><s>${money(pr.valor)}</s></div>
                 <div class="money-cell"><small>Primer periodo</small><strong>${money(pr.pago_primer_periodo)}</strong><span class="small muted">${pr.pronto_pago ? 'con ' + pr.pronto_pago + '% pronto pago' : 'sin pronto pago'}</span></div>
-                <div class="money-cell"><small>Cohorte</small><strong style="font-size:13.5px">${escapeHtml(pr.cohorte || '—')}</strong><span class="small muted">${p.faltantes} sem. por cursar</span></div>
+                <div class="money-cell"><small>Fecha de ingreso</small><strong style="font-size:13.5px">${escapeHtml(pr.cohorte || '—')}</strong><span class="small muted">${p.faltantes} sem. por cursar</span></div>
             </div>` : `<div class="alert info mt-2" style="padding:10px 12px"><i class="fa-solid fa-circle-info"></i><span class="small">Sin precio registrado para este programa. Puedes agregarlo en Administración → Precios.</span></div>`;
         return `<article class="card prog-card fade-up">
             <div class="prog-top">
@@ -324,7 +324,7 @@
             const p = last.grupos.flatMap((g) => g.programas).find((x) => x.programa_display === cp.dataset.copyProg);
             if (!p) return;
             let t = `🎓 *${p.programa_display}* (virtual)\n➡ Créditos homologados: ${p.creditos_homologados} de ${p.creditos_programa} (${p.porcentaje}%)\n➡ Tiempo estimado por cursar: ${p.faltantes} semestres`;
-            if (p.precio) t += `\n💰 ${p.precio.tipo_descuento === 'SENA' ? 'Precio SENA' : 'Valor semestre'}: *${money(p.precio.valor_final)}*` + (p.precio.pago_primer_periodo < p.precio.valor_final ? `\n⚡ Primer periodo con pronto pago: ${money(p.precio.pago_primer_periodo)}` : '') + (p.precio.cohorte ? `\n📅 Cohorte: ${p.precio.cohorte}` : '');
+            if (p.precio) t += `\n💰 ${p.precio.tipo_descuento === 'SENA' ? 'Precio SENA' : 'Valor semestre'}: *${money(p.precio.valor_final)}*` + (p.precio.pago_primer_periodo < p.precio.valor_final ? `\n⚡ Primer periodo con pronto pago: ${money(p.precio.pago_primer_periodo)}` : '') + (p.precio.cohorte ? `\n📅 Fecha de ingreso: ${p.precio.cohorte}` : '');
             copyText(t, 'Resumen copiado', last.query);
         }
     });

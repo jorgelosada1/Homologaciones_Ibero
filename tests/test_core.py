@@ -28,8 +28,16 @@ def test_titulo_sena():
 
 
 def test_cohorte_texto():
-    assert cohorte_texto("5TA COHORTE_26") == "5ta cohorte 2026"
-    assert cohorte_texto("1RA COHORTE_27") == "1ra cohorte 2027"
+    assert cohorte_texto("1RA COHORTE_27") == "Febrero 2027 · 1ra cohorte"
+    assert cohorte_texto("2DA COHORTE_27") == "Abril 2027 · 2da cohorte"
+    assert cohorte_texto("3RA COHORTE_27") == "Junio 2027 · 3ra cohorte"
+    assert cohorte_texto("4TA COHORTE_27") == "Agosto 2027 · 4ta cohorte"
+    assert cohorte_texto("5TA COHORTE_27") == "Octubre 2027 · 5ta cohorte"
+    assert cohorte_texto("5TA COHORTE_26") == "Octubre 2026 · 5ta cohorte"
+    # La configuración usa '1ra cohorte 2027' y un texto ya convertido no cambia
+    assert cohorte_texto("1ra cohorte 2027") == "Febrero 2027 · 1ra cohorte"
+    assert cohorte_texto("Febrero 2027 · 1ra cohorte") == "Febrero 2027 · 1ra cohorte"
+    assert cohorte_texto("") == ""
 
 
 def test_acta_solo_virtual():
@@ -62,7 +70,7 @@ def test_programa_por_creditos_y_precio_sena():
     assert p["faltantes"] == 5 and p["homologados"] + p["faltantes"] == p["total"]
     assert p["precio"]["tipo_descuento"] == "SENA" and p["precio"]["valor_final"] == 2127965
     assert p["precio"]["pago_primer_periodo"] == 2054126
-    assert p["inicio"] == "5ta cohorte 2026"
+    assert p["inicio"] == "Octubre 2026 · 5ta cohorte"
 
 
 def test_mensaje_formato_whatsapp():
@@ -92,9 +100,10 @@ def test_precios_ibero():
 
 def test_mensajes_usan_cohorte_del_programa():
     out = store.render("Cohorte: {cohorte}", "Derecho – Virtual", "pre")
-    assert out == "Cohorte: 5ta cohorte 2026"
+    assert out == "Cohorte: Octubre 2026 · 5ta cohorte"
     out = store.render("Cohorte: {cohorte}", "Administración en Salud – Virtual", "pre")
-    assert out == "Cohorte: 1ra cohorte 2027"
+    assert out == "Cohorte: Febrero 2027 · 1ra cohorte"
+    assert store.render("{cohorte_actual}") == "Febrero 2027 · 1ra cohorte"
 
 
 def test_sena_solo_pregrado_con_homologacion():
@@ -115,3 +124,23 @@ def test_mensaje_sin_sena_no_promete_descuento():
             p["precio"] = None
     msg = mensaje_homologacion(res, store.config)
     assert "SENA" not in msg.split("información")[-1]
+
+
+def test_comercial_datos():
+    c = store.json("comercial.json", {})
+    assert [f["mes"] for f in c["fechas_ingreso"]] == ["Febrero 2027", "Abril 2027", "Junio 2027", "Agosto 2027", "Octubre 2027"]
+    assert len(c["objeciones_generales"]) == 14 and len(c["objeciones_nivel"]) == 3
+    assert sum(o["tipo"] == "pregrado" for o in c["objeciones_programa"]) == 18
+    assert sum(o["tipo"] == "posgrado" for o in c["objeciones_programa"]) == 27
+    assert sum(1 for o in c["objeciones_generales"] if o.get("p")) == 7  # tabla "pregunta para continuar"
+    assert len(c["preguntas_filtro"]) == 7
+    assert c["rombo"] == {"tasa_mensual": 1.85, "cuota_inicial": 15, "fee": 69000, "planes": [4, 6, 12], "valor_ejemplo": 2455236}
+    plus_ids = {p["id"] for p in store.json("plus_pregrados.json", [])}
+    assert all(o["plus"] in plus_ids for o in c["objeciones_programa"] if o.get("plus"))
+
+
+def test_fechas_ingreso_marca_una_proxima():
+    import app as app_module
+    fechas = app_module.fechas_ingreso()
+    assert len(fechas) == 5 and sum(f["proxima"] for f in fechas) <= 1
+    assert fechas[0]["texto"] == "Febrero 2027 · 1ra cohorte"

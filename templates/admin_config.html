@@ -6,7 +6,7 @@
 {% if saved %}<div class="alert success mb-2"><i class="fa-solid fa-circle-check"></i> Configuración guardada.</div>{% endif %}
 <form method="POST" class="card card-pad" style="max-width:820px">
     <div class="grid grid-2">
-        <div class="field"><label class="label">Cohorte por defecto <code>{cohorte_actual}</code></label><input type="text" name="cohorte_actual" value="{{ config.cohorte_actual }}" placeholder="1ra cohorte 2027"></div>
+        <div class="field"><label class="label">Cohorte por defecto <code>{cohorte_actual}</code></label><input type="text" name="cohorte_actual" value="{{ config.cohorte_actual }}" placeholder="1ra cohorte 2027"><span class="small muted">Se muestra como fecha: {{ config.cohorte_actual|cohorte }}</span></div>
         <div class="field"><label class="label">Créditos por semestre (si el acta no trae el estimado)</label><input type="number" name="creditos_por_semestre" min="8" max="30" value="{{ config.creditos_por_semestre }}"></div>
         <div class="field"><label class="label">Año vigente</label><input type="number" name="anio" min="2024" max="2100" value="{{ config.anio }}"></div>
         <div class="field"><label class="label">Nombre del asesor en mensajes <span class="muted">(opcional)</span></label><input type="text" name="nombre_asesor" value="{{ config.nombre_asesor }}" placeholder="Si se llena, los mensajes incluyen un saludo"></div>

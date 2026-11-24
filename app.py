@@ -158,6 +158,7 @@ def _fecha_larga_filter(v):
 
 
 app.jinja_env.filters["fecha_larga"] = _fecha_larga_filter
+app.jinja_env.filters["cohorte"] = cohorte_texto
 
 
 # =====================================================
@@ -230,6 +231,9 @@ NAV = [
     ("Comercial", [
         ("/mensajes", "fa-comments", "Mensajes"),
         ("/precios", "fa-tags", "Precios"),
+        ("/plus", "fa-star", "PLUS pregrados"),
+        ("/objeciones", "fa-handshake", "Objeciones y filtros"),
+        ("/simuladores", "fa-calculator", "Simuladores de crédito"),
     ]),
     ("Recursos", [
         ("/piezas", "fa-images", "Piezas gráficas"),
@@ -242,8 +246,12 @@ NAV = [
 MODULOS = {
     "piezas": {"label": "Piezas gráficas", "prefixes": ("/piezas",)},
     "capacitacion": {"label": "Capacitación e IA", "prefixes": ("/capacitacion",)},
+    "plus": {"label": "PLUS pregrados", "prefixes": ("/plus",)},
+    "objeciones": {"label": "Objeciones y preguntas filtro", "prefixes": ("/objeciones",)},
+    "simuladores": {"label": "Simuladores de crédito", "prefixes": ("/simuladores",)},
 }
-NAV_MODULO = {"/piezas": "piezas", "/capacitacion": "capacitacion"}
+NAV_MODULO = {"/piezas": "piezas", "/capacitacion": "capacitacion", "/plus": "plus", "/objeciones": "objeciones",
+              "/simuladores": "simuladores"}
 
 TITLES = {item[0]: item[2] for _, items in NAV for item in items}
 TITLES.update({"/sena": "Mensajes SENA", "/admin": "Administración"})
@@ -458,6 +466,77 @@ def precios():
         progs.append({**p, "nivel": nivel, "cohorte_txt": cohorte_texto(p.get("cohorte")), "cohorte_sena_txt": cohorte_texto(p.get("cohorte_sena")),
                       "pensum": pen["archivo"] if pen else None})
     return render_template("precios.html", programas=progs, nivel=request.args.get("nivel", "pre"))
+
+
+# =====================================================
+# COMERCIAL: PLUS DE PREGRADOS, OBJECIONES Y SIMULADORES
+# =====================================================
+def comercial():
+    """Guion comercial: fechas de ingreso, objeciones, preguntas filtro y parámetros de simuladores."""
+    return store.json("comercial.json", {}) or {}
+
+
+def fechas_ingreso():
+    """Fechas de ingreso con la próxima marcada (la primera cuyo mes aún no termina)."""
+    hoy = datetime.now().date()
+    out, marcada = [], False
+    for f in comercial().get("fechas_ingreso", []):
+        try:
+            y, m = (int(x) for x in f["desde"].split("-")[:2])
+            fin = (datetime(y + (m == 12), m % 12 + 1, 1) - timedelta(days=1)).date()
+        except (KeyError, ValueError):
+            fin = hoy
+        pasada = fin < hoy
+        proxima = not pasada and not marcada
+        marcada = marcada or proxima
+        out.append({**f, "texto": f"{f.get('mes', '')} · {f.get('cohorte', '')}", "pasada": pasada, "proxima": proxima})
+    return out
+
+
+def precio_resumen(p):
+    if not p:
+        return None
+    return {"programa": p["programa"], "nivel": p.get("nivel", "pre"), "valor": p.get("valor"),
+            "valor_final": p.get("valor_final"), "valor_sena": p.get("valor_sena"),
+            "fecha_ingreso": cohorte_texto(p.get("cohorte_sena") or p.get("cohorte"))}
+
+
+def programas_plus():
+    """Fichas PLUS de pregrado con su precio vigente de la lista (si lo hay)."""
+    programas = []
+    for p in store.json("plus_pregrados.json", []):
+        modalidad = next((v for k, v in p.get("datos", []) if k == "Modalidad"), "")
+        # La lista de precios es solo virtual: un programa presencial no toma el precio de otro
+        precio = None if norm(modalidad) == "PRESENCIAL" else store.match_precio(p["nombre"], "pre")
+        programas.append({**p, "precio": precio_resumen(precio)})
+    return programas
+
+
+@app.route("/plus")
+@login_required
+def plus():
+    return render_template("plus.html", programas=programas_plus(), objeciones=comercial().get("objeciones_programa", []),
+                           fechas=fechas_ingreso())
+
+
+@app.route("/objeciones")
+@login_required
+def objeciones():
+    c = comercial()
+    return render_template("objeciones.html", generales=c.get("objeciones_generales", []),
+                           por_nivel=c.get("objeciones_nivel", []), por_programa=c.get("objeciones_programa", []),
+                           filtro=c.get("preguntas_filtro", []), fechas=fechas_ingreso())
+
+
+@app.route("/simuladores")
+@login_required
+def simuladores():
+    c = comercial()
+    precios_lista = [precio_resumen(p) for p in store.precios()]
+    precios_lista.sort(key=lambda p: (p["nivel"] != "pre", norm(p["programa"])))
+    return render_template("simuladores.html", rombo=c.get("rombo", {}), finky=c.get("finky", {}),
+                           precios=precios_lista, fechas=fechas_ingreso(),
+                           programa=request.args.get("programa", "")[:120])
 
 
 # =====================================================

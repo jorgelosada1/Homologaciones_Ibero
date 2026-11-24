@@ -1,0 +1,2353 @@
+[
+ {
+  "id": "derecho",
+  "nombre": "Derecho",
+  "categoria": "social",
+  "nivel": "Profesional",
+  "descripcion": [
+   "El programa de Derecho Virtual de la IBERO está diseñado para personas que buscan estudiar con flexibilidad y aprender herramientas modernas como LegalTech, derecho digital y gestión pública."
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "9 semestres"
+   ],
+   [
+    "Título",
+    "Abogado(a)"
+   ],
+   [
+    "SNIES",
+    "115979"
+   ],
+   [
+    "Créditos académicos",
+    "162"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Flexibilidad virtual",
+    "c": [
+     "Puedes estudiar desde cualquier ciudad y organizar tus horarios."
+    ]
+   },
+   {
+    "t": "Formación LegalTech",
+    "c": [
+     "Aprendes herramientas tecnológicas aplicadas al derecho moderno."
+    ]
+   },
+   {
+    "t": "Información acreditada",
+    "c": [
+     "IBERO tiene acreditación de alta calidad y hace parte de Planeta Formación y Universidades."
+    ]
+   },
+   {
+    "t": "Enfoque práctico",
+    "c": [
+     "• Consultorio jurídico",
+     "• Derecho TIC",
+     "• Programación para abogados",
+     "• Solución de conflictos",
+     "• Gestión pública"
+    ]
+   },
+   {
+    "t": "Convenio SENA",
+    "c": [
+     "Permite homologaciones para ahorrar tiempo y dinero."
+    ]
+   }
+  ],
+  "perfil": [
+   "Al graduarte podrás trabajar como:",
+   "• Abogado litigante",
+   "• Asesor jurídico",
+   "• Funcionario público",
+   "• Consultor legal",
+   "• Sector bancario",
+   "• ONG",
+   "• Entidades del estado"
+  ],
+  "materias": [],
+  "campo": [],
+  "discurso": "¡Te cuento! Estudiar Derecho Virtual en IBERO es una excelente oportunidad para quienes quieren transformar la sociedad y defender los derechos de las personas. Nuestro programa se destaca por su enfoque en tecnología jurídica (LegalTech), resolución de conflictos y políticas públicas, preparándote para desempeñarte en diferentes áreas del sector jurídico. Además, puedes estudiar de manera virtual, organizando tus tiempos sin dejar de lado tus responsabilidades. Cuéntame, ¿en qué área del Derecho te gustaría proyectarte profesionalmente?"
+ },
+ {
+  "id": "trabajo-social",
+  "nombre": "Trabajo Social",
+  "categoria": "social",
+  "nivel": "Profesional",
+  "descripcion": [
+   "La carrera de Trabajo Social Virtual de la IBERO está enfocada en formar profesionales capaces de intervenir en comunidades, familias y organizaciones para promover transformación social, inclusión y bienestar comunitario, integrando herramientas digitales y nuevas tecnologías."
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "8 cuatrimestres"
+   ],
+   [
+    "Título",
+    "Trabajador/a Social"
+   ],
+   [
+    "SNIES",
+    "118175"
+   ],
+   [
+    "Créditos académicos",
+    "143"
+   ],
+   [
+    "Inscripción",
+    "Matrículas abiertas"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Puedes estudiar desde cualquier ciudad con horarios flexibles y acompañamiento virtual."
+    ]
+   },
+   {
+    "t": "Enfoque en salud mental y transformación social",
+    "c": [
+     "La carrera tiene un enfoque moderno en:",
+     "• Salud mental comunitaria",
+     "• Inclusión social",
+     "• Derechos humanos",
+     "• Mediación de conflictos",
+     "• Intervención familiar y comunitaria"
+    ]
+   },
+   {
+    "t": "Uso de nuevas tecnologías",
+    "c": [
+     "Incluye formación en:",
+     "• Gestión digital",
+     "• Innovación social",
+     "• Trabajo social y nuevas tecnologías",
+     "• Herramientas digitales para intervención social"
+    ]
+   },
+   {
+    "t": "Posibilidad de doble programa",
+    "c": [
+     "Puedes homologar materias y continuar otras carreras como:",
+     "• Psicología",
+     "• Derecho",
+     "• Comunicación Digital"
+    ]
+   },
+   {
+    "t": "Certificaciones e insignias",
+    "c": [
+     "La universidad ofrece insignias y certificaciones complementarias para fortalecer el perfil laboral."
+    ]
+   }
+  ],
+  "perfil": [
+   "Al graduarte podrás trabajar en:",
+   "• Hospitales y clínicas",
+   "• Fundaciones y ONG",
+   "• Colegios y universidades",
+   "• Instituciones públicas",
+   "• Programas de salud mental",
+   "• Protección de infancia y familia",
+   "• Desarrollo comunitario",
+   "• Gestión social",
+   "• Proyectos humanitarios"
+  ],
+  "materias": [],
+  "campo": [
+   "• Salud",
+   "• Educación",
+   "• Justicia social",
+   "• Atención familiar",
+   "• Comunidades vulnerables",
+   "• Adulto mayor",
+   "• Salud mental",
+   "• Cooperación internacional",
+   "• Intervención digital y tecnológica"
+  ],
+  "discurso": "Estudiar Trabajo Social Virtual en IBERO es una excelente oportunidad si te apasiona ayudar a las personas y generar cambios positivos en la sociedad. Nuestro programa te prepara para intervenir en problemáticas sociales, liderar proyectos comunitarios y promover el bienestar de las personas, familias y comunidades. Además, podrás proyectarte laboralmente en fundaciones, entidades públicas, organizaciones sociales y programas de bienestar, con la flexibilidad de estudiar de manera virtual. Cuéntame, ¿te gustaría enfocarte en el trabajo con comunidades, familias o proyectos sociales?"
+ },
+ {
+  "id": "lic-matematicas",
+  "nombre": "Licenciatura en Matemáticas",
+  "categoria": "educacion",
+  "nivel": "Licenciatura",
+  "descripcion": [
+   "La Licenciatura en Matemáticas Virtual de la IBERO forma docentes con capacidades pedagógicas, tecnológicas y didácticas para enseñar matemáticas en diferentes contextos educativos. El programa combina pensamiento lógico, educación matemática y herramientas digitales."
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "8 semestres"
+   ],
+   [
+    "Título",
+    "Licenciado/a en Matemáticas"
+   ],
+   [
+    "SNIES",
+    "110641"
+   ],
+   [
+    "Créditos académicos",
+    "144"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Puedes estudiar desde cualquier ciudad con flexibilidad horaria, ideal para quienes trabajan o tienen otras responsabilidades."
+    ]
+   },
+   {
+    "t": "Formación pedagógica + tecnológica",
+    "c": [
+     "No solo aprendes matemáticas:",
+     "• Didáctica matemática",
+     "• Educación inclusiva",
+     "• Innovación digital",
+     "• Estrategias pedagógicas",
+     "• Tecnología aplicada a la educación"
+    ]
+   },
+   {
+    "t": "Enfoque moderno",
+    "c": [
+     "El programa tiene profundizaciones en:",
+     "• Matemáticas socioculturales",
+     "• Educación matemática y tecnología"
+    ]
+   },
+   {
+    "t": "Certificaciones internacionales",
+    "c": [
+     "Preparación para certificaciones:",
+     "• Microsoft",
+     "• Oracle"
+    ]
+   },
+   {
+    "t": "Continuidad académica",
+    "c": [
+     "Puedes continuar estudios con maestrías de la IBERO y homologaciones."
+    ]
+   },
+   {
+    "t": "Inclusión y diversidad",
+    "c": [
+     "La carrera tiene enfoque en:",
+     "• Educación inclusiva",
+     "• Respeto por la diversidad",
+     "• Pensamiento crítico",
+     "• Innovación educativa"
+    ]
+   }
+  ],
+  "perfil": [
+   "Al graduarte podrás trabajar como:",
+   "• Docente de matemáticas",
+   "• Diseñador de propuestas pedagógicas",
+   "• Investigador educativo",
+   "• Coordinador académico",
+   "• Gestor de proyectos educativos",
+   "• Instituciones públicas y privadas"
+  ],
+  "materias": [
+   "Entre las materias más importantes están:",
+   "• Lógica Matemática",
+   "• Geometría Euclidiana",
+   "• Cálculo Diferencial",
+   "• Cálculo Integral",
+   "• Estadística",
+   "• Matemáticas Aplicadas",
+   "• Investigación Educativa",
+   "• Didáctica del pensamiento numérico y variacional",
+   "• Prácticas pedagógicas"
+  ],
+  "campo": [],
+  "discurso": "Estudiar Licenciatura en Matemáticas Virtual en IBERO es una excelente oportunidad si te apasionan los números y quieres transformar la educación. Nuestro programa te prepara para enseñar matemáticas de manera innovadora, desarrollar estrategias pedagógicas y utilizar herramientas digitales que faciliten el aprendizaje. Además, podrás proyectarte como docente de matemáticas, orientador de procesos educativos o participar en proyectos de innovación pedagógica, con la flexibilidad de estudiar virtualmente. Cuéntame, ¿te gustaría enseñar matemáticas y contribuir a la formación de nuevas generaciones?"
+ },
+ {
+  "id": "lic-infantil",
+  "nombre": "Licenciatura en Educación Infantil",
+  "categoria": "educacion",
+  "nivel": "Licenciatura",
+  "descripcion": [
+   "La Licenciatura en Educación Infantil Virtual de la IBERO forma docentes especializados en la educación de niños y niñas de 0 a 8 años, con enfoque en inclusión, pedagogía moderna, desarrollo infantil y uso de tecnologías educativas."
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "8 semestres"
+   ],
+   [
+    "Título",
+    "Licenciado/a en Educación Infantil"
+   ],
+   [
+    "SNIES",
+    "109928"
+   ],
+   [
+    "Créditos académicos",
+    "144"
+   ],
+   [
+    "Inscripción",
+    "Matrículas abiertas"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Ideal para personas que trabajan o viven fuera de Bogotá. Puedes estudiar desde cualquier lugar y organizar tus horarios."
+    ]
+   },
+   {
+    "t": "Prácticas desde tercer semestre",
+    "c": [
+     "Las prácticas pedagógicas comienzan temprano y se realizan en instituciones reales de alto impacto social."
+    ]
+   },
+   {
+    "t": "Formación inclusiva y moderna",
+    "c": [
+     "El programa tiene enfoque en:",
+     "• Educación inclusiva",
+     "• Neuroeducación",
+     "• TIC aplicadas a la educación",
+     "• Diversidad",
+     "• Desarrollo infantil",
+     "• Pedagogía innovadora"
+    ]
+   },
+   {
+    "t": "Convenio con el SENA",
+    "c": [
+     "Puedes homologar materias y avanzar más rápido en tu carrera."
+    ]
+   },
+   {
+    "t": "Doble programa académico",
+    "c": [
+     "Existe posibilidad de estudiar simultáneamente otro pregrado de la Facultad de Educación."
+    ]
+   },
+   {
+    "t": "Redes y reconocimiento académico",
+    "c": [
+     "La IBERO hace parte de asociaciones importantes como:",
+     "• ASCOFADE",
+     "• REDIPE",
+     "• REIP",
+     "• ACDEP",
+     "• RECIEVAD"
+    ]
+   }
+  ],
+  "perfil": [
+   "Al graduarte podrás trabajar en:",
+   "• Jardines infantiles",
+   "• Colegios",
+   "• Programas de primera infancia",
+   "• Fundaciones",
+   "• ONG",
+   "• Proyectos educativos",
+   "• Diseño de material pedagógico",
+   "• Educación virtual y presencial",
+   "• Instituciones gubernamentales"
+  ],
+  "materias": [
+   "Algunas materias importantes son:",
+   "• Desarrollo Infantil",
+   "• Literatura Infantil",
+   "• Neuroeducación",
+   "• Psicomotricidad y Lúdica",
+   "• Estrategias Pedagógicas",
+   "• TIC para Educación Inclusiva",
+   "• Pensamiento Matemático Infantil",
+   "• Prácticas Pedagógicas",
+   "• Introducción al Braille",
+   "• Lengua de Señas"
+  ],
+  "campo": [],
+  "discurso": "Estudiar Licenciatura en Educación Infantil Virtual en IBERO es una excelente oportunidad si te apasiona trabajar con niños y quieres dejar una huella positiva en sus primeros años de vida. Nuestro programa te prepara para diseñar experiencias de aprendizaje, desarrollar estrategias pedagógicas innovadoras y acompañar el desarrollo integral de la primera infancia. Además, podrás proyectarte como docente de educación infantil, líder de proyectos educativos o participar en programas de atención a la primera infancia, con la flexibilidad de estudiar virtualmente. Cuéntame, ¿te gustaría trabajar en instituciones educativas o en proyectos enfocados en la primera infancia?"
+ },
+ {
+  "id": "lic-especial",
+  "nombre": "Licenciatura en Educación Especial",
+  "categoria": "educacion",
+  "nivel": "Licenciatura",
+  "descripcion": [
+   "La Licenciatura en Educación Especial Virtual de la IBERO forma profesionales capacitados para trabajar con población diversa y personas con necesidades educativas especiales, promoviendo inclusión, accesibilidad y transformación social mediante estrategias pedagógicas innovadoras."
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "8 semestres"
+   ],
+   [
+    "Título",
+    "Licenciado/a en Educación Especial"
+   ],
+   [
+    "SNIES",
+    "109929"
+   ],
+   [
+    "Créditos académicos",
+    "144"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Permite estudiar desde cualquier ciudad con horarios flexibles, ideal para quienes trabajan o tienen responsabilidades familiares."
+    ]
+   },
+   {
+    "t": "Formación en herramientas especializadas",
+    "c": [
+     "Incluye formación en:",
+     "• Lengua de señas colombiana",
+     "• Sistema Braille",
+     "• TIC para inclusión educativa",
+     "• Neuroeducación",
+     "• Adaptaciones curriculares"
+    ]
+   },
+   {
+    "t": "Prácticas pedagógicas desde semestres iniciales",
+    "c": [
+     "Las prácticas se realizan en escenarios reales relacionados con inclusión y educación especial."
+    ]
+   },
+   {
+    "t": "Convenios y homologaciones",
+    "c": [
+     "Cuenta con:",
+     "• Convenio SENA",
+     "• Posibilidad de homologación",
+     "• Continuidad académica con posgrados de la IBERO"
+    ]
+   },
+   {
+    "t": "Reconocimiento académico",
+    "c": [
+     "La Facultad de Educación hace parte de asociaciones académicas nacionales e internacionales relacionadas con pedagogía e inclusión."
+    ]
+   },
+   {
+    "t": "Enfoque inclusivo y diferencial",
+    "c": [
+     "La carrera está enfocada en:",
+     "• Inclusión educativa",
+     "• Atención a la diversidad",
+     "• Discapacidad y accesibilidad",
+     "• Educación intercultural",
+     "• Derechos humanos",
+     "• Diseño universal para el aprendizaje"
+    ]
+   }
+  ],
+  "perfil": [
+   "Al graduarte podrás trabajar en:",
+   "• Colegios públicos y privados",
+   "• Instituciones inclusivas",
+   "• Centros de apoyo pedagógico",
+   "• Fundaciones",
+   "• ONG",
+   "• Programas de inclusión social",
+   "• Atención a población con discapacidad",
+   "• Proyectos educativos y comunitarios",
+   "• Educación formal y no formal"
+  ],
+  "materias": [
+   "Entre las materias más importantes están:",
+   "• Fundamentos de Educación Especial",
+   "• Inclusión Educativa",
+   "• Lengua de Señas Colombiana",
+   "• Sistema Braille",
+   "• Neuroeducación",
+   "• Desarrollo Humano",
+   "• TIC para Inclusión",
+   "• Evaluación Psicopedagógica",
+   "• Diseño Universal del Aprendizaje",
+   "• Prácticas Pedagógicas"
+  ],
+  "campo": [
+   "Podrás desempeñarte como:",
+   "• Docente de apoyo",
+   "• Educador especial",
+   "• Coordinador de inclusión",
+   "• Orientador pedagógico",
+   "• Diseñador de estrategias inclusivas",
+   "• Gestor de proyectos sociales y educativos"
+  ],
+  "discurso": "Estudiar Licenciatura en Educación Especial Virtual en IBERO es una excelente oportunidad si te apasiona la educación y quieres transformar vidas a través de la inclusión. Nuestro programa te prepara para identificar barreras de aprendizaje, diseñar estrategias pedagógicas inclusivas y acompañar a personas con diferentes necesidades educativas, promoviendo una educación con igualdad de oportunidades. Además, podrás proyectarte como docente de educación especial, profesional de apoyo a la inclusión o participar en proyectos educativos y sociales, con la flexibilidad de estudiar virtualmente."
+ },
+ {
+  "id": "mercadeo-publicidad",
+  "nombre": "Mercadeo y Publicidad",
+  "categoria": "negocios",
+  "nivel": "Profesional",
+  "descripcion": [
+   "El programa de Mercadeo y Publicidad Virtual de la IBERO está enfocado en formar profesionales creativos y estratégicos en marketing digital, publicidad, branding, investigación de mercados y transformación digital. Combina herramientas tecnológicas con tendencias modernas de comunicación y negocios."
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "8 semestres"
+   ],
+   [
+    "Título",
+    "Profesional en Mercadeo y Publicidad"
+   ],
+   [
+    "SNIES",
+    "1010223"
+   ],
+   [
+    "Créditos académicos",
+    "144"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Puedes estudiar desde cualquier ciudad y manejar tus tiempos, ideal para personas que trabajan o emprenden."
+    ]
+   },
+   {
+    "t": "Enfoque en marketing digital",
+    "c": [
+     "El programa incluye formación en:",
+     "• Marketing digital",
+     "• Redes sociales",
+     "• Branding",
+     "• E-commerce",
+     "• Publicidad online",
+     "• Analítica digital",
+     "• Estrategias de comunicación"
+    ]
+   },
+   {
+    "t": "Formación creativa + empresarial",
+    "c": [
+     "Aprendes:",
+     "• Investigación de mercados",
+     "• Neuromarketing",
+     "• Diseño de campañas",
+     "• Comportamiento del consumidor",
+     "• Gestión de marca",
+     "• Comunicación estratégica"
+    ]
+   },
+   {
+    "t": "Certificaciones y herramientas digitales",
+    "c": [
+     "La carrera fortalece habilidades en:",
+     "• Google Ads",
+     "• Marketing en redes",
+     "• Herramientas digitales",
+     "• Analítica y tendencias digitales"
+    ]
+   },
+   {
+    "t": "Convenios y homologaciones",
+    "c": [
+     "Cuenta con:",
+     "• Convenio SENA",
+     "• Homologaciones",
+     "• Posibilidad de continuar especializaciones y maestrías en la IBERO"
+    ]
+   }
+  ],
+  "perfil": [
+   "Al graduarte podrás trabajar como:",
+   "• Community Manager",
+   "• Analista de marketing digital",
+   "• Publicista",
+   "• Ejecutivo de cuentas",
+   "• Estratega digital",
+   "• Gestor de marca",
+   "• Creador de contenido",
+   "• Director de campañas",
+   "• Consultor de mercadeo",
+   "• Emprendedor digital"
+  ],
+  "materias": [
+   "Entre las materias importantes están:",
+   "• Marketing Digital",
+   "• Publicidad Estratégica",
+   "• Branding",
+   "• Investigación de Mercados",
+   "• Neuromarketing",
+   "• Diseño Publicitario",
+   "• E-commerce",
+   "• Analítica Digital",
+   "• Comunicación Organizacional",
+   "• Gerencia de Mercadeo",
+   "• Redes Sociales y Contenidos"
+  ],
+  "campo": [
+   "Podrás trabajar en:",
+   "• Agencias de publicidad",
+   "• Empresas privadas",
+   "• Startups",
+   "• Medios digitales",
+   "• Empresas de e-commerce",
+   "• Redes sociales",
+   "• Comunicación corporativa",
+   "• Marketing político",
+   "• Emprendimientos digitales"
+  ],
+  "discurso": "Estudiar Mercadeo y Publicidad Virtual en IBERO es una excelente oportunidad si te apasionan las ventas, la creatividad y el mundo de los negocios. Nuestro programa te prepara para crear estrategias de marketing, desarrollar campañas publicitarias, analizar el comportamiento del consumidor y posicionar marcas en el mercado, aprovechando las herramientas digitales. Además, podrás proyectarte como analista de mercadeo, coordinador de marketing, estratega digital o emprendedor, con la flexibilidad de estudiar virtualmente. Cuéntame, ¿te gustaría enfocarte en el marketing digital, la publicidad o el posicionamiento de marcas?"
+ },
+ {
+  "id": "negocios-internacionales",
+  "nombre": "Negocios Internacionales",
+  "categoria": "negocios",
+  "nivel": "Profesional",
+  "descripcion": [
+   "El programa de Negocios Internacionales Virtual de la IBERO está enfocado en formar profesionales capaces de liderar procesos de comercio exterior, negociación internacional, logística global y estrategias empresariales en mercados internacionales, utilizando herramientas digitales y visión global.",
+   "Además, combina administración, innovación, economía y transformación digital para adaptarse al mercado actual."
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "8 semestres"
+   ],
+   [
+    "Título",
+    "Profesional en Negocios Internacionales"
+   ],
+   [
+    "SNIES",
+    "110224"
+   ],
+   [
+    "Créditos académicos",
+    "144"
+   ],
+   [
+    "Inscripción",
+    "Matrículas abiertas"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Puedes estudiar desde cualquier ciudad y manejar tus tiempos de forma flexible.",
+     "Ideal para:",
+     "• Personas que trabajan",
+     "• Emprendedores",
+     "• Quienes viven fuera de Bogotá"
+    ]
+   },
+   {
+    "t": "Enfoque global y digital",
+    "c": [
+     "La carrera incluye formación en:",
+     "• Comercio exterior",
+     "• Negociación internacional",
+     "• Logística internacional",
+     "• Marketing global",
+     "• E-commerce",
+     "• Innovación empresarial",
+     "• Analítica de negocios"
+    ]
+   },
+   {
+    "t": "Formación empresarial moderna",
+    "c": [
+     "Aprendes sobre:",
+     "• Economía internacional",
+     "• Finanzas globales",
+     "• Estrategias empresariales",
+     "• Inteligencia de mercados",
+     "• Gestión organizacional",
+     "• Transformación digital"
+    ]
+   },
+   {
+    "t": "Competencias internacionales",
+    "c": [
+     "El programa fortalece habilidades en:",
+     "• Relaciones internacionales",
+     "• Negociación multicultural",
+     "• Gestión de negocios globales",
+     "• Comercio digital internacional"
+    ]
+   },
+   {
+    "t": "Convenios y homologaciones",
+    "c": [
+     "La IBERO ofrece:",
+     "• Convenio SENA",
+     "• Homologación de materias",
+     "• Continuidad con especializaciones y maestrías"
+    ]
+   },
+   {
+    "t": "Herramientas digitales y tecnológicas",
+    "c": [
+     "Incluye formación en:",
+     "• Plataformas digitales",
+     "• Comercio electrónico",
+     "• Estrategias digitales empresariales",
+     "• Gestión de proyectos globales"
+    ]
+   }
+  ],
+  "perfil": [
+   "Al graduarte podrás trabajar como:",
+   "• Analista de comercio exterior",
+   "• Coordinador logístico",
+   "• Ejecutivo de importaciones y exportaciones",
+   "• Consultor internacional",
+   "• Analista de mercados internacionales",
+   "• Gerente de negocios internacionales",
+   "• Ejecutivo de relaciones comerciales",
+   "• Emprendedor global"
+  ],
+  "materias": [
+   "Entre las materias importantes están:",
+   "• Comercio Internacional",
+   "• Logística Internacional",
+   "• Negociación Internacional",
+   "• Marketing Internacional",
+   "• Economía Internacional",
+   "• Finanzas Internacionales",
+   "• Aduanas y Legislación",
+   "• Investigación de Mercados",
+   "• E-commerce",
+   "• Gestión Estratégica",
+   "• Emprendimiento",
+   "• Analítica de Negocios"
+  ],
+  "campo": [
+   "Podrás trabajar en:",
+   "• Empresas multinacionales",
+   "• Agencias de comercio exterior",
+   "• Operadores logísticos",
+   "• Empresas exportadoras e importadoras",
+   "• Cámaras de comercio",
+   "• Empresas de e-commerce",
+   "• Startups internacionales",
+   "• Sector público y privado"
+  ],
+  "discurso": "Estudiar Negocios Internacionales Virtual en IBERO es una excelente oportunidad si te apasiona el mundo empresarial y sueñas con llevar los negocios más allá de las fronteras. Nuestro programa te prepara para desarrollar estrategias de comercio internacional, gestionar procesos de importación y exportación, negociar con mercados extranjeros e identificar oportunidades de negocio a nivel global. Además, podrás proyectarte como analista de comercio exterior, coordinador de importaciones y exportaciones, asesor de negocios internacionales o emprendedor, con la flexibilidad de estudiar virtualmente. Cuéntame, ¿te gustaría trabajar en una empresa internacional o crear tu propio negocio con proyección global?"
+ },
+ {
+  "id": "admin-financiera",
+  "nombre": "Administración Financiera",
+  "categoria": "negocios",
+  "nivel": "Profesional",
+  "descripcion": [
+   "El programa de Administración Financiera Virtual de la IBERO está enfocado en formar profesionales capaces de gestionar recursos financieros, analizar inversiones, tomar decisiones estratégicas y liderar procesos económicos en empresas nacionales e internacionales, utilizando herramientas tecnológicas y digitales.",
+   "El enfoque combina:",
+   "• Finanzas",
+   "• Administración",
+   "• Economía",
+   "• Analítica financiera",
+   "• Innovación empresarial"
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "8 semestres"
+   ],
+   [
+    "Título",
+    "Profesional en Administración Financiera"
+   ],
+   [
+    "SNIES",
+    "110224"
+   ],
+   [
+    "Créditos académicos",
+    "144"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Permite estudiar desde cualquier ciudad y manejar horarios flexibles, ideal para personas que trabajan o emprenden."
+    ]
+   },
+   {
+    "t": "Enfoque global y digital",
+    "c": [
+     "La carrera incluye formación en:",
+     "• Finanzas corporativas",
+     "• Análisis financiero",
+     "• Planeación financiera",
+     "• Inversiones",
+     "• Riesgo financiero",
+     "• Mercados financieros",
+     "• Analítica de datos"
+    ]
+   },
+   {
+    "t": "Herramientas digitales y tecnológicas",
+    "c": [
+     "Aprendes sobre:",
+     "• Software financiero",
+     "• Excel avanzado",
+     "• Inteligencia de negocios",
+     "• Analítica financiera",
+     "• Transformación digital empresarial"
+    ]
+   },
+   {
+    "t": "Formación estratégica y empresarial",
+    "c": [
+     "Incluye conocimientos en:",
+     "• Administración",
+     "• Economía",
+     "• Gestión organizacional",
+     "• Emprendimiento",
+     "• Toma de decisiones gerenciales"
+    ]
+   },
+   {
+    "t": "Convenios y homologaciones",
+    "c": [
+     "La IBERO ofrece:",
+     "• Convenio con el SENA",
+     "• Homologación de materias",
+     "• Continuidad académica con especializaciones y maestrías"
+    ]
+   },
+   {
+    "t": "Perfil orientado al mercado laboral",
+    "c": [
+     "El programa busca desarrollar:",
+     "• Pensamiento analítico",
+     "• Liderazgo",
+     "• Gestión financiera empresarial",
+     "• Capacidad de toma de decisiones"
+    ]
+   }
+  ],
+  "perfil": [
+   "Al graduarte podrás trabajar como:",
+   "• Analista financiero",
+   "• Administrador financiero",
+   "• Consultor financiero",
+   "• Coordinador financiero",
+   "• Analista de inversiones",
+   "• Director administrativo",
+   "• Asesor financiero",
+   "• Emprendedor",
+   "• Gestor de riesgos"
+  ],
+  "materias": [
+   "Entre las materias importantes están:",
+   "• Matemática Financiera",
+   "• Finanzas Corporativas",
+   "• Contabilidad",
+   "• Análisis Financiero",
+   "• Presupuestos",
+   "• Riesgo Financiero",
+   "• Mercados Financieros",
+   "• Economía",
+   "• Tributaria",
+   "• Auditoría",
+   "• Gestión Estratégica",
+   "• Analítica de Datos",
+   "• Emprendimiento"
+  ],
+  "campo": [
+   "Podrás trabajar en:",
+   "• Bancos",
+   "• Empresas privadas",
+   "• Multinacionales",
+   "• Fintech",
+   "• Firmas de inversión",
+   "• Sector público",
+   "• Empresas de seguros",
+   "• Consultoras financieras",
+   "• Emprendimientos"
+  ],
+  "discurso": "Estudiar Administración Financiera Virtual en IBERO es una excelente oportunidad si te apasionan los números, las finanzas y el mundo empresarial. Nuestro programa te prepara para analizar inversiones, administrar recursos financieros, gestionar presupuestos y tomar decisiones estratégicas que contribuyan al crecimiento y la rentabilidad de las organizaciones. Además, podrás proyectarte como analista financiero, coordinador de presupuestos, asesor financiero o gestor de inversiones, con la flexibilidad de estudiar virtualmente. Cuéntame, ¿te gustaría trabajar en el sector financiero, liderar las finanzas de una empresa o desarrollar tu propio negocio?"
+ },
+ {
+  "id": "admin-empresas",
+  "nombre": "Administración de Empresas",
+  "categoria": "negocios",
+  "nivel": "Profesional",
+  "descripcion": [
+   "El programa de Administración de Empresas Virtual de la IBERO está diseñado para formar profesionales capaces de liderar organizaciones, gestionar proyectos, emprender negocios y tomar decisiones estratégicas en entornos empresariales modernos y digitales.",
+   "El enfoque combina:",
+   "• Administración",
+   "• Innovación",
+   "• Emprendimiento",
+   "• Finanzas",
+   "• Marketing",
+   "• Gestión organizacional",
+   "• Transformación digital"
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "8 semestres"
+   ],
+   [
+    "Título",
+    "Profesional en Administración de Empresas"
+   ],
+   [
+    "SNIES",
+    "110222"
+   ],
+   [
+    "Créditos académicos",
+    "144"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Ideal para:",
+     "• Personas que trabajan",
+     "• Emprendedores",
+     "• Quienes viven fuera de Bogotá",
+     "• Personas con horarios flexibles",
+     "• Puedes estudiar desde cualquier lugar."
+    ]
+   },
+   {
+    "t": "Formación empresarial moderna",
+    "c": [
+     "La carrera incluye formación en:",
+     "• Gestión organizacional",
+     "• Liderazgo",
+     "• Innovación empresarial",
+     "• Emprendimiento",
+     "• Planeación estratégica",
+     "• Transformación digital"
+    ]
+   },
+   {
+    "t": "Enfoque en herramientas digitales",
+    "c": [
+     "Aprendes sobre:",
+     "• Analítica empresarial",
+     "• Herramientas tecnológicas",
+     "• Gestión digital",
+     "• Comercio electrónico",
+     "• Plataformas empresariales"
+    ]
+   },
+   {
+    "t": "Desarrollo de liderazgo y emprendimiento",
+    "c": [
+     "El programa fortalece habilidades en:",
+     "• Toma de decisiones",
+     "• Dirección de equipos",
+     "• Creación de empresas",
+     "• Gestión de proyectos",
+     "• Resolución de problemas"
+    ]
+   },
+   {
+    "t": "Convenio SENA y homologaciones",
+    "c": [
+     "La IBERO ofrece:",
+     "• Convenios académicos",
+     "• Homologación de materias",
+     "• Continuidad con especializaciones y maestrías"
+    ]
+   },
+   {
+    "t": "Perfil adaptado al mercado actual",
+    "c": [
+     "La carrera busca desarrollar:",
+     "• Pensamiento estratégico",
+     "• Capacidad analítica",
+     "• Liderazgo organizacional",
+     "• Gestión empresarial moderna"
+    ]
+   }
+  ],
+  "perfil": [
+   "Al graduarte podrás trabajar como:",
+   "• Administrador de empresas",
+   "• Coordinador administrativo",
+   "• Gerente de proyectos",
+   "• Consultor empresarial",
+   "• Analista organizacional",
+   "• Director administrativo",
+   "• Emprendedor",
+   "• Líder de procesos",
+   "• Coordinador de talento humano"
+  ],
+  "materias": [
+   "Entre las materias importantes están:",
+   "• Administración General",
+   "• Gestión Organizacional",
+   "• Planeación Estratégica",
+   "• Finanzas",
+   "• Contabilidad",
+   "• Talento Humano",
+   "• Marketing",
+   "• Emprendimiento",
+   "• Innovación Empresarial",
+   "• Analítica de Negocios",
+   "• Economía",
+   "• Gestión de Proyectos",
+   "• Comercio Electrónico"
+  ],
+  "campo": [
+   "Podrás trabajar en:",
+   "• Empresas privadas",
+   "• Multinacionales",
+   "• Startups",
+   "• Sector público",
+   "• ONG",
+   "• Empresas familiares",
+   "• Consultoras",
+   "• Emprendimientos propios",
+   "• Empresas digitales"
+  ],
+  "discurso": "Estudiar Administración de Empresas Virtual en IBERO es una excelente oportunidad si te apasionan los negocios, el liderazgo y quieres crecer profesionalmente. Nuestro programa te prepara para dirigir empresas, liderar equipos, gestionar recursos, desarrollar estrategias comerciales y tomar decisiones que impulsen el crecimiento de las organizaciones. Además, podrás proyectarte como administrador, coordinador comercial, jefe de operaciones, gerente de proyectos o emprendedor, con la flexibilidad de estudiar virtualmente. Cuéntame, ¿te gustaría crecer dentro de una empresa, ocupar un cargo de liderazgo o crear tu propio negocio?"
+ },
+ {
+  "id": "admin-salud",
+  "nombre": "Administración en Salud",
+  "categoria": "social",
+  "nivel": "Profesional",
+  "descripcion": [
+   "El programa de Administración en Salud Virtual de la IBERO está enfocado en formar profesionales capaces de gestionar instituciones y servicios de salud, liderar procesos administrativos, optimizar recursos y mejorar la calidad de atención en el sector salud mediante herramientas tecnológicas y gestión estratégica.",
+   "El enfoque combina:",
+   "• Administración",
+   "• Salud pública",
+   "• Gestión hospitalaria",
+   "• Legislación en salud",
+   "• Calidad en servicios de salud",
+   "• Innovación y transformación digital"
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "8 semestres"
+   ],
+   [
+    "Título",
+    "Profesional en Administración en Salud"
+   ],
+   [
+    "SNIES",
+    "110221"
+   ],
+   [
+    "Créditos académicos",
+    "144"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Permite estudiar desde cualquier ciudad y manejar horarios flexibles, ideal para:",
+     "• Personas que trabajan",
+     "• Personal del sector salud",
+     "• Emprendedores",
+     "• Personas con responsabilidades familiares"
+    ]
+   },
+   {
+    "t": "Enfoque en gestión moderna del sector salud",
+    "c": [
+     "La carrera incluye formación en:",
+     "• Administración hospitalaria",
+     "• Auditoría en salud",
+     "• Calidad en servicios de salud",
+     "• Planeación estratégica",
+     "• Seguridad social",
+     "• Gestión financiera en salud"
+    ]
+   },
+   {
+    "t": "Formación tecnológica y digital",
+    "c": [
+     "Aprendes sobre:",
+     "• Sistemas de información en salud",
+     "• Transformación digital",
+     "• Herramientas tecnológicas administrativas",
+     "• Gestión de datos en salud"
+    ]
+   },
+   {
+    "t": "Enfoque en normatividad y salud pública",
+    "c": [
+     "Incluye conocimientos en:",
+     "• Legislación en salud",
+     "• Políticas públicas",
+     "• Seguridad social",
+     "• Salud pública",
+     "• Gestión del riesgo"
+    ]
+   },
+   {
+    "t": "Convenio SENA y homologaciones",
+    "c": [
+     "La IBERO ofrece:",
+     "• Homologación de materias",
+     "• Convenio con el SENA",
+     "• Continuidad académica con especializaciones y maestrías"
+    ]
+   },
+   {
+    "t": "Perfil orientado a alta demanda laboral",
+    "c": [
+     "El sector salud sigue creciendo constantemente, aumentando la necesidad de:",
+     "• Administradores hospitalarios",
+     "• Coordinadores de salud",
+     "• Auditores",
+     "• Gestores de calidad"
+    ]
+   }
+  ],
+  "perfil": [
+   "• Perfil profesional",
+   "Al graduarte podrás trabajar como:",
+   "• Administrador de instituciones de salud",
+   "• Coordinador hospitalario",
+   "• Auditor en salud",
+   "• Gestor de calidad",
+   "• Analista administrativo en salud",
+   "• Coordinador de servicios médicos",
+   "• Consultor en salud",
+   "• Gestor de proyectos en salud"
+  ],
+  "materias": [
+   "Entre las materias importantes están:",
+   "• Administración en Salud",
+   "• Legislación en Salud",
+   "• Salud Pública",
+   "• Auditoría en Salud",
+   "• Calidad en Servicios de Salud",
+   "• Gestión Hospitalaria",
+   "• Seguridad Social",
+   "• Finanzas en Salud",
+   "• Epidemiología",
+   "• Planeación Estratégica",
+   "• Gestión del Talento Humano",
+   "• Sistemas de Información en Salud"
+  ],
+  "campo": [
+   "Podrás trabajar en:",
+   "• Hospitales",
+   "• Clínicas",
+   "• EPS",
+   "• IPS",
+   "• Secretarías de salud",
+   "• Empresas del sector salud",
+   "• Fundaciones",
+   "• ONG",
+   "• Empresas de auditoría en salud",
+   "• Sector público y privado"
+  ],
+  "discurso": "",
+  "aviso": "En el Excel, el discurso de este programa es el mismo de Administración de Empresas. Pide el discurso actualizado de Administración en Salud."
+ },
+ {
+  "id": "ing-sistemas",
+  "nombre": "Ingeniería de Sistemas",
+  "categoria": "ingenieria",
+  "nivel": "Profesional",
+  "descripcion": [
+   "El programa de ingeniería de sistemas virtual en IBERO te forma para diseñar, desarrollar y gestionar procesos informáticos que optimicen la tecnología en diversos sectores. Adquiere habilidades en entornos digitales, garantizando soluciones alineadas con las nuevas tendencias."
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "9 semestres"
+   ],
+   [
+    "Título",
+    "Ingeniero(a) de sistemas"
+   ],
+   [
+    "SNIES",
+    "110842"
+   ],
+   [
+    "Créditos académicos",
+    "161"
+   ],
+   [
+    "Costo",
+    "$2.255.720 por semestre"
+   ],
+   [
+    "Inicio de clases",
+    "22 de febrero de 2027"
+   ],
+   [
+    "Inscripción",
+    "Matrículas abiertas"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Diseñada para que puedas estudiar desde cualquier lugar de Colombia sin descuidar tu empleo o responsabilidades personales"
+    ]
+   },
+   {
+    "t": "Formación en alta demanda",
+    "c": [
+     "Big Data, telecomunicaciones, desarrollo de software y laboratorios prácticos."
+    ]
+   },
+   {
+    "t": "Homologación",
+    "c": [
+     "El programa permite procesos de homologación (por ejemplo, con egresados del SENA u otras instituciones) para acortar tiempos o reducir materias."
+    ]
+   },
+   {
+    "t": "Certificaciones internacionales",
+    "c": [
+     "La facultad cuenta con convenios con grandes marcas del sector tecnológico como Microsoft, Oracle y AWS, integrando rutas de aprendizaje para prepararte para certificaciones internacionales"
+    ]
+   }
+  ],
+  "perfil": [
+   "Cuando te gradúes podrás trabajar en:",
+   "• Empresas u organizaciones de cualquier sector, privadas o públicas.",
+   "• Consultoras Especializadas en Transformación Digital y Seguridad de la Información.",
+   "• Firmas de Consultoría en TI.",
+   "• Instituciones educativas y Centros de Investigación.",
+   "• Empresas de Tecnología y Telecomunicaciones",
+   "• ONG y Organizaciones Internacionales."
+  ],
+  "materias": [
+   "Entre las materias más importantes están:",
+   "• Fundamentos de programación",
+   "• Gestión digital e innovación",
+   "• Servicio y gestión de redes",
+   "• Finanzas",
+   "• Arquitectura de Software",
+   "• Gerencia y control de proyectos informáticos",
+   "• Análisis y diseño de sistemas",
+   "• Procesos de integración tecnológica",
+   "• Gerencia estratégica de TI"
+  ],
+  "campo": [
+   "Podrás trabajar en diversos sectores como:",
+   "• Empresas u organizaciones de cualquier sector, privadas o públicas.",
+   "• Consultoras Especializadas en Transformación Digital y Seguridad de la Información.",
+   "• Firmas de Consultoría en TI.",
+   "• Instituciones educativas y Centros de Investigación.",
+   "• Empresas de Tecnología y Telecomunicaciones.",
+   "• ONG y Organizaciones Internacionales"
+  ],
+  "discurso": "Estudiar Ingeniería de Sistemas Virtual en IBERO es una excelente oportunidad si te apasiona la tecnología, la innovación y quieres ser parte de la transformación digital. Nuestro programa te prepara para desarrollar software, diseñar soluciones tecnológicas, gestionar sistemas de información y aplicar herramientas digitales que ayuden a las empresas a ser más eficientes. Además, podrás proyectarte como desarrollador de software, analista de sistemas, consultor tecnológico o líder de proyectos de tecnología, con la flexibilidad de estudiar virtualmente. Cuéntame, ¿te gustaría enfocarte en la programación, el desarrollo de aplicaciones o la gestión de proyectos tecnológicos?"
+ },
+ {
+  "id": "sst",
+  "nombre": "Seguridad y Salud en el Trabajo",
+  "categoria": "social",
+  "nivel": "Profesional",
+  "descripcion": [],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "8 semestres"
+   ],
+   [
+    "Título",
+    "Profesional en seguridad y salud en el trabajo"
+   ],
+   [
+    "SNIES",
+    "111157"
+   ],
+   [
+    "Créditos académicos",
+    "140"
+   ],
+   [
+    "Inscripción",
+    "Matrículas abiertas"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Ruta de formación integral adicional",
+    "c": [
+     "Al cursar módulos clave como Gerencia de la Seguridad y Salud en el Trabajo, Sistemas Integrados de Gestión y Medicina Preventiva y del Trabajo, puedes obtener un certificado de la ruta en Gestión Integral en SST sin costo extra junto con tu título."
+    ]
+   },
+   {
+    "t": "Proyección y respaldo institucional",
+    "c": [
+     "El programa pertenece a redes académicas y de investigación activas en escenarios nacionales, fortaleciendo el perfil profesional para empresas públicas y privadas"
+    ]
+   },
+   {
+    "t": "Homologación con el SENA",
+    "c": [
+     "Cuenta con opciones de homologación si vienes de programas afines del SENA, optimizando tiempos y costos de formación."
+    ]
+   }
+  ],
+  "perfil": [
+   "Al graduarte tendrás la oportunidad de trabajar como:",
+   "• Director de entidades administradoras de riesgos y peligros laborales.",
+   "• Coordinador de sistemas de administración de seguridad y salud de los trabajadores.",
+   "• Líder, director, coordinador, supervisor del SG-SST."
+  ],
+  "materias": [
+   "Las materias más destacadas son:",
+   "• Competencias comunicativas",
+   "• Epidemiología",
+   "• Medicina preventiva y del trabajo",
+   "• Peligros de condiciones de seguridad",
+   "• Legislación en SG-SST",
+   "• Toxicología Ocupacional"
+  ],
+  "campo": [
+   "Podrás trabajar en:",
+   "• Instituciones de salud o entidades de diferentes niveles de complejidad.",
+   "• Compañías de seguros.",
+   "• Empresas de diferentes sectores."
+  ],
+  "discurso": "Estudiar Seguridad y Salud en el Trabajo Virtual en IBERO es una excelente oportunidad si te interesa proteger la vida de las personas y contribuir a crear ambientes laborales más seguros. Nuestro programa te prepara para identificar riesgos, prevenir accidentes y enfermedades laborales, implementar medidas de prevención y gestionar el Sistema de Seguridad y Salud en el Trabajo (SG-SST). Además, podrás proyectarte como analista, inspector, coordinador o consultor en Seguridad y Salud en el Trabajo, según los requisitos de cada cargo, con la flexibilidad de estudiar virtualmente. Cuéntame, ¿te gustaría trabajar en la prevención de riesgos o liderar el área de Seguridad y Salud en el Trabajo de una empresa?"
+ },
+ {
+  "id": "lic-ciencias-sociales",
+  "nombre": "Licenciatura en Ciencias Sociales",
+  "categoria": "educacion",
+  "nivel": "Licenciatura",
+  "descripcion": [
+   "La licenciatura en Ciencias Sociales de la IBERO forma profesionales con una visión analítica y participativa de la realidad social. Nuestro programa, acreditado en alta calidad, desarrolla habilidades para la investigación y la enseñanza, permitiendo comprender y explicar fenómenos macrosociales y microsociales con un enfoque pedagógico integral."
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "SNIES",
+    "110774"
+   ],
+   [
+    "Créditos académicos",
+    "144"
+   ],
+   [
+    "Inscripción",
+    "Matrículas abiertas"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Permite estudiar desde cualquier ciudad y manejar horarios flexibles, ideal para:",
+     "• Personas que trabajan",
+     "• Personal del sector salud",
+     "• Emprendedores",
+     "• Personas con responsabilidades familiares"
+    ]
+   },
+   {
+    "t": "Duración y estructura",
+    "c": [
+     "Cuenta con un plan de 8 semestres, con la posibilidad de reducir el tiempo de titulación mediante procesos de homologación (para Normalistas Superiores u otros estudios previos en Instituciones de Educación Superior)."
+    ]
+   },
+   {
+    "t": "Perfil docente y de impacto",
+    "c": [
+     "Prepara para liderar procesos educativos en instituciones de educación básica, media y superior, así como para la gestión de proyectos sociales, investigación y análisis crítico de la realidad."
+    ]
+   },
+   {
+    "t": "Facilidades financieras",
+    "c": [
+     "La institución cuenta con opciones de financiación digital (como portal de créditos, cuota inicial accesible y procesos sin trámites extensos de codeudores)."
+    ]
+   }
+  ],
+  "perfil": [
+   "Al graduarte tendrás la oportunidad de trabajar como:",
+   "• Docente de ciencias sociales en educación básica y media.",
+   "• Consultor en programas de formación secundaria, media o técnica.",
+   "• Asesor en construcción de currículos inclusivos.",
+   "• Gestor de planes educativos territoriales y sectoriales.",
+   "• Líder en investigaciones e innovaciones curriculares y didácticas."
+  ],
+  "materias": [
+   "Las materias más destacadas son:",
+   "• Fundamentos de pedagogía",
+   "• Construcción epistemológica de ciencias sociales.",
+   "• Economía de la sociedad"
+  ],
+  "campo": [
+   "El Licenciado en Ciencias Sociales podrá desempeñarse en instituciones educativas, proyectos sociales y comunitarios, organizaciones gubernamentales y no gubernamentales, centros de investigación y observatorios sociales. También podrá participar en el diseño y gestión de proyectos educativos y culturales, procesos de formación ciudadana y construcción de memoria histórica, así como en entornos virtuales y escenarios de innovación educativa."
+  ],
+  "discurso": "¡Te cuento! Estudiar Licenciatura en Ciencias Sociales Virtual en IBERO es una excelente oportunidad si te apasionan la historia, la geografía, la cultura y quieres transformar la sociedad a través de la educación. Nuestro programa te prepara para enseñar ciencias sociales, desarrollar estrategias pedagógicas innovadoras y promover el pensamiento crítico y la participación ciudadana. Además, podrás proyectarte como docente de ciencias sociales, gestor de proyectos educativos o participar en iniciativas de investigación y desarrollo comunitario, con la flexibilidad de estudiar virtualmente. Cuéntame, ¿te gustaría enseñar y contribuir a la formación de nuevas generaciones?"
+ },
+ {
+  "id": "contaduria",
+  "nombre": "Contaduría Pública",
+  "categoria": "negocios",
+  "nivel": "Profesional",
+  "descripcion": [
+   "La carrera en Contaduría Pública virtual en IBERO te forma en normativas contables, fiscales y financieras. Su plan de estudios actualizado te prepara para afrontar los retos del sector con una visión estratégica. Además, al contar con acreditación en alta calidad y convenio SENA, puedes homologar asignaturas y avanzar en tu formación. Aprenderás a analizar modelos económicos, aplicar normativas nacionales e internacionales y tomar decisiones estratégicas para el crecimiento empresarial."
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "9 semestres"
+   ],
+   [
+    "Título",
+    "Contador(a) público"
+   ],
+   [
+    "SNIES",
+    "105216"
+   ],
+   [
+    "Créditos académicos",
+    "152"
+   ],
+   [
+    "Inscripción",
+    "Matrículas abiertas"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Permite estudiar desde cualquier ciudad y manejar horarios flexibles, ideal para:",
+     "• Personas que trabajan",
+     "• Personal del sector salud",
+     "• Emprendedores",
+     "• Personas con responsabilidades familiares"
+    ]
+   },
+   {
+    "t": "Homologación SENA",
+    "c": [
+     "Cuenta con opciones de homologación para egresados del SENA, facilitando la continuidad de los estudios técnicos o tecnológicos."
+    ]
+   },
+   {
+    "t": "Certificaciones internacionales",
+    "c": [
+     "Brinda acceso a certificaciones internacionales y oportunidades de conexiones globales para fortalecer la empleabilidad"
+    ]
+   }
+  ],
+  "perfil": [
+   "El Contador Público podrá desempeñarse como:",
+   "• Experto en asesorías y consultoría",
+   "• Director contable",
+   "• Auditor interno o externo",
+   "• Revisor Fiscal",
+   "• Director financiero"
+  ],
+  "materias": [
+   "Las materias más destacadas son:",
+   "• Fundamentos de contabilidad",
+   "• Estadística descriptiva",
+   "• Matemática financiera",
+   "• Teoría y pensamiento contable",
+   "• Gestión Financiera LP",
+   "• Planeación y control presupuestal",
+   "• Electiva profesional"
+  ],
+  "campo": [
+   "El Contador Público está preparado/a para destacarse en diversos escenarios, como:",
+   "• Empresas u organizaciones de cualquier sector, privadas, gobierno o públicas.",
+   "• Firmas Nacionales e Internacionales de Consultoría y Auditoría.",
+   "• Bancos y Servicios Financieros.",
+   "• Empresas de Productos de Consumo Masivo."
+  ],
+  "discurso": "¡Te cuento! Estudiar Contaduría Pública Virtual en IBERO es una excelente oportunidad si te apasionan los números, las finanzas y quieres crecer en el mundo empresarial. Nuestro programa te prepara para gestionar información financiera, analizar estados contables, realizar auditorías y apoyar la toma de decisiones estratégicas, contribuyendo a la estabilidad y crecimiento de las organizaciones. Además, podrás proyectarte como contador público, analista contable, auditor, asesor tributario o consultor financiero, cumpliendo los requisitos profesionales correspondientes, con la flexibilidad de estudiar virtualmente. Cuéntame, ¿te gustaría trabajar en el área financiera de una empresa o tener tu propia firma de asesoría contable?"
+ },
+ {
+  "id": "admin-empresas-2",
+  "nombre": "Administración de Empresas",
+  "categoria": "negocios",
+  "nivel": "Profesional",
+  "descripcion": [
+   "Con la carrera de Administración de Empresas virtual en IBERO comprenderás los retos del mundo globalizado y aplicarás estrategias innovadoras para la gestión organizacional sostenible. Desarrollarás habilidades en liderazgo, creatividad y trabajo en equipo para generar soluciones de alto impacto.",
+   "Además, este programa virtual ofrece formación de alta calidad con acceso a herramientas digitales avanzadas y la posibilidad de homologación a través del convenio SENA."
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "8 semestres"
+   ],
+   [
+    "Título",
+    "Administrador(a) de empresas"
+   ],
+   [
+    "SNIES",
+    "110413"
+   ],
+   [
+    "Créditos académicos",
+    "143"
+   ],
+   [
+    "Inscripción",
+    "Matrículas abiertas"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Permite estudiar desde cualquier ciudad y manejar horarios flexibles, ideal para:",
+     "• Personas que trabajan",
+     "• Personal del sector salud",
+     "• Emprendedores",
+     "• Personas con responsabilidades familiares"
+    ]
+   },
+   {
+    "t": "Homologación SENA",
+    "c": [
+     "Cuenta con opciones de homologación para egresados del SENA, facilitando la continuidad de los estudios técnicos o tecnológicos."
+    ]
+   },
+   {
+    "t": "Doble programa con menor carga",
+    "c": [
+     "La IBERO ofrece la posibilidad de cursar un segundo programa con solo un 40% de contenido adicional, lo que acelera la ampliación del perfil profesional."
+    ]
+   }
+  ],
+  "perfil": [
+   "El Administrador de Empresas podrá desempeñarse en Dirección y Gerencia como:",
+   "• Director General (CEO).",
+   "• Director Financiero (CFO).",
+   "• Emprendedor.",
+   "• Gerente en recursos humanos.",
+   "• Gerente de innovación."
+  ],
+  "materias": [
+   "Las materias más destacadas son:",
+   "• Fundamentos de Administración",
+   "• Modelos organizacionales.",
+   "• Fundamentos de contabilidad",
+   "• Innovación y Negocios",
+   "• Gerencia de Mercado y Publicidad"
+  ],
+  "campo": [
+   "El Administrador de Empresas está preparado/a para destacarse en diversos escenarios, como:",
+   "• Empresas Multinacionales (Tecnología, consumo masivo, Automotriz o Farmacéuticas).",
+   "• Consultoras Especializadas en Gestión Empresarial.",
+   "• Agencias de Regulación y Supervisión.",
+   "• Emprendedores."
+  ],
+  "discurso": "Estudiar Administración de Empresas Virtual en IBERO es una excelente oportunidad si te apasionan los negocios, el liderazgo y quieres crecer profesionalmente. Nuestro programa te prepara para liderar equipos, gestionar recursos, desarrollar estrategias empresariales y tomar decisiones que impulsen el crecimiento de las organizaciones. Además, podrás proyectarte como administrador, coordinador comercial, jefe de operaciones, gerente de proyectos o emprendedor, con la flexibilidad de estudiar virtualmente. Cuéntame, ¿te gustaría ocupar un cargo de liderazgo en una empresa o crear tu propio negocio?",
+  "nota": "El Excel trae dos fichas de Administración de Empresas con datos distintos (SNIES y créditos). Esta es la segunda."
+ },
+ {
+  "id": "ing-software",
+  "nombre": "Ingeniería de Software",
+  "categoria": "ingenieria",
+  "nivel": "Profesional",
+  "descripcion": [
+   "El pregrado en Ingeniería de Software de IBERO te forma para desarrollar softwares confiables y eficientes, aplicando modelos y documentación que optimizan tiempos y costos. Adquirirás habilidades clave en diseño, análisis y construcción de soluciones tecnológicas. Además, puedes homologar asignaturas con el convenio SENA."
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "8 semestres"
+   ],
+   [
+    "Título",
+    "Ingeniero(a) de software"
+   ],
+   [
+    "SNIES",
+    "110413"
+   ],
+   [
+    "Créditos académicos",
+    "144"
+   ],
+   [
+    "Inscripción",
+    "Matrículas abiertas"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Permite estudiar desde cualquier ciudad y manejar horarios flexibles, ideal para:",
+     "• Personas que trabajan",
+     "• Personal del sector salud",
+     "• Emprendedores",
+     "• Personas con responsabilidades familiares"
+    ]
+   },
+   {
+    "t": "Homologación SENA",
+    "c": [
+     "Cuenta con opciones de homologación para egresados del SENA, facilitando la continuidad de los estudios técnicos o tecnológicos."
+    ]
+   },
+   {
+    "t": "Alta demanda laboral",
+    "c": [
+     "Te prepara para un sector con gran crecimiento, oportunidades de trabajo remoto y salarios competitivos."
+    ]
+   }
+  ],
+  "perfil": [
+   "Al estudiar ingeniería de software en la IBERO podrás desempeñarte como:",
+   "• Líder de proyectos.",
+   "• Analista, arquitecto de software.",
+   "• Productor, consultor Sistemas de información.",
+   "• Desarrollador, programador y diseñador de software y APP.",
+   "• Ingeniero de pruebas y seguridad.",
+   "• Ingeniero de Front-End y Back-end.",
+   "• Ingeniero de DevOps."
+  ],
+  "materias": [
+   "Las materias más destacadas son:",
+   "• Fundamentos de programación",
+   "• Base de datos avanzados",
+   "• Mantenimiento de Software",
+   "• Gerencia y Control de Proyectos Informáticos",
+   "• Metodología"
+  ],
+  "campo": [
+   "Tendrá la oportunidad de desempeñarse en sectores como:",
+   "• Empresas u organizaciones de cualquier sector, privadas o públicas.",
+   "• Compañías de Software y Startups Tecnológicas.",
+   "• Empresas de Tecnología y Telecomunicaciones.",
+   "• Bancos y Entidades Financieras y Empresas Fintech.",
+   "• Instituciones educativas y Centros de Investigación.",
+   "• ONG y Organizaciones Internacionales."
+  ],
+  "discurso": "Estudiar Ingeniería de Software Virtual en IBERO es una excelente oportunidad si te apasiona la tecnología, la programación y quieres ser parte de la transformación digital. Nuestro programa te prepara para diseñar aplicaciones, desarrollar software, crear soluciones tecnológicas y gestionar proyectos digitales que respondan a las necesidades de las empresas. Además, podrás proyectarte como desarrollador de software, programador, analista de calidad, ingeniero de pruebas o líder de proyectos tecnológicos, con la flexibilidad de estudiar virtualmente. Cuéntame, ¿te gustaría desarrollar aplicaciones, crear tus propios proyectos tecnológicos o trabajar en una empresa de tecnología?"
+ },
+ {
+  "id": "ing-industrial",
+  "nombre": "Ingeniería Industrial",
+  "categoria": "ingenieria",
+  "nivel": "Profesional",
+  "descripcion": [
+   "El programa de Ingeniería Industrial de la Corporación Universitaria Iberoamericana se distingue por ofrecer un diseño curricular vanguardista, 100% virtual, enfocado en responder a los retos de la Cuarta Revolución Industrial y a las exigencias globales del mercado laboral."
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "9 semestres"
+   ],
+   [
+    "Título",
+    "Ingeniero(a) industrial"
+   ],
+   [
+    "SNIES",
+    "107162"
+   ],
+   [
+    "Créditos académicos",
+    "160"
+   ],
+   [
+    "Inscripción",
+    "Matrículas abiertas"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Permite estudiar desde cualquier ciudad y manejar horarios flexibles, ideal para:",
+     "• Personas que trabajan",
+     "• Personal del sector salud",
+     "• Emprendedores",
+     "• Personas con responsabilidades familiares"
+    ]
+   },
+   {
+    "t": "Homologación SENA",
+    "c": [
+     "Cuenta con opciones de homologación para egresados del SENA, facilitando la continuidad de los estudios técnicos o tecnológicos."
+    ]
+   },
+   {
+    "t": "Doble titulación",
+    "c": [
+     "Ofrece la posibilidad de acceder a doble titulación con otro programa de la misma facultad de ingeniería"
+    ]
+   }
+  ],
+  "perfil": [
+   "El Ingeniero Industrial podrá desempeñarse como:",
+   "• Desarrollador de soluciones para los procesos Industriales.",
+   "• Modelamiento Organizacional.",
+   "• Gerente de proyectos de Procesos Industriales.",
+   "• Planeación y Control de la Producción.",
+   "• Implementación de sistemas de gestión.",
+   "• Consultor en diversos escenarios (salud, tecnología, calidad, otros)."
+  ],
+  "materias": [
+   "Las materias más destacadas son:",
+   "• Química industrial",
+   "• Fundamentos de administración",
+   "• Cálculo diferencial",
+   "• Estadística inferencial",
+   "• Fundamentos de mercadeo",
+   "• Costos y presupuestos"
+  ],
+  "campo": [
+   "El egresado puede desempeñarse en organizaciones de los sectores público y privado, en contextos nacionales e internacionales, en áreas de manufactura, la analítica de datos, servicios, logística, gestión de calidad, innovación tecnológica y optimización de redes de valor."
+  ],
+  "discurso": "Estudiar Ingeniería Industrial Virtual en IBERO es una excelente oportunidad si te apasiona mejorar procesos, optimizar recursos y contribuir al crecimiento de las empresas. Nuestro programa te prepara para gestionar procesos de producción, mejorar la productividad, administrar recursos, fortalecer la logística y desarrollar estrategias de calidad e innovación. Además, podrás proyectarte como ingeniero de procesos, analista de calidad, coordinador de producción, jefe de logística o líder de operaciones, con la flexibilidad de estudiar virtualmente. Cuéntame, ¿te gustaría trabajar en el área de producción, logística o liderar procesos de mejora dentro de una empresa?"
+ },
+ {
+  "id": "tec-logistica",
+  "nombre": "Tecnología en Logística",
+  "categoria": "ingenieria",
+  "nivel": "Tecnología",
+  "descripcion": [
+   "El tecnólogo en Logística IBERO es un profesional con una formación integral en redes de valor y procesos logísticos. Cuenta con la capacidad de analizar el entorno organizacional, identificar oportunidades de mejora y aplicar soluciones estratégicas basadas en modelos logísticos y tecnologías emergentes. Su enfoque práctico e investigativo le permite optimizar la cadena de suministro y contribuir a la eficiencia empresarial."
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "6 semestres"
+   ],
+   [
+    "Título",
+    "Tecnólogo (a) en logística"
+   ],
+   [
+    "SNIES",
+    "107162"
+   ],
+   [
+    "Créditos académicos",
+    "104"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Permite estudiar desde cualquier ciudad y manejar horarios flexibles, ideal para:",
+     "• Personas que trabajan",
+     "• Personal del sector salud",
+     "• Emprendedores",
+     "• Personas con responsabilidades familiares"
+    ]
+   },
+   {
+    "t": "Enfoque práctico",
+    "c": [
+     "Incluye el desarrollo de prácticas con asesoría orientadas a contextos y escenarios reales del mercado."
+    ]
+   },
+   {
+    "t": "Articulación profesional",
+    "c": [
+     "Cuenta con la posibilidad de continuar tus estudios en la misma institución para homologar y obtener una segunda titulación como Ingeniero(a) Industrial."
+    ]
+   }
+  ],
+  "perfil": [
+   "El Tecnólogo en Logística podrá desempeñarse como:",
+   "• Gestor de compras.",
+   "• Coordinador de distribución y transporte.",
+   "• Jefe de almacén.",
+   "• Coordinador de sistemas de información logística.",
+   "• Gestor de inventarios.",
+   "• Gestor de Calidad."
+  ],
+  "materias": [
+   "• Gestión de inventarios y almacenamiento",
+   "• Logística de transporte y distribución",
+   "• Gestión de la cadena de suministro (Supply Chain Management)",
+   "• Compras y aprovisionamiento",
+   "• Distribución física internacional (DFI) y comercio exterior",
+   "• Sistemas de información en gestión logística (ERP / WMS)",
+   "• Costos y presupuestos logísticos"
+  ],
+  "campo": [
+   "Se podrá desempeñar en:",
+   "• Empresas u organizaciones de cualquier sector, privadas o públicas.",
+   "• Compañías del sector de transporte de carga por carretera.",
+   "• Firmas de Consultoría en Logística y Cadena de Suministro.",
+   "• Empresas del sector de comercio exterior."
+  ],
+  "discurso": "Estudiar Tecnología en Logística Virtual en IBERO es una excelente oportunidad si te interesa el mundo empresarial y quieres aprender cómo funcionan los procesos de distribución y abastecimiento. Nuestro programa te prepara para gestionar inventarios, coordinar procesos de almacenamiento, optimizar el transporte y mejorar la cadena de suministro, ayudando a las empresas a ser más eficientes. Además, podrás proyectarte como analista logístico, coordinador de inventarios, supervisor de almacén o asistente de operaciones, con la flexibilidad de estudiar virtualmente. Cuéntame, ¿te gustaría trabajar en logística, transporte o coordinación de operaciones empresariales?"
+ },
+ {
+  "id": "ing-datos",
+  "nombre": "Ingeniería en Ciencia de Datos",
+  "categoria": "ingenieria",
+  "nivel": "Profesional",
+  "descripcion": [
+   "El ingeniero en Ciencia de Datos IBERO está en la capacidad de capturar, adquirir, gestionar y manipular grandes volúmenes de datos tomados desde diferentes fuentes, para poder hacer análisis basados en modelos matemáticos."
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "8 semestres"
+   ],
+   [
+    "Título",
+    "Ingeniero/a en Ciencia de Datos"
+   ],
+   [
+    "SNIES",
+    "110672"
+   ],
+   [
+    "Créditos académicos",
+    "141"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Permite estudiar desde cualquier ciudad y manejar horarios flexibles, ideal para:",
+     "• Personas que trabajan",
+     "• Personal del sector salud",
+     "• Emprendedores",
+     "• Personas con responsabilidades familiares"
+    ]
+   },
+   {
+    "t": "Homologación con el SENA",
+    "c": [
+     "Si eres egresado de programas técnicos o tecnológicos del SENA, cuentas con un convenio institucional para homologar materias, lo que optimiza tus tiempos y reduce costos de matrícula."
+    ]
+   },
+   {
+    "t": "Enfoque en alta demanda",
+    "c": [
+     "Adquieres dominio en herramientas críticas del mercado actual como Python, R, SQL, plataformas en la nube (AWS, Google Cloud) y visualización con Power BI o Tableau"
+    ]
+   }
+  ],
+  "perfil": [
+   "El Ingeniero en ciencia de datos ibero, podrá desempeñarse como:",
+   "• Gerente BI.",
+   "• Chief data officer (científico de datos).",
+   "• Arquitecto y minería de datos.",
+   "• Ingeniero Big Data.",
+   "• Desarrollador BI.",
+   "• Ingeniero de Machine Learning."
+  ],
+  "materias": [
+   "• Fundamentos de Ciencia de Datos",
+   "• Fundamentos de Programación",
+   "• Fundamentos de Bases de Datos",
+   "• Bases de Datos Avanzadas No-SQL",
+   "• Estadística Descriptiva e Inferencial",
+   "• Álgebra Lineal y Cálculo Multivariado"
+  ],
+  "campo": [
+   "Contribuirá en el desarrollo de soluciones en sectores como:",
+   "• Empresas u organizaciones de cualquier sector, privadas o públicas.",
+   "• Bancos, entidades financieras y aseguradoras.",
+   "• Empresas de Tecnología Médica y Biotecnología.",
+   "• Empresas de Tecnología y Telecomunicaciones.",
+   "• ONG y Organizaciones Internacionales.",
+   "• Instituciones educativas y Centros de Investigación."
+  ],
+  "discurso": "Estudiar Ingeniería en Ciencia de Datos Virtual en IBERO es una excelente oportunidad si te apasionan la tecnología, los números y la inteligencia artificial. Nuestro programa te prepara para analizar grandes volúmenes de información, desarrollar modelos predictivos, aplicar inteligencia artificial y transformar datos en decisiones estratégicas para las empresas. Además, podrás proyectarte como científico de datos, analista de datos, ingeniero de datos o especialista en inteligencia de negocios, con la flexibilidad de estudiar virtualmente. Cuéntame, ¿te gustaría trabajar con inteligencia artificial, analizar datos o desarrollar soluciones tecnológicas para las empresas?"
+ },
+ {
+  "id": "lic-artistica",
+  "nombre": "Licenciatura en Educación Artística",
+  "categoria": "educacion",
+  "nivel": "Licenciatura",
+  "descripcion": [
+   "La Licenciatura en Educación Artística de IBERO forma educadores capaces de transformar realidades sociales y académicas."
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "8 semestres"
+   ],
+   [
+    "Título",
+    "Licenciado en Educación Artística"
+   ],
+   [
+    "SNIES",
+    "110778"
+   ],
+   [
+    "Créditos académicos",
+    "144"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Permite estudiar desde cualquier ciudad y manejar horarios flexibles, ideal para:",
+     "• Personas que trabajan",
+     "• Personal del sector salud",
+     "• Emprendedores",
+     "• Personas con responsabilidades familiares"
+    ]
+   },
+   {
+    "t": "Pedagogía innovadora",
+    "c": [
+     "Te capacita para aplicar conocimientos en escenarios y proyectos reales vinculados a la educación y la cultura."
+    ]
+   },
+   {
+    "t": "Plataforma y acompañamiento",
+    "c": [
+     "Disponibilidad de entornos virtuales de aprendizaje, bienestar universitario y servicios de apoyo para estudiantes."
+    ]
+   }
+  ],
+  "perfil": [
+   "El Licenciado/a en Educación Artística está preparado/a para destacarse en diversos escenarios, como:",
+   "• Instituciones educativas, colegios, instituciones técnicas e instituciones de educación superior.",
+   "• Academias y escuelas de arte.",
+   "• Centros culturales y casas de la cultura.",
+   "• Medios de comunicación y producción artística",
+   "• Proyectos independientes"
+  ],
+  "materias": [
+   "• Didáctica y evaluación de las artes",
+   "• Ambientes digitales y educación artística",
+   "• Expresión plástica y visual",
+   "• Expresión musical y sonora",
+   "• Expresión corporal, danza y teatro",
+   "• Educación artística e inclusión",
+   "• Gestión de proyectos culturales",
+   "• Historia y estética del arte"
+  ],
+  "campo": [
+   "El Licenciado en Educación Artística podrá desempeñarse como:",
+   "• Docentes de arte en educación infantil, básica y media, desarrollando programas y currículos artísticos.",
+   "• Coordinando y enseñando en talleres de arte para la comunidad.",
+   "• Gestor de proyectos artísticos.",
+   "• Artistas independientes, ofreciendo servicios de consultoría, diseño y ejecución de proyectos artísticos y educativos."
+  ],
+  "discurso": "Estudiar Licenciatura en Educación Artística Virtual en IBERO es una excelente oportunidad si te apasionan el arte, la creatividad y quieres transformar vidas a través de la educación. Nuestro programa te prepara para desarrollar estrategias pedagógicas innovadoras, promover la expresión artística y enseñar a través de la música, las artes visuales y diferentes manifestaciones culturales. Además, podrás proyectarte como docente de educación artística, gestor cultural, líder de proyectos educativos o tallerista de formación artística, con la flexibilidad de estudiar virtualmente. Cuéntame, ¿te gustaría enseñar arte en instituciones educativas o desarrollar proyectos artísticos y culturales?"
+ },
+ {
+  "id": "lic-artes-visuales",
+  "nombre": "Licenciatura en Artes Visuales",
+  "categoria": "educacion",
+  "nivel": "Licenciatura",
+  "descripcion": [
+   "El licenciado en Artes Visuales IBERO es un profesional con dominio disciplinar y logra fundamentarlo epistemológicamente y materializarlo a través de prácticas artísticas y educativas; entiende que su campo de conocimiento es dinámico y cambiante y, por naturaleza, un espacio de creación y reflexión, donde se generan y modifican los saberes continuamente."
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "8 semestres"
+   ],
+   [
+    "Título",
+    "Licenciado(a) en artes visuales"
+   ],
+   [
+    "SNIES",
+    "110777"
+   ],
+   [
+    "Créditos académicos",
+    "144"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Permite estudiar desde cualquier ciudad y manejar horarios flexibles, ideal para:",
+     "• Personas que trabajan",
+     "• Personal del sector salud",
+     "• Emprendedores",
+     "• Personas con responsabilidades familiares"
+    ]
+   },
+   {
+    "t": "Pedagogía innovadora",
+    "c": [
+     "Te capacita para aplicar conocimientos en escenarios y proyectos reales vinculados a la educación y la cultura."
+    ]
+   },
+   {
+    "t": "Homologación sin costo",
+    "c": [
+     "Posibilidad de homologar saberes si vienes de ser Normalista Superior, de instituciones de formación para el trabajo o de otras IES (reduciendo tiempo de titulación)"
+    ]
+   }
+  ],
+  "perfil": [
+   "La Licenciatura en Artes Visuales está dirigida a personas interesadas en el arte, la creatividad, la cultura visual y la educación como medios para generar transformación social"
+  ],
+  "materias": [
+   "• Lenguaje del Dibujo",
+   "• Lenguaje Fotográfico y Cinematográfico",
+   "• Teoría de la Imagen y el Lenguaje Visual",
+   "• Cultura Visual: Estudios Visuales",
+   "• Historia del Arte y Arte Latinoamericano",
+   "• Gestión Digital e Innovación",
+   "• Didáctica para la Enseñanza del Arte Visual",
+   "• Prácticas Pedagógicas"
+  ],
+  "campo": [
+   "El Licenciado en Artes Visuales podrá desempeñarse en instituciones educativas, proyectos de educación artística y cultural, iniciativas comunitarias y de transformación social, así como en museos, galerías y otros espacios culturales."
+  ],
+  "discurso": "Estudiar Artes Visuales Virtual en IBERO es una excelente oportunidad si te apasionan la creatividad, el diseño y quieres convertir tu talento artístico en una profesión. Nuestro programa te prepara para desarrollar proyectos artísticos, explorar técnicas de expresión visual, crear contenidos digitales y utilizar herramientas tecnológicas para comunicar ideas de manera innovadora. Además, podrás proyectarte como artista visual, creador de contenido, gestor de proyectos culturales, ilustrador o emprendedor creativo, con la flexibilidad de estudiar virtualmente. Cuéntame, ¿te gustaría desarrollar tu talento artístico, trabajar en proyectos creativos o emprender con tus propias creaciones?"
+ },
+ {
+  "id": "lic-lenguas",
+  "nombre": "Licenciatura en Lenguas Extranjeras con énfasis en Inglés",
+  "categoria": "educacion",
+  "nivel": "Licenciatura",
+  "descripcion": [
+   "La Licenciatura en Lenguas Extranjeras con énfasis en inglés de IBERO forma docentes con inglés avanzado (C1) y francés intermedio (B1)."
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "8 semestres"
+   ],
+   [
+    "Título",
+    "Licenciado(a) en Lenguas Extranjeras - Inglés"
+   ],
+   [
+    "SNIES",
+    "117747"
+   ],
+   [
+    "Créditos académicos",
+    "144"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Permite estudiar desde cualquier ciudad y manejar horarios flexibles, ideal para:",
+     "• Personas que trabajan",
+     "• Personal del sector salud",
+     "• Emprendedores",
+     "• Personas con responsabilidades familiares"
+    ]
+   },
+   {
+    "t": "Oportunidades de empleo amplias",
+    "c": [
+     "Desempeño como docente en colegios o universidades, investigador, traductor, intérprete, formador o líder de proyectos de bilingüismo en embajadas, ONGs y empresas multinacionales."
+    ]
+   },
+   {
+    "t": "Soporte institucional",
+    "c": [
+     "Acceso a la Coordinación de Bilingüismo, clubes de conversación, talleres y espacios de práctica."
+    ]
+   }
+  ],
+  "perfil": [
+   "Cargos a desempeñar:",
+   "• Docente",
+   "• Investigador/a",
+   "• Traductor/a",
+   "• Líder de proyectos de bilingüismo"
+  ],
+  "materias": [
+   "Las materias más destacadas son:",
+   "• Introducción a la Lingüística y Morfosintaxis",
+   "• Didáctica de las Lenguas Extranjeras",
+   "• Evaluación del Aprendizaje de Idiomas",
+   "• Diseño Curricular y de Materiales Didácticos",
+   "• TIC y Ambientes Virtuales para la Enseñanza de Lenguas"
+  ],
+  "campo": [
+   "Podrás trabajar como:",
+   "• Docente de inglés y francés",
+   "• Formador en programas de bilingüismo",
+   "• Diseñador de políticas educativas en bilingüismo"
+  ],
+  "discurso": "Estudiar Licenciatura en Lenguas Extranjeras Virtual en IBERO es una excelente oportunidad si te apasionan los idiomas y quieres abrir nuevas puertas a través de la educación. Nuestro programa te prepara para enseñar lenguas extranjeras, desarrollar habilidades comunicativas, aplicar estrategias pedagógicas innovadoras y utilizar herramientas digitales para facilitar el aprendizaje de idiomas. Además, podrás proyectarte como docente de idiomas, tutor virtual, creador de contenidos educativos o líder de proyectos de enseñanza de lenguas, con la flexibilidad de estudiar virtualmente. Cuéntame, ¿te gustaría enseñar idiomas en instituciones educativas o desarrollar proyectos de formación bilingüe?"
+ },
+ {
+  "id": "lic-humanidades",
+  "nombre": "Licenciatura en Humanidades y Lengua Castellana",
+  "categoria": "educacion",
+  "nivel": "Licenciatura",
+  "descripcion": [
+   "La Licenciatura en Humanidades y Lengua Castellana responde a las necesidades contemporáneas de la educación y a los desafíos actuales, fomentando el pensamiento crítico y la creatividad."
+  ],
+  "datos": [
+   [
+    "Modalidad",
+    "Virtual"
+   ],
+   [
+    "Duración",
+    "8 semestres"
+   ],
+   [
+    "Título",
+    "Licenciado(a) en Humanidades y Lengua Castellana"
+   ],
+   [
+    "SNIES",
+    "107241"
+   ],
+   [
+    "Créditos académicos",
+    "144"
+   ],
+   [
+    "Inicio de clases",
+    "22 de febrero de 2027"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Modalidad 100% virtual",
+    "c": [
+     "Permite estudiar desde cualquier ciudad y manejar horarios flexibles, ideal para:",
+     "• Personas que trabajan",
+     "• Personal del sector salud",
+     "• Emprendedores",
+     "• Personas con responsabilidades familiares"
+    ]
+   },
+   {
+    "t": "Oportunidades institucionales",
+    "c": [
+     "Acceso a opciones de internacionalización, becas, convenios institucionales y escenarios de prácticas personalizados."
+    ]
+   },
+   {
+    "t": "Rutas de formación especializadas",
+    "c": [
+     "Permite profundizar en áreas como Desarrollo, Lectura y Escritura en la Infancia, Fundamentos de Educación y Pedagogía, Creación, Producción y Promoción Literaria, Lectura, Escritura, Oralidad y Memoria, y Ambientes Digitales."
+    ]
+   }
+  ],
+  "perfil": [
+   "Podrás desempeñarte como:",
+   "• Docente de lengua castellana y literatura.",
+   "• Diseñador/a y evaluador/a de materiales pedagógicos y curriculares.",
+   "• Líder de proyectos educativos, culturales y sociales.",
+   "• Asesor/a pedagógico o académico en procesos de formación docente."
+  ],
+  "materias": [
+   "• Morfosintaxis",
+   "• Semántica y Pragmática",
+   "• Sociolingüística",
+   "• Psicolingüística",
+   "• Análisis del Discurso",
+   "• Literatura Española",
+   "• Literatura Latinoamericana"
+  ],
+  "campo": [
+   "Podrás desempeñarte en instituciones educativas, proyectos culturales y comunitarios, editoriales, programas de promoción de lectura y organizaciones sociales y educativas. También podrá participar en procesos de formación intercultural e inclusiva y en la creación de contenidos para entornos virtuales y plataformas de aprendizaje digital."
+  ],
+  "discurso": "Estudiar Licenciatura en Humanidades y Lengua Castellana Virtual en IBERO es una excelente oportunidad si te apasionan la lectura, la escritura, la comunicación y quieres transformar vidas a través de la educación. Nuestro programa te prepara para enseñar lengua castellana, fortalecer las habilidades de lectura y escritura, desarrollar estrategias pedagógicas innovadoras y promover el pensamiento crítico. Además, podrás proyectarte como docente de lengua castellana, tutor académico, gestor de proyectos educativos o creador de contenidos pedagógicos, con la flexibilidad de estudiar virtualmente. Cuéntame, ¿te gustaría dedicarte a la enseñanza o desarrollar proyectos que promuevan la lectura y la escritura?"
+ },
+ {
+  "id": "marketing-ni",
+  "nombre": "Marketing y Negocios Internacionales",
+  "categoria": "negocios",
+  "nivel": "Profesional",
+  "descripcion": [],
+  "datos": [
+   [
+    "Modalidad",
+    "Presencial"
+   ],
+   [
+    "Duración",
+    "8 semestres"
+   ],
+   [
+    "Título",
+    "Profesional en Marketing y Negocios Internacionales"
+   ],
+   [
+    "SNIES",
+    "102940"
+   ],
+   [
+    "Créditos académicos",
+    "143"
+   ],
+   [
+    "Inicio de clases",
+    "22 de febrero de 2027"
+   ]
+  ],
+  "plus": [
+   {
+    "t": "Oportunidades institucionales",
+    "c": [
+     "Durante el desarrollo del programa de marketing y negocios internacionales, los estudiantes pueden llegar a certificarse en 4 áreas importantes:",
+     "• Certificaciones en Competencias Digitales",
+     "• Certificación en Competencias Financieras",
+     "• Certificación en Competencias en Mercadeo",
+     "• Certificación en Competencias en Negocios Internacionales"
+    ]
+   },
+   {
+    "t": "Perfil del egresado",
+    "c": [
+     "El Profesional en Marketing y Negocios Internacionales de la IBERO, está calificado para identificar y analizar oportunidades de negocios, así como ejecutar estrategias de penetración del mercado y toma de decisiones para la consecución y fidelización de clientes. Siendo un agente activo en las organizaciones, brindando alternativas para la internacionalización de los productos o servicios, identificando las tendencias del mercado."
+    ]
+   }
+  ],
+  "perfil": [
+   "El Profesional en Marketing y Negocios Internacionales está preparado/a para destacarse en diversos escenarios, como:",
+   "• Empresas de Productos de Consumo Masivo.",
+   "• Retail y Comercio Electrónico.",
+   "• Plataformas de Streaming y Producción de Contenidos, empresas de medios de comunicación.",
+   "• Empresas Publicas y Privadas.",
+   "• Bolsa de valores."
+  ],
+  "materias": [
+   "• Fundamentos de Marketing.",
+   "• Investigación de Mercados.",
+   "• Marketing Digital.",
+   "• Comportamiento del Consumidor.",
+   "• Gerencia de Marca (Branding).",
+   "• Estrategias de Mercadeo.",
+   "• Publicidad y Comunicación Comercial.",
+   "• Planeación Estratégica.",
+   "• Gestión Comercial y Ventas.",
+   "• Emprendimiento e Innovación."
+  ],
+  "campo": [
+   "El Profesional en Marketing Y Negocios Internacionales podrá desempeñarse como:",
+   "• Gerente de Marketing Internacional.",
+   "• Gerente de Producto Internacional.",
+   "• Gestión de Negocios Internacionales.",
+   "• Auditor interno o externo.",
+   "• Gerente de Mercadeo y Ventas."
+  ],
+  "discurso": "Estudiar Marketing y Negocios Internacionales en IBERO es una excelente oportunidad si te apasionan las ventas, las estrategias comerciales y quieres llevar los negocios a mercados internacionales. Este campo te permite desarrollar conocimientos en marketing digital, posicionamiento de marcas, comercio internacional, negociación y estrategias para expandir negocios a nivel global. Además, podrás proyectarte como analista de marketing, coordinador comercial, asesor de negocios internacionales o emprendedor, con oportunidades en diferentes sectores empresariales. Cuéntame, ¿te gustaría enfocarte en el marketing digital, trabajar con empresas internacionales o crear tu propio negocio?"
+ }
+]

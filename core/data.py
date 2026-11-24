@@ -216,9 +216,9 @@ class DataStore:
         return cfg
 
     def cohorte_de(self, programa, nivel="pre"):
-        """Cohorte vigente del programa según la lista de precios (p. ej. '1ra cohorte 2027')."""
+        """Cohorte vigente del programa según la lista de precios (p. ej. 'Febrero 2027 · 1ra cohorte')."""
         p = self.match_precio(programa, nivel) if programa else None
-        return cohorte_texto(p.get("cohorte_sena") or p.get("cohorte")) if p else self.config.get("cohorte_actual", "")
+        return cohorte_texto(p.get("cohorte_sena") or p.get("cohorte")) if p else cohorte_texto(self.config.get("cohorte_actual", ""))
 
     def render(self, text, titulo=None, tipo=None):
         """Reemplaza variables de configuración dentro de los mensajes guardados.
@@ -231,8 +231,8 @@ class DataStore:
         for var in ("{cohorte}", "{inicio}"):
             if var in text:
                 text = text.replace(var, self.cohorte_de(titulo, "pos" if tipo == "pos" else "pre") if titulo
-                                    else cfg.get("cohorte_actual", ""))
-        valores = {"{anio}": str(cfg.get("anio", "")), "{cohorte_actual}": cfg.get("cohorte_actual", "")}
+                                    else cohorte_texto(cfg.get("cohorte_actual", "")))
+        valores = {"{anio}": str(cfg.get("anio", "")), "{cohorte_actual}": cohorte_texto(cfg.get("cohorte_actual", ""))}
         for k, v in valores.items():
             text = text.replace(k, str(v))
         return text
@@ -294,16 +294,26 @@ class DataStore:
 
 _ORD = {"1RA": "1ra", "2DA": "2da", "3RA": "3ra", "4TA": "4ta", "5TA": "5ta", "6TA": "6ta", "STA": "5ta"}
 
+# Mes de ingreso de cada cohorte: 1ra febrero, 2da abril, 3ra junio, 4ta agosto, 5ta octubre
+MES_COHORTE = {"1ra": "Febrero", "2da": "Abril", "3ra": "Junio", "4ta": "Agosto", "5ta": "Octubre"}
+
 
 def cohorte_texto(v):
-    """'5TA COHORTE_26' -> '5ta cohorte 2026'."""
+    """Vigencia de la lista de precios -> fecha de ingreso.
+
+    '1RA COHORTE_27' -> 'Febrero 2027 · 1ra cohorte'; '5TA COHORTE_26' -> 'Octubre 2026 · 5ta cohorte'.
+    También acepta '1ra cohorte 2027' (configuración). Un texto que ya es fecha se deja igual.
+    """
     if not v:
         return ""
     m = re.match(r"\s*(\w+)\s*COHORTE[_\s-]*(\d{2,4})", str(v), re.I)
     if not m:
         return str(v)
     n, a = m.group(1).upper(), m.group(2)
-    return f"{_ORD.get(n, n.lower())} cohorte {('20' + a) if len(a) == 2 else a}"
+    orden = _ORD.get(n, n.lower())
+    anio = ("20" + a) if len(a) == 2 else a
+    mes = MES_COHORTE.get(orden)
+    return f"{mes} {anio} · {orden} cohorte" if mes else f"{orden} cohorte {anio}"
 
 
 def rank_titles(query, titles, limit=8, threshold=0.62):
@@ -410,7 +420,8 @@ def build_programa(store, programa, ch, cp, cpend, sem, cfg):
     from .pensum import buscar_pensum
     pen = buscar_pensum(programa)
     item["pensum"] = pen["archivo"] if pen else None
-    item["inicio"] = item["precio"]["cohorte"] if item["precio"] and item["precio"]["cohorte"] else cfg.get("cohorte_actual", "")
+    item["inicio"] = (item["precio"]["cohorte"] if item["precio"] and item["precio"]["cohorte"]
+                      else cohorte_texto(cfg.get("cohorte_actual", "")))
     return item
 
 

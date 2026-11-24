@@ -1,0 +1,11 @@
+<section class="card fechas-ingreso" aria-label="Fechas de ingreso">
+    <div class="fi-head">
+        <span class="head-icon"><i class="fa-regular fa-calendar-check"></i></span>
+        <div><p class="eyebrow">Fechas de ingreso</p><strong>Cohortes 2027</strong></div>
+    </div>
+    <ol class="fi-lista">
+        {% for f in fechas %}
+        <li class="fi{% if f.proxima %} proxima{% elif f.pasada %} pasada{% endif %}"><b>{{ f.mes }}</b><span>{{ f.cohorte }}</span>{% if f.proxima %}<em>Próximo ingreso</em>{% endif %}</li>
+        {% endfor %}
+    </ol>
+</section>

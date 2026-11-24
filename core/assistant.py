@@ -63,7 +63,7 @@ def _fmt_precio(p, store):
             lineas.append(f"• Pronto pago SENA (primer periodo): {money(p['pago_sena'])}")
     coh = cohorte_texto(p.get("cohorte_sena") or p.get("cohorte"))
     if coh:
-        lineas.append(f"• Cohorte: {coh}")
+        lineas.append(f"• Fecha de ingreso: {coh}")
     return "\n".join(lineas)
 
 

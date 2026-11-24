@@ -36,6 +36,8 @@
 
     const H = 1350; // formato 4:5 para que WhatsApp la muestre completa
     const fechaCorta = (t) => String(t || '').replace(/ de (\d{4})$/, ' $1');
+    // 'Febrero 2027 · 1ra cohorte' -> fecha ('Febrero 2027') y cohorte ('1ra cohorte')
+    const partesInicio = (t) => { const [fecha, coh] = String(t || '').split(' · '); return { fecha: fechaCorta(fecha), coh: coh || '' }; };
     function textoPrecio(p) {
         const pr = p.precio; if (!pr) return null;
         return pr.descuento
@@ -93,7 +95,7 @@
 
         font(ctx, 800, txtS, BODY); ctx.fillStyle = C.green2; const a = `${p.creditos_homologados} de ${p.creditos_programa} créditos`; ctx.fillText(a, x0, yy);
         let resto = `  ·  ≈${p.faltantes} semestres por cursar`;
-        if (inicioPropio && p.inicio) resto += `  ·  ${p.inicio}`;
+        if (inicioPropio && p.inicio) resto += `  ·  ${partesInicio(p.inicio).fecha}`;
         font(ctx, 600, txtS, BODY); ctx.fillStyle = C.text2; ctx.fillText(resto, x0 + ctx.measureText(a).width + 4, yy);
     }
 
@@ -162,9 +164,10 @@
             if (ahorro && inicioComun) {
                 col(PAD + 34, 'Ahorro estimado', `Hasta ${money(ahorro)}`);
                 ctx.globalAlpha = 0.35; ctx.fillRect(PAD + bw * 0.55, bandaY + 22, 2, 60); ctx.globalAlpha = 1;
-                col(PAD + bw * 0.55 + 32, 'Cohorte', fechaCorta(inicioComun));
+                const ini = partesInicio(inicioComun);
+                col(PAD + bw * 0.55 + 32, ini.coh ? `Ingreso · ${ini.coh}` : 'Cohorte', ini.fecha);
             } else if (ahorro) col(PAD + 34, 'Ahorro estimado frente al valor regular', `Hasta ${money(ahorro)}`);
-            else col(PAD + 34, 'Cohorte', fechaCorta(inicioComun));
+            else { const ini = partesInicio(inicioComun); col(PAD + 34, ini.coh ? `Fecha de ingreso · ${ini.coh}` : 'Cohorte', ini.fecha); }
         }
 
         // ---- Beneficios

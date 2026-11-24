@@ -1,0 +1,177 @@
+{% extends "layout.html" %}
+{% block title %}PLUS pregrados{% endblock %}
+{% block head %}
+<style>
+    .plus-explorer { display: grid; grid-template-columns: 330px minmax(0, 1fr); gap: 20px; align-items: start; }
+    @media (max-width: 980px) { .plus-explorer { grid-template-columns: minmax(0, 1fr); } }
+    .plist { position: sticky; top: calc(var(--topbar-h) + 16px); padding: 12px; max-height: calc(100vh - var(--topbar-h) - 32px); display: flex; flex-direction: column; gap: 10px; }
+    @media (max-width: 980px) { .plist { position: static; max-height: none; } }
+    .plist .seg { width: 100%; }
+    .plist .seg button { flex: 1 1 auto; justify-content: center; padding: 6px 10px; font-size: 12.5px; }
+    .plist-items { overflow-y: auto; display: grid; gap: 2px; margin: 0 -4px; padding: 0 4px; }
+    @media (max-width: 980px) { .plist-items { max-height: 340px; } }
+    .pitem { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; cursor: pointer; border: 1px solid transparent; width: 100%; background: none; text-align: left; color: var(--text); transition: var(--t); }
+    .pitem:hover { background: var(--surface-2); }
+    .pitem.active { background: var(--brand-soft); border-color: rgba(201,160,60,0.35); }
+    .pitem .pi { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--surface-3); color: var(--text-2); flex-shrink: 0; font-size: 14px; }
+    .pitem.active .pi { background: var(--brand); color: #1a1406; }
+    .pitem .nm { display: block; font-weight: 600; font-size: 13.5px; line-height: 1.25; }
+    .pitem .mt { font-size: 12px; color: var(--text-3); }
+    .pd-head { padding: 22px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px 18px; align-items: start; }
+    @media (max-width: 720px) { .pd-head { grid-template-columns: minmax(0, 1fr); padding: 18px; } }
+    .pd-head h3 { font-family: var(--font-display); font-size: 24px; font-weight: 700; margin: 4px 0 6px; line-height: 1.2; }
+    .pd-actions { display: flex; flex-direction: column; gap: 8px; }
+    @media (max-width: 720px) { .pd-actions { flex-direction: row; flex-wrap: wrap; } .pd-actions .btn { flex: 1 1 160px; } }
+    .pd-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; padding: 0 22px 16px; }
+    @media (max-width: 720px) { .pd-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 0 18px 14px; } }
+    .mini { padding: 11px 13px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--border); min-width: 0; }
+    .mini small { font-size: 11px; color: var(--text-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+    .mini strong { display: block; font-family: var(--font-display); font-size: 18px; margin-top: 2px; overflow-wrap: anywhere; }
+    .mini span { display: block; font-size: 11.5px; color: var(--text-3); }
+    .pd-sec { padding: 18px 22px; border-top: 1px solid var(--border); }
+    @media (max-width: 720px) { .pd-sec { padding: 16px 18px; } }
+    .pd-sec > h4 { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; margin: 0 0 10px; }
+    .pd-sec > h4 i { color: var(--brand-700); }
+    .pd-sec > h4 .btn { margin-left: auto; }
+    .datos-list { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--text-2); }
+    .datos-list b { color: var(--text); font-weight: 600; }
+    .ingresos { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; align-items: center; }
+    .ingresos .badge { white-space: normal; }
+    .discurso { background: var(--brand-soft); border-left: 4px solid var(--brand); border-radius: 12px; padding: 14px 16px; font-size: 14.5px; line-height: 1.7; color: var(--text); margin: 0; }
+    .plus-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+    .plus-item { border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; background: var(--surface-2); }
+    .plus-item h5 { font-size: 13.5px; font-weight: 700; margin: 0 0 4px; display: flex; gap: 7px; align-items: flex-start; }
+    .plus-item h5 i { color: var(--brand); font-size: 12px; margin-top: 3px; }
+    .tres { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    @media (max-width: 1200px) { .tres { grid-template-columns: minmax(0, 1fr); } }
+    .tres h5 { font-size: 13px; font-weight: 700; margin: 0 0 6px; display: flex; gap: 7px; align-items: center; color: var(--text); }
+    .tres h5 i { color: var(--brand-700); }
+</style>
+{% endblock %}
+{% block content %}
+<div class="page-head">
+    <div>
+        <h2><span class="head-icon"><i class="fa-solid fa-star"></i></span> PLUS de pregrados</h2>
+        <p>Discurso, PLUS y ventajas, perfil profesional, materias y campo laboral de cada pregrado, con su objeción frecuente y su precio vigente.</p>
+    </div>
+</div>
+
+{% include "_fechas_ingreso.html" %}
+
+<div class="plus-explorer">
+    <div class="card plist">
+        <div class="input-icon"><i class="fa-solid fa-magnifying-glass"></i><input type="search" id="pBuscar" placeholder="Programa, materia o cargo…" autocomplete="off" data-page-search aria-label="Buscar programa"></div>
+        <div class="seg" id="pCats" role="group" aria-label="Área"></div>
+        <div class="plist-items" id="pLista"></div>
+    </div>
+    <article class="card" id="pDetalle" tabindex="-1" style="outline:none"></article>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+(() => {
+    const { escapeHtml, normalize, copyText, money } = App;
+    const $ = (id) => document.getElementById(id);
+    const PROGS = {{ programas | tojson }};
+    const OBJS = {{ objeciones | tojson }};
+    const FECHAS = {{ fechas | tojson }};
+    const CATS = [['todos', 'Todos'], ['educacion', 'Educación'], ['negocios', 'Negocios'], ['ingenieria', 'Ingeniería'], ['social', 'Salud y social']];
+    const CAT_NOMBRE = { educacion: 'Educación', negocios: 'Negocios', ingenieria: 'Ingeniería y tecnología', social: 'Salud, social y derecho' };
+    const ICONO = { educacion: 'fa-chalkboard-user', negocios: 'fa-briefcase', ingenieria: 'fa-laptop-code', social: 'fa-hand-holding-heart' };
+    const dato = (p, k) => (p.datos.find((d) => d[0] === k) || [])[1] || '';
+    PROGS.forEach((p) => { p._idx = normalize([p.nombre, p.nivel, ...p.descripcion, ...p.plus.map((x) => x.t + ' ' + x.c.join(' ')), ...p.perfil, ...p.materias, ...p.campo].join(' ')); });
+
+    const inicial = new URLSearchParams(location.search).get('p');
+    let cat = 'todos';
+    let cur = Math.max(0, PROGS.findIndex((p) => p.id === inicial));
+
+    function texto(lineas) {
+        let h = '', ul = false;
+        (lineas || []).forEach((l) => {
+            if (l.startsWith('• ')) { if (!ul) { h += '<ul>'; ul = true; } h += `<li>${escapeHtml(l.slice(2))}</li>`; }
+            else { if (ul) { h += '</ul>'; ul = false; } h += `<p${l.endsWith(':') ? ' class="intro"' : ''}>${escapeHtml(l)}</p>`; }
+        });
+        return `<div class="txt-list">${h}${ul ? '</ul>' : ''}</div>`;
+    }
+
+    function pintarCats() {
+        $('pCats').innerHTML = CATS.map(([id, n]) => `<button type="button" data-c="${id}" class="${id === cat ? 'active' : ''}" aria-pressed="${id === cat}">${n}</button>`).join('');
+    }
+    function pintarLista() {
+        const q = normalize($('pBuscar').value.trim());
+        const lista = PROGS.map((p, i) => [p, i]).filter(([p]) => (cat === 'todos' || p.categoria === cat) && (!q || q.split(/\s+/).every((w) => p._idx.includes(w))));
+        $('pLista').innerHTML = lista.length ? lista.map(([p, i]) => `
+            <button type="button" class="pitem ${i === cur ? 'active' : ''}" data-i="${i}">
+                <span class="pi"><i class="fa-solid ${ICONO[p.categoria] || 'fa-graduation-cap'}"></i></span>
+                <span style="min-width:0"><span class="nm">${escapeHtml(p.nombre)}</span><span class="mt">${escapeHtml([p.nivel, dato(p, 'Modalidad'), dato(p, 'Duración')].filter(Boolean).join(' · '))}</span></span>
+            </button>`).join('') : '<p class="small muted" style="padding:12px">Sin resultados.</p>';
+    }
+
+    function pintarDetalle() {
+        const p = PROGS[cur];
+        if (!p) { $('pDetalle').innerHTML = ''; return; }
+        const pr = p.precio;
+        const obj = OBJS.find((o) => o.plus === p.id || (p.id === 'admin-empresas-2' && o.plus === 'admin-empresas'));
+        const extras = p.datos.filter(([k]) => !['Duración', 'Créditos académicos', 'SNIES'].includes(k));
+        const simular = '/simuladores?programa=' + encodeURIComponent(pr ? pr.programa : '') + '#rombo';
+        const secciones = [['fa-id-badge', 'Perfil profesional', p.perfil], ['fa-book-open', 'Materias destacadas', p.materias], ['fa-briefcase', 'Campo laboral', p.campo]].filter((s) => s[2].length);
+        $('pDetalle').innerHTML = `
+            <div class="pd-head">
+                <div>
+                    <p class="eyebrow">${escapeHtml(p.nivel)} · ${escapeHtml(CAT_NOMBRE[p.categoria] || '')}</p>
+                    <h3>${escapeHtml(p.nombre)}</h3>
+                    ${p.descripcion.length ? texto(p.descripcion) : ''}
+                </div>
+                <div class="pd-actions">
+                    ${p.discurso ? '<button type="button" class="btn btn-primary btn-sm" data-copiar="discurso"><i class="fa-regular fa-copy"></i> Copiar discurso</button>' : ''}
+                    <a class="btn btn-secondary btn-sm" href="${simular}"><i class="fa-solid fa-calculator"></i> Simular crédito</a>
+                </div>
+            </div>
+            <div class="pd-kpis">
+                <div class="mini"><small>Duración</small><strong>${escapeHtml(dato(p, 'Duración') || '—')}</strong></div>
+                <div class="mini"><small>Créditos</small><strong>${escapeHtml(dato(p, 'Créditos académicos') || '—')}</strong></div>
+                <div class="mini"><small>SNIES</small><strong>${escapeHtml(dato(p, 'SNIES') || '—')}</strong></div>
+                <div class="mini"><small>Semestre (lista)</small><strong>${pr ? money(pr.valor_final) : '—'}</strong>${pr && pr.valor_sena ? `<span>SENA ${money(pr.valor_sena)}</span>` : ''}</div>
+            </div>
+            <div class="pd-sec">
+                <div class="datos-list">${extras.map(([k, v]) => `<span>${escapeHtml(k)}: <b>${escapeHtml(v)}</b></span>`).join('')}${pr && pr.fecha_ingreso ? `<span>Vigencia del precio: <b>${escapeHtml(pr.fecha_ingreso)}</b></span>` : ''}</div>
+                <div class="ingresos"><span class="obj-k" style="margin:0 4px 0 0">Fechas de ingreso</span>${FECHAS.map((f) => `<span class="badge ${f.proxima ? 'green' : ''}">${escapeHtml(f.texto)}</span>`).join('')}</div>
+                ${p.nota ? `<p class="small muted" style="margin:10px 0 0"><i class="fa-solid fa-circle-info"></i> ${escapeHtml(p.nota)}</p>` : ''}
+            </div>
+            <div class="pd-sec">
+                <h4><i class="fa-solid fa-microphone-lines"></i> Discurso ${p.discurso ? '<button type="button" class="btn btn-ghost btn-sm" data-copiar="discurso"><i class="fa-regular fa-copy"></i> Copiar</button>' : ''}</h4>
+                ${p.discurso ? `<blockquote class="discurso">${escapeHtml(p.discurso)}</blockquote>` : `<div class="alert warning"><i class="fa-solid fa-triangle-exclamation"></i><span>${escapeHtml(p.aviso || 'Este programa no tiene discurso en el Excel.')}</span></div>`}
+            </div>
+            <div class="pd-sec">
+                <h4><i class="fa-solid fa-award"></i> PLUS y ventajas de estudiar en Ibero</h4>
+                <div class="plus-items">${p.plus.map((x) => `<div class="plus-item">${x.t ? `<h5><i class="fa-solid fa-circle-check"></i>${escapeHtml(x.t)}</h5>` : ''}${texto(x.c)}</div>`).join('')}</div>
+            </div>
+            ${obj ? `<div class="pd-sec">
+                <h4><i class="fa-solid fa-handshake"></i> Objeción frecuente <button type="button" class="btn btn-ghost btn-sm" data-copiar="objecion"><i class="fa-regular fa-copy"></i> Copiar</button></h4>
+                <p class="obj-q">${escapeHtml(obj.o)}</p>
+                <div class="obj-a" style="margin-top:8px"><span class="obj-k">Respuesta corta</span>${obj.r.map((r) => `<p>${escapeHtml(r)}</p>`).join('')}</div>
+                <a class="btn btn-ghost btn-sm mt-1" href="/objeciones"><i class="fa-solid fa-comments"></i> Todas las objeciones</a>
+            </div>` : ''}
+            ${secciones.length ? `<div class="pd-sec"><div class="tres">${secciones.map((s) => `<div><h5><i class="fa-solid ${s[0]}"></i> ${s[1]}</h5>${texto(s[2])}</div>`).join('')}</div></div>` : ''}`;
+        $('pDetalle').querySelectorAll('[data-copiar]').forEach((b) => b.addEventListener('click', () => {
+            if (b.dataset.copiar === 'discurso') copyText(p.discurso, 'Discurso copiado');
+            else copyText(`${obj.o}\n${obj.r.join(' ')}`, 'Respuesta copiada');
+        }));
+    }
+
+    $('pCats').addEventListener('click', (e) => { const b = e.target.closest('[data-c]'); if (!b) return; cat = b.dataset.c; pintarCats(); pintarLista(); });
+    $('pBuscar').addEventListener('input', pintarLista);
+    $('pLista').addEventListener('click', (e) => {
+        const b = e.target.closest('[data-i]'); if (!b) return;
+        cur = Number(b.dataset.i);
+        history.replaceState(null, '', '?p=' + encodeURIComponent(PROGS[cur].id));
+        pintarLista(); pintarDetalle();
+        if (window.matchMedia('(max-width: 980px)').matches) $('pDetalle').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        else window.scrollTo({ top: Math.min(window.scrollY, $('pDetalle').getBoundingClientRect().top + window.scrollY - 90), behavior: 'smooth' });
+    });
+
+    pintarCats(); pintarLista(); pintarDetalle();
+    if (inicial && window.matchMedia('(max-width: 980px)').matches) setTimeout(() => $('pDetalle').scrollIntoView({ block: 'start' }), 50);
+})();
+</script>
+{% endblock %}

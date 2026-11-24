@@ -1,0 +1,364 @@
+{% extends "layout.html" %}
+{% block title %}Simuladores de crédito{% endblock %}
+{% block head %}
+<style>
+    .sim-panel[hidden] { display: none !important; }
+    .sim-grid { display: grid; grid-template-columns: 330px minmax(0, 1fr); gap: 18px; align-items: start; }
+    .sim-grid > * { min-width: 0; }
+    @media (max-width: 1100px) { .sim-grid { grid-template-columns: minmax(0, 1fr); } }
+    .sim-side { padding: 20px; position: sticky; top: calc(var(--topbar-h) + 16px); }
+    @media (max-width: 1100px) { .sim-side { position: static; } }
+    .sim-side h3 { font-family: var(--font-display); font-size: 18px; margin: 0 0 6px; }
+    .sim-side > p { font-size: 13.5px; color: var(--text-2); margin: 0; }
+    .sim-kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px 0; }
+    .sim-kpis div { background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 9px 12px; }
+    .sim-kpis b { display: block; font-family: var(--font-display); font-size: 18px; }
+    .sim-kpis span { font-size: 12px; color: var(--text-3); font-weight: 550; }
+    .sim-notas { list-style: none; padding: 0; margin: 0; display: grid; gap: 7px; font-size: 13px; color: var(--text-2); }
+    .sim-notas li { display: flex; gap: 9px; align-items: baseline; }
+    .sim-notas i { color: var(--brand-700); width: 14px; text-align: center; }
+    .sim-acc { display: grid; gap: 8px; margin-top: 16px; }
+    .finky-box { position: relative; overflow: hidden; padding: 0; }
+    .finky-box iframe { display: block; width: 100%; height: 600px; border: 0; background: #fff; transition: height 0.3s var(--ease); }
+    .finky-load { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 12px; background: var(--surface); color: var(--text-3); font-size: 13.5px; font-weight: 600; }
+    .rb-form { display: grid; gap: 14px; }
+    .rb-form .field { margin: 0; min-width: 0; }
+    .rb-form .select, .rb-form select { width: 100%; min-width: 0; text-overflow: ellipsis; }
+    .money-in { position: relative; }
+    .money-in span { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-weight: 700; color: var(--text-3); }
+    .content .money-in input { padding-left: 28px; font-size: 18px; font-weight: 700; font-family: var(--font-display); }
+    .rb-form .seg { width: 100%; }
+    .rb-form .seg button { flex: 1; justify-content: center; }
+    .rb-cuotas button { font-size: 15px; font-weight: 700; }
+    .ajustes { border: 1px solid var(--border); border-radius: 12px; padding: 0 14px; }
+    .ajustes summary { list-style: none; cursor: pointer; padding: 11px 0; font-size: 13px; font-weight: 650; display: flex; gap: 8px; align-items: center; color: var(--text-2); }
+    .ajustes summary::-webkit-details-marker { display: none; }
+    .ajustes summary i { color: var(--brand-700); }
+    .ajustes .grid { padding-bottom: 14px; }
+    .rb-res { padding: 20px; display: grid; gap: 16px; }
+    .rb-top { background: var(--side-bg); color: #fff; border-radius: 16px; padding: 20px 22px; position: relative; overflow: hidden; }
+    .rb-top::after { content: ''; position: absolute; right: -34px; bottom: -34px; width: 120px; height: 120px; border-radius: 50%; background: var(--brand); opacity: 0.22; }
+    .rb-top small { font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand); }
+    .rb-cuota { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin-top: 2px; }
+    .rb-cuota strong { font-family: var(--font-display); font-size: clamp(30px, 4.4vw, 42px); font-weight: 800; letter-spacing: -0.01em; }
+    .rb-cuota span { color: rgba(255,255,255,0.7); font-weight: 600; }
+    .rb-sep { display: flex; gap: 10px; align-items: center; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.14); font-size: 13.5px; position: relative; z-index: 1; }
+    .rb-sep i { color: var(--brand); }
+    .rb-sep b { font-size: 16px; }
+    .rb-sep em { display: block; font-style: normal; font-size: 12px; color: rgba(255,255,255,0.6); }
+    .rb-list { margin: 0; display: grid; }
+    .rb-list div { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px dashed var(--border); font-size: 13.5px; }
+    .rb-list dt { color: var(--text-2); }
+    .rb-list dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
+    .rb-list .tot dt { color: var(--text); font-weight: 650; }
+    .rb-list div:last-child { border-bottom: 0; }
+    .rb-cmp { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+    .cmp { text-align: left; border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; background: var(--surface); cursor: pointer; color: var(--text); display: grid; gap: 1px; transition: var(--t); }
+    .cmp:hover { border-color: var(--border-strong); }
+    .cmp small { font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.05em; }
+    .cmp b { font-family: var(--font-display); font-size: 16px; font-variant-numeric: tabular-nums; }
+    .cmp span { font-size: 11.5px; color: var(--text-3); }
+    .cmp.on { border-color: var(--brand); background: var(--brand-soft); }
+    .rb-acc { display: flex; flex-wrap: wrap; gap: 8px; }
+    .rb-acc .btn { flex: 1 1 200px; }
+    .plan { border: 1px solid var(--border); border-radius: 12px; padding: 0 14px; }
+    .plan summary { list-style: none; cursor: pointer; padding: 12px 0; font-size: 13.5px; font-weight: 650; display: flex; gap: 8px; align-items: center; }
+    .plan summary::-webkit-details-marker { display: none; }
+    .plan summary i { color: var(--brand-700); }
+    .plan .table-wrap { margin: 0 -14px; }
+    .plan .table td, .plan .table th { white-space: nowrap; }
+</style>
+{% endblock %}
+{% block content %}
+<div class="page-head">
+    <div>
+        <h2><span class="head-icon"><i class="fa-solid fa-calculator"></i></span> Simuladores de crédito</h2>
+        <p>Calcula la cuota con el prospecto en la llamada: Finky (crédito digital sin codeudor) o Rombo (cuota fija con cuota inicial).</p>
+    </div>
+</div>
+
+{% include "_fechas_ingreso.html" %}
+
+<div class="tabs" role="tablist">
+    <button class="tab active" role="tab" data-tab="finky" aria-selected="true"><i class="fa-solid fa-bolt"></i> Finky</button>
+    <button class="tab" role="tab" data-tab="rombo" aria-selected="false"><i class="fa-solid fa-table-list"></i> Rombo · cuota fija</button>
+</div>
+
+<!-- ===== Finky ===== -->
+<section class="sim-panel" data-panel="finky">
+    <div class="sim-grid">
+        <aside class="card sim-side">
+            <h3>Crédito educativo Finky</h3>
+            <p>Simulador oficial de Finky para la Ibero. La institución ya viene seleccionada: elige nivel académico, programa, monto y número de cuotas.</p>
+            <div class="sim-kpis">
+                <div><b>4 min</b><span>de aprobación</span></div>
+                <div><b>0</b><span>codeudor</span></div>
+                <div><b>100%</b><span>digital</span></div>
+                <div><b>Sin</b><span>historial</span></div>
+            </div>
+            <ul class="sim-notas">
+                <li><i class="fa-solid fa-calendar-days"></i><span>Cuotas de 1 a 6 meses.</span></li>
+                <li><i class="fa-solid fa-receipt"></i><span>Muestra fianza (FGA), seguro y cobro Finky incluidos en la cuota.</span></li>
+                <li><i class="fa-solid fa-circle-info"></i><span>Pide nombre y celular para calcular.</span></li>
+            </ul>
+            <div class="sim-acc">
+                <a class="btn btn-primary" href="{{ finky.solicitar }}" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Solicitar crédito</a>
+                <a class="btn btn-secondary" href="{{ finky.pagina }}" target="_blank" rel="noopener"><i class="fa-solid fa-globe"></i> Página Finky × Ibero</a>
+            </div>
+        </aside>
+        <div class="card finky-box">
+            <iframe id="finkyFrame" title="Simulador de crédito Finky para la Ibero" data-src="{{ finky.simulador }}" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            <div class="finky-load" id="finkyLoad"><span class="spinner" style="width:22px;height:22px;border-width:3px"></span> Cargando simulador de Finky…</div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Rombo ===== -->
+<section class="sim-panel" data-panel="rombo" hidden>
+    <div class="sim-grid">
+        <form class="card sim-side rb-form" id="rbForm" novalidate>
+            <h3 style="margin:0">Rombo · cuota fija</h3>
+            <div class="field">
+                <label class="label" for="rbPrograma">Programa (lista de precios)</label>
+                <select id="rbPrograma"><option value="">Escribir el valor a mano</option></select>
+            </div>
+            <div class="field" id="rbTipoWrap" hidden>
+                <span class="label">Valor a usar</span>
+                <div class="seg" id="rbTipo" role="radiogroup" aria-label="Valor a usar">
+                    <button type="button" role="radio" data-t="regular" class="active" aria-checked="true">Precio final</button>
+                    <button type="button" role="radio" data-t="sena" aria-checked="false">Precio SENA</button>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="rbMatricula">Valor de la matrícula (semestre)</label>
+                <div class="money-in"><span>$</span><input type="text" id="rbMatricula" inputmode="numeric" autocomplete="off"></div>
+            </div>
+            <div class="field">
+                <span class="label" id="lblCuotas">Número de cuotas</span>
+                <div class="seg rb-cuotas" id="rbCuotas" role="radiogroup" aria-labelledby="lblCuotas"></div>
+            </div>
+            <div class="field">
+                <label class="label" for="rbFecha">Fecha de ingreso</label>
+                <select id="rbFecha"></select>
+            </div>
+            <details class="ajustes">
+                <summary><i class="fa-solid fa-sliders"></i> Condiciones del crédito</summary>
+                <div class="grid grid-3" style="gap:10px">
+                    <div class="field"><label class="label" for="rbTasa">Tasa mensual %</label><input type="text" id="rbTasa" inputmode="decimal"></div>
+                    <div class="field"><label class="label" for="rbInicial">Cuota inicial %</label><input type="text" id="rbInicial" inputmode="decimal"></div>
+                    <div class="field"><label class="label" for="rbFee">Fee $</label><input type="text" id="rbFee" inputmode="numeric"></div>
+                </div>
+                <button type="button" class="btn btn-ghost btn-sm" id="rbReset" style="margin-bottom:12px"><i class="fa-solid fa-rotate-left"></i> Valores del simulador Rombo</button>
+            </details>
+        </form>
+
+        <div class="card rb-res" aria-live="polite">
+            <div class="rb-top">
+                <small>Cuota fija mensual</small>
+                <div class="rb-cuota"><strong id="rbCuota">$0</strong><span id="rbCuotaN">× 4 cuotas</span></div>
+                <div class="rb-sep"><i class="fa-solid fa-key"></i><span>Para separar el cupo paga <b id="rbSepara">$0</b><em>Cuota inicial + fee</em></span></div>
+            </div>
+            <dl class="rb-list">
+                <div><dt>Valor matrícula</dt><dd id="vMat">$0</dd></div>
+                <div><dt>Cuota inicial (<span id="vPct">15%</span>)</dt><dd id="vIni">$0</dd></div>
+                <div><dt>Fee</dt><dd id="vFee">$0</dd></div>
+                <div><dt>Valor del crédito</dt><dd id="vCred">$0</dd></div>
+                <div><dt>Intereses (<span id="vTasa">1,85%</span> mensual)</dt><dd id="vInt">$0</dd></div>
+                <div class="tot"><dt>Total a pagar en cuotas</dt><dd id="vCuotas">$0</dd></div>
+                <div class="tot"><dt>Total con cuota inicial y fee</dt><dd id="vTotal">$0</dd></div>
+            </dl>
+            <div class="rb-cmp" id="rbCmp" aria-label="Comparar planes"></div>
+            <div class="rb-acc">
+                <button type="button" class="btn btn-primary" id="rbCopiar"><i class="fa-regular fa-copy"></i> Copiar resumen</button>
+                <button type="button" class="btn btn-wa" id="rbWa"><i class="fa-brands fa-whatsapp"></i> Enviar por WhatsApp</button>
+            </div>
+            <details class="plan">
+                <summary><i class="fa-solid fa-table"></i> Ver plan de pagos</summary>
+                <div class="table-wrap">
+                    <table class="table">
+                        <thead><tr><th>N.º</th><th class="num">Saldo inicial</th><th class="num">Cuota fija</th><th class="num">Interés</th><th class="num">Abono a capital</th><th class="num">Saldo a capital</th></tr></thead>
+                        <tbody id="rbTabla"></tbody>
+                    </table>
+                </div>
+            </details>
+            <p class="small muted" style="margin:0">Mismo cálculo de la hoja «Nuevo simulador Cuota Fija» de Rombo (cuota fija, amortización francesa). Valores de referencia: la aprobación y las condiciones finales las define Rombo.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+(() => {
+    const { escapeHtml, money, copyText, openWhatsApp } = App;
+    const $ = (id) => document.getElementById(id);
+    const ROMBO = {{ rombo | tojson }};
+    const FINKY = {{ finky | tojson }};
+    const PRECIOS = {{ precios | tojson }};
+    const FECHAS = {{ fechas | tojson }};
+    const PROGRAMA_INICIAL = {{ programa | tojson }};
+    const PLANES = ROMBO.planes || [4, 6, 12];
+    const decimalTxt = (n) => String(n).replace('.', ',');
+
+    // ---------- Pestañas (#finky / #rombo) ----------
+    function mostrar(t) {
+        document.querySelectorAll('.tabs .tab').forEach((b) => { const on = b.dataset.tab === t; b.classList.toggle('active', on); b.setAttribute('aria-selected', on); });
+        document.querySelectorAll('.sim-panel').forEach((p) => { p.hidden = p.dataset.panel !== t; });
+        if (t === 'finky') cargarFinky();
+        if (t === 'rombo') calcular();
+    }
+    document.querySelectorAll('.tabs .tab').forEach((b) => b.addEventListener('click', () => { history.replaceState(null, '', location.search + '#' + b.dataset.tab); mostrar(b.dataset.tab); }));
+
+    // ---------- Finky: iframe oficial, la Ibero ya viene seleccionada ----------
+    let finkyResultado = false;
+    function altoFinky() {
+        const f = $('finkyFrame');
+        const w = f.clientWidth || f.parentElement.clientWidth;
+        // Alto del simulador de Finky según el ancho: [formulario, con resultado]
+        const alto = w >= 780 ? [580, 1590] : w >= 600 ? [790, 1910] : w >= 460 ? [790, 1980] : w >= 400 ? [800, 2100] : [830, 2300];
+        f.style.height = alto[finkyResultado ? 1 : 0] + 'px';
+    }
+    function cargarFinky() {
+        const f = $('finkyFrame');
+        if (!f.getAttribute('src')) {
+            f.addEventListener('load', () => { $('finkyLoad').hidden = true; altoFinky(); }, { once: true });
+            f.src = f.dataset.src;
+        }
+        altoFinky();
+    }
+    window.addEventListener('message', (e) => {
+        if (e.origin !== FINKY.origen || !e.data || typeof e.data !== 'object' || !e.data.height) return;
+        finkyResultado = true; altoFinky();
+    });
+    window.addEventListener('resize', () => { if (!document.querySelector('[data-panel="finky"]').hidden) altoFinky(); });
+
+    // ---------- Rombo · cuota fija ----------
+    let cuotas = PLANES[0];
+    let tipo = 'regular';
+    const digitos = (s) => String(s || '').replace(/\D/g, '');
+    const num = (s) => { const n = parseFloat(String(s || '').replace(/\s/g, '').replace(',', '.')); return Number.isFinite(n) ? n : 0; };
+    const miles = (s) => { const d = digitos(s).replace(/^0+(?=\d)/, '').slice(0, 12); return d ? Number(d).toLocaleString('es-CO') : ''; };
+    const pct = (n) => n.toLocaleString('es-CO', { maximumFractionDigits: 2 }) + '%';
+    // Equivalente a PAGO() de Excel
+    const cuotaFija = (r, n, pv) => (r === 0 ? pv / n : pv * r / (1 - Math.pow(1 + r, -n)));
+
+    function plan(v, n) {
+        const inicial = v.matricula * v.inicial;
+        const credito = v.matricula - inicial;
+        const cuota = credito > 0 ? cuotaFija(v.tasa, n, credito) : 0;
+        const filas = [];
+        let saldo = credito, intereses = 0;
+        for (let k = 1; k <= n && credito > 0; k++) {
+            const interes = saldo * v.tasa, abono = cuota - interes;
+            const fin = Math.abs(saldo - abono) < 0.005 ? 0 : saldo - abono;
+            filas.push({ k, saldo, cuota, interes, abono, fin });
+            intereses += interes; saldo = fin;
+        }
+        return { inicial, credito, cuota, filas, intereses, totalCuotas: cuota * n, separa: inicial + v.fee, total: cuota * n + inicial + v.fee };
+    }
+    function leer() {
+        return {
+            matricula: Number(digitos($('rbMatricula').value)) || 0,
+            tasa: Math.max(0, num($('rbTasa').value)) / 100,
+            inicial: Math.min(100, Math.max(0, num($('rbInicial').value))) / 100,
+            fee: Number(digitos($('rbFee').value)) || 0,
+        };
+    }
+    let ultimo = null;
+    function calcular() {
+        const v = leer();
+        const p = plan(v, cuotas);
+        ultimo = { v, p };
+        $('rbCuota').textContent = money(p.cuota);
+        $('rbCuotaN').textContent = `× ${cuotas} cuotas`;
+        $('rbSepara').textContent = money(p.separa);
+        $('vMat').textContent = money(v.matricula);
+        $('vPct').textContent = pct(v.inicial * 100);
+        $('vIni').textContent = money(p.inicial);
+        $('vFee').textContent = money(v.fee);
+        $('vCred').textContent = money(p.credito);
+        $('vTasa').textContent = pct(v.tasa * 100);
+        $('vInt').textContent = money(p.intereses);
+        $('vCuotas').textContent = money(p.totalCuotas);
+        $('vTotal').textContent = money(p.total);
+        $('rbCmp').innerHTML = PLANES.map((n) => { const x = plan(v, n); return `<button type="button" class="cmp${n === cuotas ? ' on' : ''}" data-n="${n}" aria-pressed="${n === cuotas}"><small>${n} cuotas</small><b>${money(x.cuota)}</b><span>Intereses ${money(x.intereses)}</span></button>`; }).join('');
+        $('rbTabla').innerHTML = p.filas.map((f) => `<tr><td>${f.k}</td><td class="num">${money(f.saldo)}</td><td class="num">${money(f.cuota)}</td><td class="num">${money(f.interes)}</td><td class="num">${money(f.abono)}</td><td class="num">${money(f.fin)}</td></tr>`).join('')
+            + (p.filas.length ? `<tr><td><strong>Total</strong></td><td></td><td class="num"><strong>${money(p.totalCuotas)}</strong></td><td class="num"><strong>${money(p.intereses)}</strong></td><td class="num"><strong>${money(p.credito)}</strong></td><td></td></tr>` : '');
+        $('rbCopiar').disabled = $('rbWa').disabled = !v.matricula;
+    }
+    function elegirCuotas(n) {
+        cuotas = n;
+        $('rbCuotas').querySelectorAll('[data-n]').forEach((b) => { const on = Number(b.dataset.n) === n; b.classList.toggle('active', on); b.setAttribute('aria-checked', on); });
+        calcular();
+    }
+    function restablecer() {
+        $('rbTasa').value = decimalTxt(ROMBO.tasa_mensual ?? 1.85);
+        $('rbInicial').value = decimalTxt(ROMBO.cuota_inicial ?? 15);
+        $('rbFee').value = miles(String(ROMBO.fee ?? 69000));
+    }
+    const precioSel = () => PRECIOS[Number($('rbPrograma').value)] || null;
+    function aplicarPrecio() {
+        const p = precioSel();
+        $('rbTipoWrap').hidden = !(p && p.valor_sena);
+        if (!(p && p.valor_sena)) tipo = 'regular';
+        $('rbTipo').querySelectorAll('[data-t]').forEach((b) => { const on = b.dataset.t === tipo; b.classList.toggle('active', on); b.setAttribute('aria-checked', on); });
+        if (p) $('rbMatricula').value = miles(String(tipo === 'sena' && p.valor_sena ? p.valor_sena : p.valor_final));
+        calcular();
+    }
+
+    // Opciones
+    $('rbCuotas').innerHTML = PLANES.map((n, i) => `<button type="button" role="radio" data-n="${n}" class="${i === 0 ? 'active' : ''}" aria-checked="${i === 0}">${n}</button>`).join('');
+    $('rbFecha').innerHTML = FECHAS.map((f, i) => `<option value="${i}"${f.proxima ? ' selected' : ''}>${escapeHtml(f.texto)}</option>`).join('');
+    const grupos = { pre: 'Pregrado', pos: 'Posgrado' };
+    $('rbPrograma').innerHTML = '<option value="">Escribir el valor a mano</option>' + Object.entries(grupos).map(([nv, label]) =>
+        `<optgroup label="${label}">${PRECIOS.map((p, i) => [p, i]).filter(([p]) => p.nivel === nv).map(([p, i]) => `<option value="${i}">${escapeHtml(p.programa)} · ${money(p.valor_final)}</option>`).join('')}</optgroup>`).join('');
+
+    // Eventos
+    $('rbCuotas').addEventListener('click', (e) => { const b = e.target.closest('[data-n]'); if (b) elegirCuotas(Number(b.dataset.n)); });
+    $('rbCmp').addEventListener('click', (e) => { const b = e.target.closest('[data-n]'); if (b) elegirCuotas(Number(b.dataset.n)); });
+    $('rbTipo').addEventListener('click', (e) => { const b = e.target.closest('[data-t]'); if (!b) return; tipo = b.dataset.t; aplicarPrecio(); });
+    $('rbPrograma').addEventListener('change', aplicarPrecio);
+    ['rbMatricula', 'rbFee'].forEach((id) => $(id).addEventListener('input', (e) => {
+        const alFinal = e.target.selectionStart === e.target.value.length;
+        e.target.value = miles(e.target.value);
+        if (alFinal) e.target.setSelectionRange(e.target.value.length, e.target.value.length);
+        calcular();
+    }));
+    ['rbTasa', 'rbInicial'].forEach((id) => $(id).addEventListener('input', (e) => {
+        e.target.value = e.target.value.replace(/[^\d.,]/g, '').replace(/([.,].*)[.,]/, '$1').slice(0, 6);
+        calcular();
+    }));
+    $('rbReset').addEventListener('click', () => { restablecer(); calcular(); });
+    $('rbForm').addEventListener('submit', (e) => e.preventDefault());
+
+    function resumen() {
+        const { v, p } = ultimo;
+        const prog = precioSel();
+        const f = FECHAS[Number($('rbFecha').value)];
+        return [
+            '*Simulación de crédito Ibero · Rombo (cuota fija)*',
+            prog ? `🎓 Programa: ${prog.programa}` : '',
+            f ? `📅 Fecha de ingreso: ${f.texto}` : '',
+            `💰 Valor de la matrícula: ${money(v.matricula)}`,
+            `🔑 Para separar el cupo (cuota inicial ${pct(v.inicial * 100)} + fee): *${money(p.separa)}*`,
+            `💳 Valor a financiar: ${money(p.credito)}`,
+            `📆 Plan: ${cuotas} cuotas fijas mensuales de *${money(p.cuota)}*`,
+            `📈 Tasa de interés: ${pct(v.tasa * 100)} mensual`,
+            '',
+            '_Valores de referencia, sujetos a aprobación del crédito._',
+        ].filter((l, i, a) => l !== '' || (i > 0 && a[i - 1] !== '')).join('\n');
+    }
+    $('rbCopiar').addEventListener('click', () => { if (ultimo && ultimo.v.matricula) copyText(resumen(), 'Resumen copiado'); });
+    $('rbWa').addEventListener('click', () => { if (ultimo && ultimo.v.matricula) openWhatsApp('', resumen()); });
+
+    // Inicio
+    restablecer();
+    const idx = PROGRAMA_INICIAL ? PRECIOS.findIndex((p) => p.programa === PROGRAMA_INICIAL && p.nivel === 'pre') : -1;
+    if (idx >= 0) { $('rbPrograma').value = String(idx); aplicarPrecio(); }
+    else $('rbMatricula').value = miles(String(ROMBO.valor_ejemplo || ''));
+    calcular();
+    const tabDelHash = () => mostrar(location.hash === '#rombo' ? 'rombo' : 'finky');
+    window.addEventListener('hashchange', tabDelHash);
+    tabDelHash();
+})();
+</script>
+{% endblock %}

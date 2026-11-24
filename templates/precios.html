@@ -81,7 +81,7 @@
     let nivel = {{ ('pos' if nivel == 'pos' else 'pre') | tojson }}, view = store.get('precios-view', 'grid');
     let oferta = { p: null, tipo: 'sena' };
     const ref = (p) => p.valor_sena || p.valor_final;
-    const corto = (c) => (c || '').replace(/ cohorte /, ' coh. ');
+    const corto = (c) => (c || '').replace(/ cohorte$/, ' coh.');
 
     function list() {
         const q = normalize($('q').value.trim());
@@ -98,7 +98,7 @@
         if (view === 'grid') {
             $('out').innerHTML = `<div class="p-grid">${l.map((p) => `
                 <article class="card hoverable p-card" data-id="${p.id}">
-                    <div class="row" style="justify-content:space-between"><span class="badge">Virtual</span>${(p.cohorte_sena_txt || p.cohorte_txt) ? `<span class="badge green" title="Vigencia"><i class="fa-regular fa-calendar"></i> ${escapeHtml(p.cohorte_sena_txt || p.cohorte_txt)}</span>` : ''}</div>
+                    <div class="row" style="justify-content:space-between"><span class="badge">Virtual</span>${(p.cohorte_sena_txt || p.cohorte_txt) ? `<span class="badge green" title="Fecha de ingreso"><i class="fa-regular fa-calendar"></i> ${escapeHtml(p.cohorte_sena_txt || p.cohorte_txt)}</span>` : ''}</div>
                     <h3>${highlight(p.programa, q)}</h3>
                     <div class="p-full">Valor regular por semestre: <b>${money(p.valor)}</b></div>
                     <div class="p-rows">
@@ -114,7 +114,7 @@
                 </article>`).join('')}</div>`;
         } else {
             const conSena = nivel !== 'pos';
-            $('out').innerHTML = `<div class="table-wrap"><table class="table"><thead><tr><th>Programa</th><th class="num">Valor regular</th>${conSena ? '<th class="num">% SENA</th><th class="num">Precio SENA</th><th class="num">Pronto pago SENA</th>' : ''}<th class="num">${conSena ? 'Precio final no SENA' : 'Precio final'}</th><th>Vigencia</th><th></th></tr></thead><tbody>${l.map((p) => `
+            $('out').innerHTML = `<div class="table-wrap"><table class="table"><thead><tr><th>Programa</th><th class="num">Valor regular</th>${conSena ? '<th class="num">% SENA</th><th class="num">Precio SENA</th><th class="num">Pronto pago SENA</th>' : ''}<th class="num">${conSena ? 'Precio final no SENA' : 'Precio final'}</th><th>Fecha de ingreso</th><th></th></tr></thead><tbody>${l.map((p) => `
                 <tr data-id="${p.id}"><td><b>${highlight(p.programa, q)}</b></td><td class="num">${money(p.valor)}</td>
                 ${conSena ? `<td class="num">${p.descuento_sena != null ? p.descuento_sena + '%' : '—'}</td>
                 <td class="num">${p.valor_sena ? `<span class="t-sena">${money(p.valor_sena)}</span>` : '<span class="muted">No aplica</span>'}</td>
@@ -136,7 +136,7 @@
             t += `✅ *Precio final por semestre: ${money(p.valor_final)}*\n`;
         }
         const coh = esSena ? (p.cohorte_sena_txt || p.cohorte_txt) : p.cohorte_txt;
-        if (coh) t += `\n📅 *Cohorte:* ${coh}\n`;
+        if (coh) t += `\n📅 *Fecha de ingreso:* ${coh}\n`;
         t += `📌 Valores sujetos a cambios institucionales.`;
         return t;
     }
