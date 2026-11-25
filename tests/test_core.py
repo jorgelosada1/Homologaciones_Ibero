@@ -100,6 +100,18 @@ def test_mensajes_usan_cohorte_del_programa():
     assert store.render("{cohorte_actual}") == "Febrero 2027 · 1ra cohorte"
 
 
+def test_mensajes_incluyen_plus_corto():
+    comerciales = store.mensajes_programas()
+    con_plus = [m for m in comerciales if "incluye formación en:" in m["texto"]]
+    assert len(con_plus) >= 49 and all("incluye formación en:" in m["texto"] for m in store.mensajes_sena())
+    adm = next(m["texto"] for m in comerciales if m["titulo"].startswith("Administración de Empresas"))
+    assert "(Ibero)\n\nLa carrera incluye formación en:\n\n* " in adm and "* Gestión organizacional\n" in adm
+    assert adm.index("incluye formación en:") < adm.index("*Información del programa:*")
+    mba = next(m["texto"] for m in comerciales if m["titulo"] == "MBA – Virtual")
+    assert "El programa incluye formación en:" in mba
+    assert all("\n\n\n" not in m["texto"] for m in comerciales + store.mensajes_sena())
+
+
 def test_sena_solo_pregrado_con_homologacion():
     acta = set(store.actas()["programa"])
     for p in store.precios():

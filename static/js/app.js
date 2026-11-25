@@ -17,6 +17,7 @@
     const normalize = (s) => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
     const debounce = (fn, ms = 250) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
     const waFormat = (text) => escapeHtml(text)
+        .replace(/^[*-] (?=\S)/gm, '• ')
         .replace(/\*([^*\n]+)\*/g, '<strong>$1</strong>')
         .replace(/(^|\s)_([^_\n]+)_(?=\s|$|[.,!?])/g, '$1<em>$2</em>')
         .replace(/~([^~\n]+)~/g, '<s>$1</s>');
